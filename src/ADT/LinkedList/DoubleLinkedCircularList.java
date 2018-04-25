@@ -8,7 +8,7 @@ package ADT.LinkedList;
 import ADT.List;
 import ADT.Node;
 import Exceptions.ListException;
-import ADT.LinkedList.LinkedList;
+import ADT.LinkedList.LinkedListSimple;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -149,7 +149,7 @@ public class DoubleLinkedCircularList implements List {
             }
             return false;
         } catch (ListException ex) {
-            Logger.getLogger(LinkedList.class
+            Logger.getLogger(LinkedListSimple.class
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             System.out.println("Funcion isElement se ejecuto correctamente");

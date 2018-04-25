@@ -5,9 +5,11 @@
  */
 package Main;
 
-import ADT.LinkedList.LinkedList;
+import Domain.Client;
 import Exceptions.ListException;
 import GUI.Login;
+import java.util.LinkedList;
+import ADT.LinkedList.LinkedListSimple;
 import ADT.LinkedList.DoubleLinkedCircularList;
 import ADT.LinkedList.DoublyLinkedList;
 
@@ -22,6 +24,10 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
      */
     public static void main(String[] args) throws ListException {
 
+        LinkedListSimple linkedList = new LinkedListSimple();
+        DoubleLinkedCircularList doubleLinkedCircularList = new DoubleLinkedCircularList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        LinkedList<Client> clientes = new LinkedList<Client>();
         Login login = new Login();
         login.setVisible(true);
 

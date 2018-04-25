@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
  * @version1.0
  * @author Daniel Solano
  */
-public class LinkedList implements List {
+public class LinkedListSimple implements List {
 
     private Node start;
 
-    public LinkedList() {
+    public LinkedListSimple() {
         this.start = null;
     }
 
@@ -176,7 +176,7 @@ public class LinkedList implements List {
             }
 
         } catch (ListException ex) {
-            Logger.getLogger(LinkedList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LinkedListSimple.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             System.out.println("Function isElement excecuted correctly");
         }
