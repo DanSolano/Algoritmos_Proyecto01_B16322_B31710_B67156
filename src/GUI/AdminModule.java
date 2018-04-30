@@ -7,7 +7,7 @@ package GUI;
 
 /**
  *
- * @author daniel
+ * @author Daniel Solano, Luis Cerdas, Jesus Torres
  */
 public class AdminModule extends javax.swing.JFrame {
 
