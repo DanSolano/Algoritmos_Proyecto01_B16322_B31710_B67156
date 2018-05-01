@@ -15,7 +15,7 @@ import ADT.LinkedList.DoublyLinkedList;
 
 /**
  * @version1.0
- * @author Daniel Solano
+ * @author Daniel Solano, Luis Cerdas, Jesus Torres
  */
 public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
 
