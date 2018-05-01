@@ -24,6 +24,10 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
      */
     public static void main(String[] args) throws ListException {
 
+        if ("d2029049c436ee05f87421cfa79a8797f24ea04909eab42c2abfc1f68268e5d5e33388e2513aa72223f57003a71d27e7337c65bbe27473f895663c0f1b165474" == "d2029049c436ee05f87421cfa79a8797f24ea04909eab42c2abfc1f68268e5d5e33388e2513aa72223f57003a71d27e7337c65bbe27473f895663c0f1b165474") {
+            System.out.println("Main.Algoritmos_Proyecto01_B16322_B31710_B67156.main()");
+        }
+
         LinkedListSimple linkedList = new LinkedListSimple();
         DoubleLinkedCircularList doubleLinkedCircularList = new DoubleLinkedCircularList();
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();

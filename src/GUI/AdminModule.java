@@ -5,8 +5,9 @@
  */
 package GUI;
 
+import Data.ClientCSV;
 import Domain.Client;
-import GUI.CRUDclient.CreateClient;
+import GUI.CRUDagent.CreateAgent;
 import java.util.LinkedList;
 
 /**
@@ -192,8 +193,16 @@ public class AdminModule extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        LinkedList<Client> l = new LinkedList<Client>();
+        l.add(new Client("Andres", "Meseguer", "and@mail.com", "78787878", "Cartago", "Paraiso", "Paraiso"));
+        l.add(new Client("112", "Richard", "56789", "Ric@mail.com", "", "", "-"));
+        l.add(new Client("113", "Mateo", "23456", "Mat@mail.com", "", "", "-"));
+        ClientCSV lectorCSV = new ClientCSV();
+        lectorCSV.escibirCSV(l);
+        lectorCSV.leerCSV();
+
         this.dispose();
-        CreateClient createClient = new CreateClient();
+        CreateAgent createClient = new CreateAgent();
         createClient.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

@@ -15,7 +15,7 @@ public class User {
 
     private String name;
     private String userName;
-    private String eMail;
+    private String Mail;
     private String password;
     private int code;
     private String kindUser;
@@ -25,10 +25,10 @@ public class User {
     }
 
     //Constructor sobrecargado
-    public User(String name, String userName, String eMail, String password, int code, String kindUser) {
+    public User(String name, String userName, String Mail, String password, int code, String kindUser) {
         this.name = name;
         this.userName = userName;
-        this.eMail = eMail;
+        this.Mail = Mail;
         this.password = password;
         this.code = code;
         this.kindUser = kindUser;//Define if user is a agent or a manager user
@@ -37,7 +37,7 @@ public class User {
     //retorna el tamano del registro
     public int tamano() {
         return this.getName().length() * 2 + this.getUserName().length() * 2
-                + this.geteMail().length() * 2 + this.getPassword().length() * 2
+                + this.getMail().length() * 2 + this.getPassword().length() * 2
                 + this.getKindUser().length() * 2 + 4;
     }
 
@@ -57,12 +57,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getMail() {
+        return Mail;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setMail(String Mail) {
+        this.Mail = Mail;
     }
 
     /**

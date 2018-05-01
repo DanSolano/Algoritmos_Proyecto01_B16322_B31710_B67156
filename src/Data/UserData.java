@@ -21,12 +21,13 @@ import java.util.logging.Logger;
 public class UserData {
 
     private int tamanoRegistro;
-    private int cantidadRegistros;
-    String rutaDelArchivo;
+    private int cantidadRegistros; 
+    String rutaDelArchivo; 
     private RandomAccessFile randomAccessFile;
 
     //Constructor de la clase
     public UserData() {
+        
         try {
             this.rutaDelArchivo = "user.dat";
             File archivo = new File(rutaDelArchivo);
