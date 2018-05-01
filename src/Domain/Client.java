@@ -13,7 +13,7 @@ public class Client {
 
     private String name;
     private String lastName;
-    private String eMail;
+    private String Mail;
     private String phoneNumber;
     private String province;
     private String canton;
@@ -22,10 +22,10 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String lastName, String eMail, String phoneNumber, String province, String canton, String district) {
+    public Client(String name, String lastName, String Mail, String phoneNumber, String province, String canton, String district) {
         this.name = name;
         this.lastName = lastName;
-        this.eMail = eMail;
+        this.Mail = Mail;
         this.phoneNumber = phoneNumber;
         this.province = province;
         this.canton = canton;
@@ -48,12 +48,12 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getMail() {
+        return Mail;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setMail(String Mail) {
+        this.Mail = Mail;
     }
 
     public String getPhoneNumber() {
