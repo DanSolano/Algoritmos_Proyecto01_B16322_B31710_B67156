@@ -15,6 +15,7 @@ import ADT.LinkedList.DoublyLinkedList;
 import Data.AgentCSV;
 import Domain.User;
 import java.util.ArrayList;
+import javax.swing.UIManager;
 
 /**
  * @version1.0
@@ -33,11 +34,20 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
             System.out.println(user.getName());
 
         }
+        
+        
 
         LinkedListSimple linkedList = new LinkedListSimple();
         DoubleLinkedCircularList doubleLinkedCircularList = new DoubleLinkedCircularList();
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
         LinkedList<Client> clientes = new LinkedList<Client>();
+        
+        try{
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        }catch(Exception ex){
+        }
+        
         Login login = new Login(agentList);
         login.setVisible(true);
 
