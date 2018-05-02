@@ -10,6 +10,8 @@ import Data.ClientCSV;
 import Domain.Client;
 import Domain.User;
 import GUI.CRUDagent.CreateAgent;
+import GUI.CRUDagent.ListAgents;
+import GUI.CRUDagent.UpdateAgent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1079,6 +1081,11 @@ public class AdminModule extends javax.swing.JFrame implements Runnable {
         jMenu4.add(jMenuItem7);
 
         jMenuItem8.setText("Agente de Ventas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem8);
 
         jMenuItem9.setText("Administrador");
@@ -1101,6 +1108,11 @@ public class AdminModule extends javax.swing.JFrame implements Runnable {
         jMenu5.add(jMenuItem13);
 
         jMenuItem14.setText("Agente de Ventas");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem14);
 
         jMenuItem15.setText("Administrador");
@@ -1177,6 +1189,18 @@ public class AdminModule extends javax.swing.JFrame implements Runnable {
         agentCSV.writeCSV(this.agents);
         agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        ListAgents listAgents = new ListAgents(agents);
+        listAgents.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        UpdateAgent updateAgent = new UpdateAgent(agents);
+        updateAgent.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

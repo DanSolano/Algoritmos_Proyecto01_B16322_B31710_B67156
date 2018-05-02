@@ -8,6 +8,7 @@ package GUI.CRUDagent;
 import Domain.User;
 import GUI.AdminModule;
 import Utilities.StringMD;
+import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,17 +17,26 @@ import java.util.regex.Pattern;
  *
  * @author daniel
  */
-public class CreateAgent extends javax.swing.JFrame {
+public class UpdateAgent extends javax.swing.JFrame {
 
-    ArrayList<User> agents;
+    private ArrayList<User> agents;
+    private TextAutoCompleter textAutocompleter;
+    private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public CreateAgent(ArrayList<User> agentList) {
+    public UpdateAgent(ArrayList<User> agentList) {
         initComponents();
+        this.indexUser = -1;
         this.agents = agentList;
         jbSave.setEnabled(false);
+        textAutocompleter = new TextAutoCompleter(jtfUser);
+        textAutocompleter.setCaseSensitive(false);
+        textAutocompleter.setMode(0);//para que el autocompletar busque el fragmento escrito este contenido en alguna parte de la busqueda
+        uploadSearchByUser();
+//        textAutocompleter = new TextAutoCompleter(jtfMail);
+//        uploadSearchByMail();
     }
 
     /**
@@ -45,16 +55,13 @@ public class CreateAgent extends javax.swing.JFrame {
         jtfName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtfUser = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jbSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jpfPass = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        jpfPassB = new javax.swing.JPasswordField();
         jlError = new javax.swing.JLabel();
+        jbSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Crear Nuevo Agente");
+        setTitle("Actualizar Informacion de Agente");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -65,17 +72,15 @@ public class CreateAgent extends javax.swing.JFrame {
 
         jLabel2.setText("Usuario");
 
-        jtfMail.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabel3.setText("e-mail:");
+
+        jtfUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfMailKeyReleased(evt);
+                jtfUserKeyReleased(evt);
             }
         });
 
-        jLabel3.setText("e-mail:");
-
-        jLabel4.setText("Contraseña");
-
-        jbSave.setText("Guardar");
+        jbSave.setText("Actualizar");
         jbSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSaveActionPerformed(evt);
@@ -89,21 +94,14 @@ public class CreateAgent extends javax.swing.JFrame {
             }
         });
 
-        jpfPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jpfPassKeyReleased(evt);
-            }
-        });
-
-        jLabel5.setText("Contraseña de nuevo");
-
-        jpfPassB.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jpfPassBKeyReleased(evt);
-            }
-        });
-
         jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jbSearch.setText("Buscar");
+        jbSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSearchActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -111,82 +109,71 @@ public class CreateAgent extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jtfName, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbSave, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jpfPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jpfPassB, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(28, 28, 28)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jpfPassB, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jpfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(1, 1, 1)))
-                .addGap(13, 13, 13))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(82, 82, 82)
                 .addComponent(jButton2)
                 .addGap(119, 119, 119)
                 .addComponent(jbSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jtfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(28, 28, 28)
+                                .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(jbSearch)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(54, 54, 54)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
+                .addComponent(jbSearch)
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jpfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jpfPassB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSave)
                     .addComponent(jButton2))
-                .addGap(42, 42, 42)
-                .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,7 +187,7 @@ public class CreateAgent extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -215,23 +202,14 @@ public class CreateAgent extends javax.swing.JFrame {
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
 
-        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
-        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
-        String shaNothing = "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e";
         String email = jtfMail.getText().trim();
         String user = jtfUser.getText().trim();
         if (exist(email, user)) {
             jlError.setText("El nombre de usuario o correo ya está en uso.");
-        } else if (!pass.equals(passB) || !isMail(email) || pass.equals(shaNothing)
-                || passB.equals(shaNothing)) {//validate that the email and password are valid
-            jlError.setText("Correo o contraseña con errores.");
-            jbSave.setEnabled(false);
-        } else if (pass.equals(passB) && isMail(email) && !pass.equals(shaNothing)
-                && !passB.equals(shaNothing)
-                && !jtfName.getText().trim().isEmpty()
+        } else if (!jtfName.getText().trim().isEmpty()
                 && !jtfUser.getText().trim().isEmpty()
                 && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
-            this.agents.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, this.agents.size() + 1, "agent"));
+
 //            AgentCSV agentCSV = new AgentCSV();
 //            agentCSV.writeCSV(this.agents);
 //            agentCSV.readCSV();
@@ -240,49 +218,17 @@ public class CreateAgent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbSaveActionPerformed
 
-    private void jpfPassBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfPassBKeyReleased
-        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
-        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
-        if (pass.equals(passB)) {
-            jlError.setText("Contraseña CORRECTA.");
-            jbSave.setEnabled(true);
-
-        } else {
-            jlError.setVisible(true);
-            jlError.setText("Contraseña debe ser igual.");
-            jbSave.setEnabled(false);
-        }
-    }//GEN-LAST:event_jpfPassBKeyReleased
-
-    private void jpfPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfPassKeyReleased
-        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
-        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
-        if (pass.equals(passB)) {
-            jlError.setText("Contraseña CORRECTA.");
-            jbSave.setEnabled(true);
-
-        } else {
-            jlError.setText("Contraseña debe ser igual.");
-            jbSave.setEnabled(false);
-        }
-    }//GEN-LAST:event_jpfPassKeyReleased
-
-    private void jtfMailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfMailKeyReleased
-        // El email a validar
-        String email = jtfMail.getText().trim();
-        if (isMail(email)) {
-            jlError.setText(email + " Correcto.");
-            jbSave.setEnabled(true);
-        } else {
-            jlError.setText(email + " No es un e-Mail.");
-            jbSave.setEnabled(false);
-        }
-
-    }//GEN-LAST:event_jtfMailKeyReleased
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         back();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jtfUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfUserKeyReleased
+        searchUser();
+    }//GEN-LAST:event_jtfUserKeyReleased
+
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
+        searchUser();
+    }//GEN-LAST:event_jbSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,12 +237,9 @@ public class CreateAgent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbSave;
+    private javax.swing.JButton jbSearch;
     private javax.swing.JLabel jlError;
-    private javax.swing.JPasswordField jpfPass;
-    private javax.swing.JPasswordField jpfPassB;
     private javax.swing.JTextField jtfMail;
     private javax.swing.JTextField jtfName;
     private javax.swing.JTextField jtfUser;
@@ -341,4 +284,37 @@ public class CreateAgent extends javax.swing.JFrame {
         }
         return exist;
     }
+
+    private void uploadSearchByUser() {
+        ArrayList<User> agents = this.agents;
+        for (int i = 0; i < agents.size(); i++) {
+            textAutocompleter.addItem(agents.get(i).getUserName());
+        }
+    }
+
+//    private void uploadSearchByMail() {
+//        ArrayList<User> agents = this.agents;
+//        for (int i = 0; i < agents.size(); i++) {
+//            textAutocompleter.addItem(agents.get(i).getMail());
+//        }
+//    }
+
+  
+
+    private void searchUser() {
+        String user = jtfUser.getText().trim();
+        int counter = 0;
+        for (User agent : agents) {
+            counter++;
+
+            if (agent.getUserName().equals(user)) {
+                this.indexUser = counter;
+                jtfName.setText(agent.getName());
+                jtfMail.setText(agent.getMail());
+                jbSave.setEnabled(true);
+            }
+        }
+
+    }
+
 }
