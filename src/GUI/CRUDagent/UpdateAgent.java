@@ -6,7 +6,7 @@
 package GUI.CRUDagent;
 
 import Domain.User;
-import GUI.AdminModule;
+import GUI.AgentsModule;
 import Utilities.StringMD;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
@@ -270,7 +270,7 @@ public class UpdateAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AgentsModule adminModule = new AgentsModule(this.agents);
         adminModule.setVisible(true);
     }
 

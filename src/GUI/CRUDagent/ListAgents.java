@@ -6,7 +6,7 @@
 package GUI.CRUDagent;
 
 import Domain.User;
-import GUI.AdminModule;
+import GUI.AgentsModule;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -153,7 +153,7 @@ public class ListAgents extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AgentsModule adminModule = new AgentsModule(this.agents);
         adminModule.setVisible(true);
     }
 }

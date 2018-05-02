@@ -167,7 +167,7 @@ ArrayList<User> agents;
 //            JOptionPane.showMessageDialog(null, "pass: " + cliente.getPassword()
 //                    + " >\n" + "pass: " + pass, "Error", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            AgentsModule agentsModule = new AgentsModule();
+            AgentsModule agentsModule = new AgentsModule(this.agents);
             agentsModule.setVisible(true);
 //            if (userBusiness.existe("")) {
 //                //cerrar login y abrir la ventana correspondiente
