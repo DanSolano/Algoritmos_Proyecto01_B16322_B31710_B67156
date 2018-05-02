@@ -20,7 +20,7 @@ import java.util.LinkedList;
  *
  * @author Daniel Solano, Luis Cerdas, Jesus Torres
  */
-public class AdminModule extends javax.swing.JFrame {//implements Runnable {
+public class AdminModule extends javax.swing.JFrame implements Runnable {
 
     private ArrayList<User> agents;
     private String hour;
@@ -36,7 +36,7 @@ public class AdminModule extends javax.swing.JFrame {//implements Runnable {
         initComponents();
         this.agents = agentList;
         this.setResizable(false);
-//        dateAndTime();
+        dateAndTime();
 
     }
 
@@ -1178,45 +1178,6 @@ public class AdminModule extends javax.swing.JFrame {//implements Runnable {
         agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(AdminModule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(AdminModule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(AdminModule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(AdminModule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                
-//
-////                new AdminModule.setVisible(true);
-//            }
-//
-//        });
-//    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1328,5 +1289,43 @@ public class AdminModule extends javax.swing.JFrame {//implements Runnable {
     private javax.swing.JLabel jlDate;
     private javax.swing.JLabel jlHour;
     // End of variables declaration//GEN-END:variables
+ @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        while (ct == thread) {
+            calculate();
+            jlHour.setText(hour + ":" + minutes + ":" + seconds + " " + ampm);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
 
+    public void calculate() {
+        Calendar calendar = new GregorianCalendar();
+        Date dateAndTimeNow = new Date();
+
+        calendar.setTime(dateAndTimeNow);
+        ampm = calendar.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+        if (ampm.equals("PM")) {
+            int h = calendar.get(Calendar.HOUR_OF_DAY) - 12;
+            hour = h > 9 ? "" + h : "0" + h;
+        } else {
+            hour = calendar.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendar.get(Calendar.HOUR_OF_DAY) : "0" + calendar.get(Calendar.HOUR_OF_DAY);
+        }
+        minutes = calendar.get(Calendar.MINUTE) > 9 ? "" + calendar.get(Calendar.MINUTE) : "0" + calendar.get(Calendar.MINUTE);
+        seconds = calendar.get(Calendar.SECOND) > 9 ? "" + calendar.get(Calendar.SECOND) : "0" + calendar.get(Calendar.SECOND);
+    }
+
+    private void dateAndTime() {
+        Calendar c = Calendar.getInstance();
+        String day = Integer.toString(c.get(Calendar.DATE));
+        String month = Integer.toString(c.get(Calendar.MONTH));
+        String year = Integer.toString(c.get(Calendar.YEAR));
+        jlDate.setText(day + " / " + month + " / " + year + " / ");
+
+        thread = new Thread(this);
+        thread.start();
+    }
 }
