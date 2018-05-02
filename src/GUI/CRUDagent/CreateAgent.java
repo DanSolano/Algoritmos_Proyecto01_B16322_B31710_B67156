@@ -13,6 +13,8 @@ import GUI.LoginAdmin;
 import Utilities.StringMD;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -28,6 +30,7 @@ public class CreateAgent extends javax.swing.JFrame {
     public CreateAgent(ArrayList<User> agentList) {
         initComponents();
         this.agents = agentList;
+        jbSave.setEnabled(false);
     }
 
     /**
@@ -47,27 +50,39 @@ public class CreateAgent extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtfUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jpfPass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        jpsPasVerification = new javax.swing.JPasswordField();
+        jpfPassB = new javax.swing.JPasswordField();
+        jlError = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Crear Nuevo Agente");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Usuario");
 
+        jtfMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfMailKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("e-mail:");
 
         jLabel4.setText("Contraseña");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbSave.setText("Guardar");
+        jbSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbSaveActionPerformed(evt);
             }
         });
 
@@ -78,7 +93,21 @@ public class CreateAgent extends javax.swing.JFrame {
             }
         });
 
+        jpfPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jpfPassKeyReleased(evt);
+            }
+        });
+
         jLabel5.setText("Contraseña de nuevo");
+
+        jpfPassB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jpfPassBKeyReleased(evt);
+            }
+        });
+
+        jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -87,18 +116,19 @@ public class CreateAgent extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbSave, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jpfPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jpsPasVerification, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jpfPassB, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -112,28 +142,30 @@ public class CreateAgent extends javax.swing.JFrame {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfMail, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(jpsPasVerification, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(jpfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                    .addGap(76, 76, 76)
-                    .addComponent(jButton2)
-                    .addGap(119, 119, 119)
-                    .addComponent(jButton1)
-                    .addContainerGap(87, Short.MAX_VALUE)))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jpfPassB, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jpfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(1, 1, 1)))
+                .addGap(13, 13, 13))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jButton2)
+                .addGap(119, 119, 119)
+                .addComponent(jbSave)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,22 +177,20 @@ public class CreateAgent extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jpfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jpsPasVerification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
-            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                    .addContainerGap(303, Short.MAX_VALUE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2))
-                    .addContainerGap()))
+                    .addComponent(jpfPassB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSave)
+                    .addComponent(jButton2))
+                .addGap(42, 42, 42)
+                .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +198,7 @@ public class CreateAgent extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
@@ -184,26 +214,82 @@ public class CreateAgent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
-        adminModule.setVisible(true);
+        back();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
 
-//        LinkedList<User> l = new LinkedList<User>();
-        String pass = new String(jpfPass.getPassword());
-        String sha = StringMD.getStringMessageDigest(pass, StringMD.SHA512);
-        System.out.println("\n\n\n\nSHA:" + sha + "\n\n\n\n");
-        this.agents.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), sha, 0, "agent"));
-        AgentCSV agentCSV = new AgentCSV();
-        agentCSV.writeCSV(this.agents);
-        agentCSV.readCSV();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
+        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
+        String shaNothing = "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e";
+        String email = jtfMail.getText().trim();
+        String user = jtfUser.getText().trim();
+        if (exist(email, user)) {
+            jlError.setText("El nombre de usuario o correo ya está en uso.");
+        } else if (!pass.equals(passB) || !isMail(email) || pass.equals(shaNothing)
+                || passB.equals(shaNothing)) {//validate that the email and password are valid
+            jlError.setText("Correo o contraseña con errores.");
+            jbSave.setEnabled(false);
+        } else if (pass.equals(passB) && isMail(email) && !pass.equals(shaNothing)
+                && !passB.equals(shaNothing)
+                && !jtfName.getText().trim().isEmpty()
+                && !jtfUser.getText().trim().isEmpty()
+                && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
+            this.agents.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, 0, "agent"));
+//            AgentCSV agentCSV = new AgentCSV();
+//            agentCSV.writeCSV(this.agents);
+//            agentCSV.readCSV();
+        } else {
+            jlError.setText("Debe ingresar todos los datos.");
+        }
+    }//GEN-LAST:event_jbSaveActionPerformed
+
+    private void jpfPassBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfPassBKeyReleased
+        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
+        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
+        if (pass.equals(passB)) {
+            jlError.setText("Contraseña CORRECTA.");
+            jbSave.setEnabled(true);
+
+        } else {
+            jlError.setVisible(true);
+            jlError.setText("Contraseña debe ser igual.");
+            jbSave.setEnabled(false);
+        }
+    }//GEN-LAST:event_jpfPassBKeyReleased
+
+    private void jpfPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfPassKeyReleased
+        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512);
+        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
+        if (pass.equals(passB)) {
+            jlError.setText("Contraseña CORRECTA.");
+            jbSave.setEnabled(true);
+
+        } else {
+            jlError.setText("Contraseña debe ser igual.");
+            jbSave.setEnabled(false);
+        }
+    }//GEN-LAST:event_jpfPassKeyReleased
+
+    private void jtfMailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfMailKeyReleased
+        // El email a validar
+        String email = jtfMail.getText().trim();
+        if (isMail(email)) {
+            jlError.setText(email + " Correcto.");
+            jbSave.setEnabled(true);
+        } else {
+            jlError.setText(email + " No es un e-Mail.");
+            jbSave.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_jtfMailKeyReleased
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        back();
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
@@ -211,10 +297,52 @@ public class CreateAgent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jbSave;
+    private javax.swing.JLabel jlError;
     private javax.swing.JPasswordField jpfPass;
-    private javax.swing.JPasswordField jpsPasVerification;
+    private javax.swing.JPasswordField jpfPassB;
     private javax.swing.JTextField jtfMail;
     private javax.swing.JTextField jtfName;
     private javax.swing.JTextField jtfUser;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * isMail evaluate if the String is an email.
+     *
+     * @param email email received the string input the text field for email
+     * @return true if the String is a email and false if the String is not an
+     * email
+     */
+    private boolean isMail(String email) {
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    private void back() {
+        this.dispose();
+        AdminModule adminModule = new AdminModule(this.agents);
+        adminModule.setVisible(true);
+    }
+
+    private boolean exist(String email, String user) {
+        boolean exist = false;
+        for (User agent : agents) {
+            if (agent.getUserName().equals(user)
+                    || agent.getMail().equals(email)) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
 }
