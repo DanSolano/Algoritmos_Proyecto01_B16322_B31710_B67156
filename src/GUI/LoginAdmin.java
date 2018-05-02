@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class LoginAdmin extends javax.swing.JFrame {
 
-    ArrayList<User> admins;
+    ArrayList<User> agents;
 
     /**
      * Creates new form Login
      */
     public LoginAdmin(ArrayList<User> agentList) {
         initComponents();
-        this.admins = agentList;
+        this.agents = agentList;
 
     }
 
@@ -131,7 +131,7 @@ public class LoginAdmin extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "pass: " + cliente.getPassword()
 //                    + " >\n" + "pass: " + pass, "Error", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            AdminModule adminModule = new AdminModule();
+            AdminModule adminModule = new AdminModule(agents);
             adminModule.setVisible(true);
 //            if (userBusiness.existe("")) {
 //                //cerrar login y abrir la ventana correspondiente

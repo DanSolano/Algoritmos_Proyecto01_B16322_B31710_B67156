@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  *
  * @author daniel
  */
-public class AdminModule extends javax.swing.JFrame implements Runnable{
+public class AdminModule extends javax.swing.JFrame {
 
     /**
      * Creates new form AgentsModule
@@ -31,18 +31,11 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
     private String ampm;
     private Thread thread;
 
-    public AdminModule() {
-    }
-    
-    
-    
+    public AdminModule(ArrayList<User> agentsList) {
 
-    public AdminModule(ArrayList<User>agentsList ) {
-        
         initComponents();
-        this.agents= agentsList;
-         this.setResizable(false);
-        dateAndTime();
+        this.agents = agentsList;
+        this.setResizable(false);
     }
 
     /**
@@ -98,6 +91,8 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
 
         jLabel1.setText("AGENTES");
 
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -105,7 +100,7 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(230, 230, 230)
                 .addComponent(jLabel1)
-                .addContainerGap(502, Short.MAX_VALUE))
+                .addContainerGap(518, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +109,6 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
                 .addComponent(jLabel1)
                 .addContainerGap(447, Short.MAX_VALUE))
         );
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jScrollPane1.setViewportView(jDesktopPane1);
 
@@ -276,17 +270,14 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1)
-                .addGap(8, 8, 8))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-                .addGap(8, 8, 8))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -331,7 +322,7 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       ListAgents listAgents = new ListAgents(agents);
+        ListAgents listAgents = new ListAgents(agents);
         listAgents.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -390,43 +381,5 @@ public class AdminModule extends javax.swing.JFrame implements Runnable{
     // End of variables declaration//GEN-END:variables
     private javax.swing.JLabel jlDate;
     private javax.swing.JLabel jlHour;
-    
-    @Override
-    public void run() {
-        Thread ct = Thread.currentThread();
-        while (ct == thread) {
-            calculate();
-            jlHour.setText(hour + ":" + minutes + ":" + seconds + " " + ampm);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-        }
-    }
-    public void calculate() {
-        Calendar calendar = new GregorianCalendar();
-        Date dateAndTimeNow = new Date();
-
-        calendar.setTime(dateAndTimeNow);
-        ampm = calendar.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-        if (ampm.equals("PM")) {
-            int h = calendar.get(Calendar.HOUR_OF_DAY) - 12;
-            hour = h > 9 ? "" + h : "0" + h;
-        } else {
-            hour = calendar.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendar.get(Calendar.HOUR_OF_DAY) : "0" + calendar.get(Calendar.HOUR_OF_DAY);
-        }
-        minutes = calendar.get(Calendar.MINUTE) > 9 ? "" + calendar.get(Calendar.MINUTE) : "0" + calendar.get(Calendar.MINUTE);
-        seconds = calendar.get(Calendar.SECOND) > 9 ? "" + calendar.get(Calendar.SECOND) : "0" + calendar.get(Calendar.SECOND);
-    }
- private void dateAndTime() {
-        Calendar c = Calendar.getInstance();
-        String day = Integer.toString(c.get(Calendar.DATE));
-        String month = Integer.toString(c.get(Calendar.MONTH));
-        String year = Integer.toString(c.get(Calendar.YEAR));
-        jlDate.setText(day + " / " + month + " / " + year + " / ");
-
-        thread = new Thread(this);
-        thread.start();
-    }
 
 }

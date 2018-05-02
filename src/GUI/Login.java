@@ -30,7 +30,6 @@ ArrayList<User> agents;
     public Login(ArrayList<User> agentList) {
         initComponents();
         jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");
-        
         jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.agents = agentList;
         enableEvents(MouseEvent.MOUSE_EVENT_MASK);
