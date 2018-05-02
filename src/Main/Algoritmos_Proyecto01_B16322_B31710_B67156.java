@@ -12,6 +12,10 @@ import java.util.LinkedList;
 import ADT.LinkedList.LinkedListSimple;
 import ADT.LinkedList.DoubleLinkedCircularList;
 import ADT.LinkedList.DoublyLinkedList;
+import Data.AgentCSV;
+import Domain.User;
+import java.util.ArrayList;
+import javax.swing.UIManager;
 
 /**
  * @version1.0
@@ -23,16 +27,28 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ListException {
+        AgentCSV agentCSV = new AgentCSV();
+        ArrayList<User> agentList = new ArrayList<User>();
+        agentList = (ArrayList<User>) agentCSV.readCSV();
+        for (User user : agentList) {
+            System.out.println(user.getName());
 
-        if ("d2029049c436ee05f87421cfa79a8797f24ea04909eab42c2abfc1f68268e5d5e33388e2513aa72223f57003a71d27e7337c65bbe27473f895663c0f1b165474" == "d2029049c436ee05f87421cfa79a8797f24ea04909eab42c2abfc1f68268e5d5e33388e2513aa72223f57003a71d27e7337c65bbe27473f895663c0f1b165474") {
-            System.out.println("Main.Algoritmos_Proyecto01_B16322_B31710_B67156.main()");
         }
+        
+        
 
         LinkedListSimple linkedList = new LinkedListSimple();
         DoubleLinkedCircularList doubleLinkedCircularList = new DoubleLinkedCircularList();
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
         LinkedList<Client> clientes = new LinkedList<Client>();
-        Login login = new Login();
+        
+        try{
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        }catch(Exception ex){
+        }
+        
+        Login login = new Login(agentList);
         login.setVisible(true);
 
     }

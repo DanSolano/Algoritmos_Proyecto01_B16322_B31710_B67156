@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class to read CSV files on Java. We use javacsv.jar to read it.
@@ -36,13 +38,14 @@ public class AgentCSV {
      * @param path Ruta donde está el archivo
      * @throws IOException
      */
-    public void readCSV() {
-        try {
-            List<User> usuarios = new ArrayList<User>();
+    public ArrayList<User> readCSV() {
 
+        try {
+            ArrayList<User> agentes = new ArrayList<User>();
+            
             CsvReader empleados_import = new CsvReader(path);
             empleados_import.readHeaders();
-
+            
             while (empleados_import.readRecord()) {
                 String name = empleados_import.get(0);
                 String userName = empleados_import.get(1);
@@ -50,26 +53,29 @@ public class AgentCSV {
                 String password = empleados_import.get(3);
                 int code = Integer.parseInt(empleados_import.get(4));
                 String kindUser = empleados_import.get(5);
-
-                usuarios.add(new User(name, userName, mail, password, code, kindUser));
+                
+                agentes.add(new User(name, userName, mail, password, code, kindUser));
             }
-
+            
             empleados_import.close();
-
-            for (User emp : usuarios) {
-
+            
+            for (User emp : agentes) {
+                
                 System.out.println(emp.getName() + " - " + emp.getUserName() + " - "
                         + emp.getMail() + " - " + emp.getPassword());
             }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            
+            return agentes;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AgentCSV.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AgentCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
+
     }
 
-    public void writeCSV(LinkedList<User> clientLinketList) {
+    public void writeCSV(ArrayList<User> clientLinketList) {
 
         String outputFile = path;
 
