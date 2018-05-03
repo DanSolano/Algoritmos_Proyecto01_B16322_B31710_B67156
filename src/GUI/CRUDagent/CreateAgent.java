@@ -6,6 +6,7 @@
 package GUI.CRUDagent;
 
 import Domain.User;
+import GUI.AdminModule;
 import GUI.AgentsModule;
 import Utilities.StringMD;
 import java.util.ArrayList;
@@ -327,7 +328,7 @@ public class CreateAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AgentsModule adminModule = new AgentsModule(this.agents);
+        AdminModule adminModule = new AdminModule(this.agents);
         adminModule.setVisible(true);
     }
 

@@ -8,6 +8,7 @@ package GUI;
 import Data.AgentCSV;
 import Domain.User;
 import GUI.CRUDagent.CreateAgent;
+import GUI.CRUDagent.DeleteAgent;
 import GUI.CRUDagent.ListAgents;
 import GUI.CRUDagent.UpdateAgent;
 import java.util.ArrayList;
@@ -329,7 +330,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-        // TODO add your handling code here:
+        DeleteAgent deleteAgent = new DeleteAgent(agents);
+        this.dispose();
+        deleteAgent.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
