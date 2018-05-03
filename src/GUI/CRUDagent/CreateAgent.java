@@ -20,13 +20,15 @@ import java.util.regex.Pattern;
 public class CreateAgent extends javax.swing.JFrame {
 
     ArrayList<User> agents;
+    ArrayList<User> admin;
 
     /**
      * Creates new form CreateClient
      */
-    public CreateAgent(ArrayList<User> agentList) {
+    public CreateAgent(ArrayList<User> agentList, ArrayList<User> adminList) {
         initComponents();
         this.agents = agentList;
+        this.admin = adminList;
         jbSave.setEnabled(false);
     }
 
@@ -328,7 +330,7 @@ public class CreateAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule(this.agents, this.admin);
         adminModule.setVisible(true);
     }
 

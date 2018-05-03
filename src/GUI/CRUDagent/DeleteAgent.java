@@ -21,16 +21,18 @@ import java.util.regex.Pattern;
 public class DeleteAgent extends javax.swing.JFrame {
 
     private ArrayList<User> agents;
+    private ArrayList<User> admin;
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public DeleteAgent(ArrayList<User> agentList) {
+    public DeleteAgent(ArrayList<User> agentList, ArrayList<User> adminList) {
         initComponents();
         this.indexUser = -1;
         this.agents = agentList;
+        this.admin = adminList;
         jbUpdate.setEnabled(false);
         autoCompleter();
 
@@ -217,7 +219,7 @@ public class DeleteAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule(this.agents, this.admin);
         adminModule.setVisible(true);
     }
 

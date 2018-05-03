@@ -21,16 +21,18 @@ import java.util.regex.Pattern;
 public class UpdateAgent extends javax.swing.JFrame {
 
     private ArrayList<User> agents;
+    private ArrayList<User> admin;
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public UpdateAgent(ArrayList<User> agentList) {
+    public UpdateAgent(ArrayList<User> agentList, ArrayList<User> agents) {
         initComponents();
         this.indexUser = -1;
         this.agents = agentList;
+        this.admin = admin;
         jbUpdate.setEnabled(false);
         textAutocompleter = new TextAutoCompleter(jtfUser);
         textAutocompleter.setCaseSensitive(false);
@@ -405,7 +407,7 @@ public class UpdateAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule(this.agents, this.admin);
         adminModule.setVisible(true);
     }
 

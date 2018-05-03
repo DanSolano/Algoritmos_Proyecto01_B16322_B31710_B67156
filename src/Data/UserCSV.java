@@ -19,15 +19,15 @@ import java.util.logging.Logger;
  *
  * @author daniel
  */
-public class AgentCSV {
+public class UserCSV {
 
     // Propiedades
     private char separador;
     private String path;
 
     // Constructor
-    public AgentCSV() {
-        this.path = "./agentes.csv";
+    public UserCSV(String path) {
+        this.path = path;
     }
 
     // Métodos
@@ -67,9 +67,9 @@ public class AgentCSV {
             
             return agentes;
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(AgentCSV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserCSV.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(AgentCSV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
 

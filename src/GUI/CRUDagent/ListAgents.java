@@ -22,10 +22,12 @@ public class ListAgents extends javax.swing.JFrame {
      */
     DefaultTableModel model;
     ArrayList<User> agents;
+    ArrayList<User> admin;
 
-    public ListAgents(ArrayList<User> agentList) {
+    public ListAgents(ArrayList<User> agentList, ArrayList<User> adminList) {
         initComponents();
         this.agents = agentList;
+        this.admin = adminList;
         fillJtAgents(this.agents);
     }
 
@@ -155,7 +157,7 @@ public class ListAgents extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule(this.agents, this.admin);
         adminModule.setVisible(true);
     }
 }
