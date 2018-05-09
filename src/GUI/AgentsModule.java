@@ -5,8 +5,9 @@
  */
 package GUI;
 
-import Data.UserCSV;
+import Data.DataCSV;
 import Domain.User;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,10 +31,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     /**
      * Creates new form AgentsModule
      */
-    public AgentsModule(ArrayList<User> agentList, ArrayList<User> adminList) {
+    public AgentsModule() {
         initComponents();
-        this.agents = agentList;
-        this.admin = adminList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.setResizable(false);
         dateAndTime();
 
@@ -1048,11 +1049,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        UserCSV agentCSV = new UserCSV(StringPath.PATH_AGENT);
+        DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
         agentCSV.writeCSV(this.agents);
-        UserCSV adminCSV = new UserCSV(StringPath.PATH_ADMIN);
+        DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
         adminCSV.writeCSV(this.admin);
-        agentCSV.readCSV();
+//        agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

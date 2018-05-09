@@ -11,6 +11,7 @@ package Domain;
  */
 public class Details {
 
+    private int orderId;
     private String restaurantName;
     private String product;
     private int quantity;
@@ -18,10 +19,19 @@ public class Details {
     public Details() {
     }
 
-    public Details(String restaurantName, String product, int quantity) {
+    public Details(int orderId, String restaurantName, String product, int quantity) {
+        this.orderId = orderId;
         this.restaurantName = restaurantName;
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderCounter) {
+        this.orderId = orderCounter;
     }
 
     public String getRestaurantName() {

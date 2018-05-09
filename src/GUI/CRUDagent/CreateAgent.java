@@ -8,6 +8,7 @@ package GUI.CRUDagent;
 import Domain.User;
 import GUI.AdminModule;
 import GUI.AgentsModule;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -25,10 +26,10 @@ public class CreateAgent extends javax.swing.JFrame {
     /**
      * Creates new form CreateClient
      */
-    public CreateAgent(ArrayList<User> agentList, ArrayList<User> adminList) {
+    public CreateAgent() {
         initComponents();
-        this.agents = agentList;
-        this.admin = adminList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         jbSave.setEnabled(false);
     }
 
@@ -330,7 +331,7 @@ public class CreateAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents, this.admin);
+        AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
     }
 

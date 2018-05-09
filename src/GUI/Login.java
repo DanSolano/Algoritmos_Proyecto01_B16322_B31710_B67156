@@ -7,6 +7,7 @@ package GUI;
 
 import Business.UserBusiness;
 import Domain.User;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -30,12 +31,12 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login(ArrayList<User> agentList, ArrayList<User> adminList) {
+    public Login() {
         initComponents();
         jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");
         jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.agents = agentList;
-        this.admin = adminList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         enableEvents(MouseEvent.MOUSE_EVENT_MASK);
 
     }
@@ -152,7 +153,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         this.setVisible(false);
-        LoginAdmin loginAdmin = new LoginAdmin(this.agents, this.admin);
+        LoginAdmin loginAdmin = new LoginAdmin();
         loginAdmin.setVisible(true);
 //        JOptionPane.showConfirmDialog(rootPane, "BIEN");
     }//GEN-LAST:event_jLabel3MouseClicked
@@ -170,7 +171,7 @@ public class Login extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "pass: " + cliente.getPassword()
 //                    + " >\n" + "pass: " + pass, "Error", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            AgentsModule agentsModule = new AgentsModule(this.agents,this.admin);
+            AgentsModule agentsModule = new AgentsModule();
             agentsModule.setVisible(true);
 //            if (userBusiness.existe("")) {
 //                //cerrar login y abrir la ventana correspondiente
