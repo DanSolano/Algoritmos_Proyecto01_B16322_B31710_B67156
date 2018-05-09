@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,15 +18,15 @@ public class OrderDetails {
     private int orderCounter;
     private String clientName;
     private String agentCode;
-    private Date dateOrder;
+    private String dateOrder;
     private String province;
     private String driverDni;
-    private List<Details> details;
+    private ArrayList<Details> details;
 
     public OrderDetails() {
     }
 
-    public OrderDetails(int orderCounter, String clientName, String agentCode, Date dateOrder, String province, String driverDni, List<Details> details) {
+    public OrderDetails(int orderCounter, String clientName, String agentCode, String dateOrder, String province, String driverDni, ArrayList<Details> details) {
         this.orderCounter = orderCounter;
         this.clientName = clientName;
         this.agentCode = agentCode;
@@ -59,11 +60,11 @@ public class OrderDetails {
         this.agentCode = agentCode;
     }
 
-    public Date getDateOrder() {
+    public String getDateOrder() {
         return dateOrder;
     }
 
-    public void setDateOrder(Date dateOrder) {
+    public void setDateOrder(String dateOrder) {
         this.dateOrder = dateOrder;
     }
 
@@ -83,11 +84,11 @@ public class OrderDetails {
         this.driverDni = driverDni;
     }
 
-    public List<Details> getDetails() {
+    public ArrayList<Details> getDetails() {
         return details;
     }
 
-    public void setDetails(List<Details> details) {
+    public void setDetails(ArrayList<Details> details) {
         this.details = details;
     }
 
