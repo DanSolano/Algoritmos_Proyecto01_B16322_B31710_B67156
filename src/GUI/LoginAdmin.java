@@ -6,6 +6,7 @@
 package GUI;
 
 import Domain.User;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -17,13 +18,15 @@ import javax.swing.JOptionPane;
 public class LoginAdmin extends javax.swing.JFrame {
 
     ArrayList<User> agents;
+    ArrayList<User> admin;
 
     /**
      * Creates new form Login
      */
-    public LoginAdmin(ArrayList<User> agentList) {
+    public LoginAdmin() {
         initComponents();
-        this.agents = agentList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
 
     }
 
@@ -131,7 +134,7 @@ public class LoginAdmin extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "pass: " + cliente.getPassword()
 //                    + " >\n" + "pass: " + pass, "Error", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            AdminModule adminModule = new AdminModule(agents);
+            AdminModule adminModule = new AdminModule();
             adminModule.setVisible(true);
 //            if (userBusiness.existe("")) {
 //                //cerrar login y abrir la ventana correspondiente

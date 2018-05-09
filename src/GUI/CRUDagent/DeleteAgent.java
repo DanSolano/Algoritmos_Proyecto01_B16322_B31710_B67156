@@ -8,6 +8,7 @@ package GUI.CRUDagent;
 import Domain.User;
 import GUI.AdminModule;
 import GUI.AgentsModule;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
@@ -21,16 +22,18 @@ import java.util.regex.Pattern;
 public class DeleteAgent extends javax.swing.JFrame {
 
     private ArrayList<User> agents;
+    private ArrayList<User> admin;
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public DeleteAgent(ArrayList<User> agentList) {
+    public DeleteAgent() {
         initComponents();
         this.indexUser = -1;
-        this.agents = agentList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         jbUpdate.setEnabled(false);
         autoCompleter();
 
@@ -217,7 +220,7 @@ public class DeleteAgent extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
     }
 

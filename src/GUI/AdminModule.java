@@ -5,16 +5,15 @@
  */
 package GUI;
 
-import Data.AgentCSV;
+import Data.DataCSV;
 import Domain.User;
 import GUI.CRUDagent.CreateAgent;
 import GUI.CRUDagent.DeleteAgent;
 import GUI.CRUDagent.ListAgents;
 import GUI.CRUDagent.UpdateAgent;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.StringPath;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  *
@@ -26,16 +25,18 @@ public class AdminModule extends javax.swing.JFrame {
      * Creates new form AgentsModule
      */
     private ArrayList<User> agents;
+    private ArrayList<User> admin;
     private String hour;
     private String minutes;
     private String seconds;
     private String ampm;
     private Thread thread;
 
-    public AdminModule(ArrayList<User> agentsList) {
+    public AdminModule() {
 
         initComponents();
-        this.agents = agentsList;
+         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.setResizable(false);
     }
 
@@ -309,12 +310,14 @@ public class AdminModule extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         this.dispose();
-        CreateAgent createClient = new CreateAgent(this.agents);
+        CreateAgent createClient = new CreateAgent();
         createClient.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+//        this.dispose();
+//        CreateAdmin createAdmin = new CreateAdmin();
+//        createAdmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -330,7 +333,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-        DeleteAgent deleteAgent = new DeleteAgent(agents);
+        DeleteAgent deleteAgent = new DeleteAgent();
         this.dispose();
         deleteAgent.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
@@ -348,7 +351,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        ListAgents listAgents = new ListAgents(agents);
+        ListAgents listAgents = new ListAgents();
         listAgents.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -358,15 +361,17 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        UpdateAgent updateAgent = new UpdateAgent(agents);
+        UpdateAgent updateAgent = new UpdateAgent();
         updateAgent.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        AgentCSV agentCSV = new AgentCSV();
+        DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
         agentCSV.writeCSV(this.agents);
-        agentCSV.readCSV();
+        DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
+        adminCSV.writeCSV(this.admin);
+//        agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

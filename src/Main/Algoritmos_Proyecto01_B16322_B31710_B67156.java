@@ -9,13 +9,15 @@ import Domain.Client;
 import Exceptions.ListException;
 import GUI.Login;
 import java.util.LinkedList;
-import ADT.LinkedList.LinkedListSimple;
-import ADT.LinkedList.DoubleLinkedCircularList;
-import ADT.LinkedList.DoublyLinkedList;
-import Data.AgentCSV;
+import Data.LoadData;
+import Domain.Driver;
+import Domain.OrderDetails;
+import Domain.Restaurant;
 import Domain.User;
 import java.util.ArrayList;
+import java.util.Queue;
 import javax.swing.UIManager;
+import javax.xml.soap.Detail;
 
 /**
  * @version1.0
@@ -26,29 +28,29 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
     /**
      * @param args the command line arguments
      */
+    public static LinkedList<Client> CLIENT_LIST;
+    public static ArrayList<Detail> DETAIL_LIST;
+    public static Queue<Driver> DRIVER_QUEUE;
+    public static ArrayList<OrderDetails> ORDER_DETAIL_LIST;
+    public static ArrayList<Restaurant> RESTAURANT_LIST;
+    public static ArrayList<User> AGENT_LIST;
+    public static ArrayList<User> ADMIN_LIST;
+
     public static void main(String[] args) throws ListException {
-        AgentCSV agentCSV = new AgentCSV();
-        ArrayList<User> agentList = new ArrayList<User>();
-        agentList = (ArrayList<User>) agentCSV.readCSV();
-        for (User user : agentList) {
-            System.out.println(user.getName());
+        LoadData ld = new LoadData();
+        CLIENT_LIST = ld.getClients();
+        DRIVER_QUEUE = ld.getDrivers();
+        RESTAURANT_LIST = ld.getRestaurants();
+        AGENT_LIST = ld.getAgents();
+        ADMIN_LIST = ld.getAdministrators();
 
-        }
-        
-        
-
-        LinkedListSimple linkedList = new LinkedListSimple();
-        DoubleLinkedCircularList doubleLinkedCircularList = new DoubleLinkedCircularList();
-        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        LinkedList<Client> clientes = new LinkedList<Client>();
-        
-        try{
+        try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
         }
-        
-        Login login = new Login(agentList);
+
+        Login login = new Login();
         login.setVisible(true);
 
     }

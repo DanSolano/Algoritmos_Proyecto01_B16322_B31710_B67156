@@ -8,6 +8,7 @@ package GUI.CRUDagent;
 import Domain.User;
 import GUI.AdminModule;
 import GUI.AgentsModule;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,10 +23,12 @@ public class ListAgents extends javax.swing.JFrame {
      */
     DefaultTableModel model;
     ArrayList<User> agents;
+    ArrayList<User> admin;
 
-    public ListAgents(ArrayList<User> agentList) {
+    public ListAgents() {
         initComponents();
-        this.agents = agentList;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         fillJtAgents(this.agents);
     }
 
@@ -155,7 +158,7 @@ public class ListAgents extends javax.swing.JFrame {
 
     private void back() {
         this.dispose();
-        AdminModule adminModule = new AdminModule(this.agents);
+        AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
     }
 }

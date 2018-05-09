@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,14 +15,24 @@ import java.util.List;
 public class OrderDetails {
 
     private int orderCounter;
-    private List<Details> ordenDetails;
+    private String clientName;
+    private String agentCode;
+    private Date dateOrder;
+    private String province;
+    private String driverDni;
+    private List<Details> details;
 
     public OrderDetails() {
     }
 
-    public OrderDetails(int orderCounter, List<Details> ordenDetails) {
+    public OrderDetails(int orderCounter, String clientName, String agentCode, Date dateOrder, String province, String driverDni, List<Details> details) {
         this.orderCounter = orderCounter;
-        this.ordenDetails = ordenDetails;
+        this.clientName = clientName;
+        this.agentCode = agentCode;
+        this.dateOrder = dateOrder;
+        this.province = province;
+        this.driverDni = driverDni;
+        this.details = details;
     }
 
     public int getOrderCounter() {
@@ -32,12 +43,52 @@ public class OrderDetails {
         this.orderCounter = orderCounter;
     }
 
-    public List<Details> getOrden() {
-        return ordenDetails;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setOrden(List<Details> ordenDetails) {
-        this.ordenDetails = ordenDetails;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getAgentCode() {
+        return agentCode;
+    }
+
+    public void setAgentCode(String agentCode) {
+        this.agentCode = agentCode;
+    }
+
+    public Date getDateOrder() {
+        return dateOrder;
+    }
+
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDriverDni() {
+        return driverDni;
+    }
+
+    public void setDriverDni(String driverDni) {
+        this.driverDni = driverDni;
+    }
+
+    public List<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Details> details) {
+        this.details = details;
     }
 
 }
