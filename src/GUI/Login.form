@@ -138,6 +138,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfUserOrMail">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="agente"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -145,6 +148,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jpPassword">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="pass"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlError">
           <Properties>

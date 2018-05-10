@@ -7,6 +7,10 @@ package GUI;
 
 import Data.DataCSV;
 import Domain.User;
+import GUI.CRUDadmin.CreateAdmin;
+import GUI.CRUDadmin.DeleteAdmin;
+import GUI.CRUDadmin.ListAdmins;
+import GUI.CRUDadmin.UpdateAdmin;
 import GUI.CRUDagent.CreateAgent;
 import GUI.CRUDagent.DeleteAgent;
 import GUI.CRUDagent.ListAgents;
@@ -222,6 +226,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu4.add(jMenuItem3);
 
         jMenuItem20.setText("Eliminar Administrador");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem20);
 
         jMenuItem13.setText("Actualizar Administrador");
@@ -322,9 +331,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-//        this.dispose();
-//        CreateAdmin createAdmin = new CreateAdmin();
-//        createAdmin.setVisible(true);
+        this.dispose();
+        CreateAdmin createAdmin = new CreateAdmin();
+        createAdmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -332,7 +341,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+        UpdateAdmin updateAdmin = new UpdateAdmin();
+        updateAdmin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
@@ -360,7 +371,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        ListAdmins listAdmins = new ListAdmins();
+        listAdmins.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
@@ -374,7 +387,7 @@ public class AdminModule extends javax.swing.JFrame {
         agentCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST);
 
         DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
-        adminCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST);
+        adminCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST);
 //        agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
 
@@ -385,6 +398,12 @@ public class AdminModule extends javax.swing.JFrame {
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        DeleteAdmin deleteAdmin = new DeleteAdmin();
+        this.dispose();
+        deleteAdmin.setVisible(true);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

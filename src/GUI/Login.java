@@ -83,7 +83,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese su Contraseña:");
 
+        jtfUserOrMail.setText("agente");
+
         jLabel1.setText("Ingrese Nombre de Usuario o eMail");
+
+        jpPassword.setText("pass");
 
         jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlError.setText(" ");
@@ -169,7 +173,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String pass = new String(jpPassword.getPassword());
+        String pass = new String(jpPassword.getPassword()).trim();
         if (pass.equals("") || jtfUserOrMail.getText().isEmpty()) {
             //JOptionPane.showMessageDialog(null, "", "Error", JOptionPane.ERROR_MESSAGE);
             jlError.setText("<html><font color=\"#FE0101\"><u>" + "Ingrese usuario y contraseña." + "</u></font></html>");//#FF000

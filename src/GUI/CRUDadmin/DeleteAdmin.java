@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.CRUDagent;
+package GUI.CRUDadmin;
 
 import Domain.User;
 import GUI.AdminModule;
-import GUI.AgentsModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
-import Utilities.StringMD;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -19,21 +17,19 @@ import java.util.regex.Pattern;
  *
  * @author daniel
  */
-public class DeleteAgent extends javax.swing.JFrame {
+public class DeleteAdmin extends javax.swing.JFrame {
 
-    private ArrayList<User> agents;
-    private ArrayList<User> admin;
+    private ArrayList<User> admins;
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public DeleteAgent() {
+    public DeleteAdmin() {
         initComponents();
         this.indexUser = -1;
-        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
-        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        this.admins = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         jbUpdate.setEnabled(false);
         autoCompleter();
 
@@ -219,6 +215,7 @@ public class DeleteAgent extends javax.swing.JFrame {
     }
 
     private void back() {
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
@@ -226,9 +223,9 @@ public class DeleteAgent extends javax.swing.JFrame {
 
     private boolean exist(String email, String user) {
         boolean exist = false;
-        for (User agent : agents) {
-            if (agent.getUserName().equals(user)
-                    || agent.getMail().equals(email)) {
+        for (User admin : admins) {
+            if (admin.getUserName().equals(user)
+                    || admin.getMail().equals(email)) {
                 exist = true;
             }
         }
@@ -236,16 +233,16 @@ public class DeleteAgent extends javax.swing.JFrame {
     }
 
     private void uploadSearchByUser() {
-        ArrayList<User> agents = this.agents;
-        for (int i = 0; i < agents.size(); i++) {
-            textAutocompleter.addItem(agents.get(i).getUserName());
+        ArrayList<User> admins = this.admins;
+        for (int i = 0; i < admins.size(); i++) {
+            textAutocompleter.addItem(admins.get(i).getUserName());
         }
     }
 
     private void searchUser() {
         String user = jtfUser.getText().trim();
         int counter = -1;
-        for (User agent : agents) {
+        for (User agent : admins) {
             counter++;
 
             if (agent.getUserName().equals(user)) {
@@ -262,8 +259,8 @@ public class DeleteAgent extends javax.swing.JFrame {
     }
 
     private void delete() {
-        this.agents.remove(this.indexUser);
-        jlInformation.setText("Agente Eliminado con exito.");
+        this.admins.remove(this.indexUser);
+        jlInformation.setText("Administrador eliminado con exito.");
         jbUpdate.setEnabled(false);
         clearFields();
     }
