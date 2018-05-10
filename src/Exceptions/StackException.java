@@ -7,14 +7,14 @@ package Exceptions;
 
 /**
  *
- * @author deltadragon
+ * @author daniel
  */
-public class PilaException extends Exception{
+public class StackException extends Exception{
 
-    public PilaException() {
+    public StackException() {
     }
 
-    public PilaException(String message) {
+    public StackException(String message) {
         super(message);
     }
     //pila llena

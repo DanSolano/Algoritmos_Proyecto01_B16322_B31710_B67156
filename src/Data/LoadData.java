@@ -6,11 +6,13 @@
 package Data;
 
 import ADT.LinkedList.DoubleLinkedCircularList;
+import ADT.Stack.LinkedStack;
 import Domain.Client;
 import Domain.Driver;
 import Domain.OrderDetails;
 import Domain.Restaurant;
 import Domain.User;
+import Exceptions.StackException;
 import Utilities.StringPath;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -67,6 +69,19 @@ public class LoadData {
         ArrayList<User> admin = new ArrayList<User>();
         admin = (ArrayList<User>) agentCSV.readAgentAdmin();
         return admin;
+    }
+
+    public LinkedStack getOrdersDetails() throws StackException {
+        DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER_DETAIL);
+        ArrayList<OrderDetails> ordersDetail = new ArrayList<OrderDetails>();
+        ordersDetail = (ArrayList<OrderDetails>) orderDetailCSV.readOrderDetails();
+        LinkedStack ordersDetails = new LinkedStack();
+        for (OrderDetails orderDetails : ordersDetail) {
+            OrderDetails oD = orderDetails;
+            ordersDetails.push(oD);
+
+        }
+        return ordersDetails;
     }
 
 }

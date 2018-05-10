@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");
+        jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");//#FF000
         jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
@@ -54,9 +54,10 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfUserOrMail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jpPassword = new javax.swing.JPasswordField();
+        jlError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,14 +83,23 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese su Contraseña:");
 
-        jLabel1.setText("Ingrese Nombre de Usuario");
+        jtfUserOrMail.setText("agente");
+
+        jLabel1.setText("Ingrese Nombre de Usuario o eMail");
+
+        jpPassword.setText("pass");
+
+        jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlError.setText(" ");
+        jlError.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfUserOrMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jpPassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -97,23 +107,27 @@ public class Login extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jLabel3)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)
-                        .addComponent(jTextField1)
+                        .addComponent(jtfUserOrMail)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(33, Short.MAX_VALUE)))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(368, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
+                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26))
             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,11 +135,11 @@ public class Login extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(jLabel1)
                     .addGap(18, 18, 18)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfUserOrMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(28, 28, 28)
                     .addComponent(jLabel2)
                     .addGap(29, 29, 29)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(38, 38, 38)
                     .addComponent(jButton1)
                     .addContainerGap(181, Short.MAX_VALUE)))
@@ -159,66 +173,26 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        try {
-        String pass = new String(jPasswordField1.getPassword());
-        if (pass.equals("") || jTextField1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese usuario y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
+        String pass = new String(jpPassword.getPassword()).trim();
+        if (pass.equals("") || jtfUserOrMail.getText().isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "", "Error", JOptionPane.ERROR_MESSAGE);
+            jlError.setText("<html><font color=\"#FE0101\"><u>" + "Ingrese usuario y contraseña." + "</u></font></html>");//#FF000
 
         } else {
             String sha = StringMD.getStringMessageDigest(pass, StringMD.SHA512);
-//      // UserBusiness userBusiness = new UserBusiness();
-            User cliente = new User("", "", "", sha, 0, "agent");
-//            JOptionPane.showMessageDialog(null, "pass: " + cliente.getPassword()
-//                    + " >\n" + "pass: " + pass, "Error", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            AgentsModule agentsModule = new AgentsModule();
-            agentsModule.setVisible(true);
-//            if (userBusiness.existe("")) {
-//                //cerrar login y abrir la ventana correspondiente
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "El usuario no está registrado");
-//            }
+            String userOrMail = jtfUserOrMail.getText().trim();
+            if (isAgent(sha, userOrMail)) {
+                this.dispose();
+                AgentsModule agentsModule = new AgentsModule();
+                agentsModule.setVisible(true);
+            } else {
+                jlError.setText("<html><font color=\"#FE0101\"><u>" + "Usuario y contraseña no coinciden." + "</u></font></html>");//#FF000
+//                jlError.setText(");
+            }
+//            cliente = new User("", "", "", sha, 0, "agent");
+
         }
-//        } catch (IOException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Login().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -226,7 +200,19 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jlError;
+    private javax.swing.JPasswordField jpPassword;
+    private javax.swing.JTextField jtfUserOrMail;
     // End of variables declaration//GEN-END:variables
+
+    private boolean isAgent(String sha, String userOrMail) {
+        for (User agent : agents) {
+            if ((agent.getUserName().equals(userOrMail) || agent.getMail().equals(userOrMail)) && agent.getPassword().equals(sha)) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
 }
