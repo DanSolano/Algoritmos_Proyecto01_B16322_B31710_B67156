@@ -107,8 +107,7 @@ public class DataCSV {
 
         try {
 
-            ArrayList<User> agentes = new ArrayList<User>();
-            ArrayList<Object> ob = new ArrayList<>();
+            ArrayList<Object> objeclArrList = new ArrayList<>();
 
             File alreadyExists = new File(outputFile);
 
@@ -129,14 +128,14 @@ public class DataCSV {
                         int code = Integer.parseInt(dataImport.get(4));
                         String kindUser = dataImport.get(5);
 
-                        ob.add(new User(name, userName, mail, password, code, kindUser));
+                        objeclArrList.add(new User(name, userName, mail, password, code, kindUser));
                     } else if (path.equals(StringPath.PATH_RESTAURANT)) {
                         String dni = dataImport.get(0);
                         String name = dataImport.get(1);
                         String location = dataImport.get(2);
                         this.readProducts(dni);
 
-                        ob.add(new Restaurant(dni, name, location, this.drinks, this.foods, this.desserts, this.others));
+                        objeclArrList.add(new Restaurant(dni, name, location, this.drinks, this.foods, this.desserts, this.others));
 
                     } else if (path.equals(StringPath.PATH_CLIENT)) {
                         String name = dataImport.get(0);
@@ -147,7 +146,7 @@ public class DataCSV {
                         String canton = dataImport.get(5);
                         String district = dataImport.get(6);
 
-                        ob.add(new Client(name, lastName, mail, phoneNumber, province, canton, district));
+                        objeclArrList.add(new Client(name, lastName, mail, phoneNumber, province, canton, district));
 
                     } else if (path.equals(StringPath.PATH_ORDER_DETAIL)) {
                         int ordercounter = Integer.parseInt(dataImport.get(0));
@@ -159,7 +158,7 @@ public class DataCSV {
                         String district = dataImport.get(6);
 
                         this.readDetails(ordercounter);
-                        ob.add(new OrderDetails(ordercounter, clienteName, agentCode, dateOrder, province, driverDni, this.details));
+                        objeclArrList.add(new OrderDetails(ordercounter, clienteName, agentCode, dateOrder, province, driverDni, this.details));
                     } else if (path.equals(StringPath.PATH_DRIVER)) {
                         int ordercounter = Integer.parseInt(dataImport.get(0));
                         String dni = dataImport.get(1);
@@ -170,7 +169,7 @@ public class DataCSV {
                         String district = dataImport.get(6);
 
                         this.readDetails(ordercounter);
-                        ob.add(new Driver(dni, name, age, vehcle, phoneNumber));
+                        objeclArrList.add(new Driver(dni, name, age, vehcle, phoneNumber));
                     }
 
                 }
@@ -179,7 +178,7 @@ public class DataCSV {
 
             }
 
-            return ob;
+            return objeclArrList;
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataCSV.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,7 +237,7 @@ public class DataCSV {
 
             if (alreadyExists) {
                 File ArchivoEmpleados = new File(outputFile);
-                File directorio = new File("./data");
+                File directorio = new File(StringPath.PATH_DIR);
                 directorio.mkdir();
                 ArchivoEmpleados.delete();
             }
@@ -278,9 +277,10 @@ public class DataCSV {
         File createDir = new File(StringPath.PATH_DIR);
 
         if (createDir.mkdir()) {
-            return true;
+            return false;//false porque el directorio ya existe
         }
-        return false;
+        return true;//true cuando CREA directorio nuevo
+        
     }
 
 }

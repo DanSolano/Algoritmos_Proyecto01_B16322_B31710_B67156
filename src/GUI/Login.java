@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");
+        jLabel3.setText("<html><font color=\"#0000CF\"><u>" + "Ingresar como Administrador." + "</u></font></html>");//#FF000
         jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
@@ -57,6 +57,7 @@ public class Login extends javax.swing.JFrame {
         jtfUserOrMail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jpPassword = new javax.swing.JPasswordField();
+        jlError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,12 +85,17 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese Nombre de Usuario o eMail");
 
+        jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlError.setText(" ");
+        jlError.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfUserOrMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jpPassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -97,7 +103,9 @@ public class Login extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jLabel3)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -113,7 +121,9 @@ public class Login extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(368, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
+                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26))
             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +171,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pass = new String(jpPassword.getPassword());
         if (pass.equals("") || jtfUserOrMail.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese usuario y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "", "Error", JOptionPane.ERROR_MESSAGE);
+            jlError.setText("<html><font color=\"#FE0101\"><u>" + "Ingrese usuario y contraseña." + "</u></font></html>");//#FF000
 
         } else {
             String sha = StringMD.getStringMessageDigest(pass, StringMD.SHA512);
@@ -170,6 +181,9 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
                 AgentsModule agentsModule = new AgentsModule();
                 agentsModule.setVisible(true);
+            } else {
+                jlError.setText("<html><font color=\"#FE0101\"><u>" + "Usuario y contraseña no coinciden." + "</u></font></html>");//#FF000
+//                jlError.setText(");
             }
 //            cliente = new User("", "", "", sha, 0, "agent");
 
@@ -182,12 +196,19 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jlError;
     private javax.swing.JPasswordField jpPassword;
     private javax.swing.JTextField jtfUserOrMail;
     // End of variables declaration//GEN-END:variables
 
     private boolean isAgent(String sha, String userOrMail) {
-        
-        return true;
+        for (User agent : agents) {
+            if ((agent.getUserName().equals(userOrMail) || agent.getMail().equals(userOrMail)) && agent.getPassword().equals(sha)) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 }

@@ -35,7 +35,7 @@ public class AdminModule extends javax.swing.JFrame {
     public AdminModule() {
 
         initComponents();
-         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.setResizable(false);
     }
@@ -57,33 +57,34 @@ public class AdminModule extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -105,6 +106,11 @@ public class AdminModule extends javax.swing.JFrame {
         jButton2.setText("jButton2");
 
         jButton3.setText("jButton3");
+
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -133,18 +139,37 @@ public class AdminModule extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addContainerGap(447, Short.MAX_VALUE))
         );
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jScrollPane1.setViewportView(jDesktopPane1);
 
         jMenu1.setText("File");
 
-        jMenu3.setText("C");
+        jMenu2.setText("Cliente");
 
-        jMenuItem5.setText("Agente De Ventas");
+        jMenuItem1.setText("Listar Cliente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem12.setText("Actualizar Cliente");
+        jMenu2.add(jMenuItem12);
+
+        jMenuItem18.setText("Eliminar Cliente");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem18);
+
+        jMenu1.add(jMenu2);
+
+        jMenu3.setText("Agente de Ventas");
+
+        jMenuItem5.setText("Nuevo Agente");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -152,59 +177,43 @@ public class AdminModule extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem5);
 
-        jMenuItem6.setText("Administrador");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem6);
-
-        jMenuItem7.setText("Conductor");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem7);
-
-        jMenuItem8.setText("Restaurante");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem8);
-
-        jMenuItem9.setText("Pedidos");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem9);
-
-        jMenu1.add(jMenu3);
-
-        jMenu4.setText("R");
-
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem1);
-
-        jMenuItem2.setText("Agente De Ventas");
+        jMenuItem2.setText("Listar Agentes");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem2);
+        jMenu3.add(jMenuItem2);
 
-        jMenuItem3.setText("Administrador");
+        jMenuItem14.setText("Actualizar Agente");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem14);
+
+        jMenuItem19.setText("Eliminar Agente");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem19);
+
+        jMenu1.add(jMenu3);
+
+        jMenu4.setText("Administrador");
+
+        jMenuItem6.setText("Crear Administrador");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem3.setText("Listar Administrador");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -212,80 +221,78 @@ public class AdminModule extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem3);
 
-        jMenuItem4.setText("Conductor");
-        jMenu4.add(jMenuItem4);
+        jMenuItem20.setText("Eliminar Administrador");
+        jMenu4.add(jMenuItem20);
 
-        jMenuItem10.setText("Restaurante");
-        jMenu4.add(jMenuItem10);
-
-        jMenuItem11.setText("Productos");
-        jMenu4.add(jMenuItem11);
-
-        jMenu1.add(jMenu4);
-
-        jMenu5.setText("U");
-
-        jMenuItem12.setText("Cliente");
-        jMenu5.add(jMenuItem12);
-
-        jMenuItem13.setText("Administrador");
+        jMenuItem13.setText("Actualizar Administrador");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem13);
+        jMenu4.add(jMenuItem13);
 
-        jMenuItem14.setText("Agente De Ventas");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.add(jMenu4);
+
+        jMenu5.setText("Conductor");
+
+        jMenuItem7.setText("Crear Conductor");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem14);
+        jMenu5.add(jMenuItem7);
 
-        jMenuItem15.setText("Conductor");
+        jMenuItem4.setText("Listar Conductor");
+        jMenu5.add(jMenuItem4);
+
+        jMenuItem21.setText("Eliminar Conductor");
+        jMenu5.add(jMenuItem21);
+
+        jMenuItem15.setText("Actualizar Conductor");
         jMenu5.add(jMenuItem15);
-
-        jMenuItem16.setText("Restaurante");
-        jMenu5.add(jMenuItem16);
-
-        jMenuItem17.setText("Productos");
-        jMenu5.add(jMenuItem17);
 
         jMenu1.add(jMenu5);
 
-        jMenu6.setText("D");
+        jMenu6.setText("Restaurante");
 
-        jMenuItem18.setText("Cliente");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem8.setText("Crear  Restaurante");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                jMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem18);
+        jMenu6.add(jMenuItem8);
 
-        jMenuItem19.setText("Agente De Ventas");
-        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem19ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem19);
+        jMenuItem10.setText("Listar  Restaurantes");
+        jMenu6.add(jMenuItem10);
 
-        jMenuItem20.setText("Administrador");
-        jMenu6.add(jMenuItem20);
+        jMenuItem16.setText("Actualizar Restaurante");
+        jMenu6.add(jMenuItem16);
 
-        jMenuItem21.setText("Conductor");
-        jMenu6.add(jMenuItem21);
-
-        jMenuItem22.setText("Restaurante");
+        jMenuItem22.setText("Eliminar Restaurante");
         jMenu6.add(jMenuItem22);
 
-        jMenuItem23.setText("Productos");
-        jMenu6.add(jMenuItem23);
-
         jMenu1.add(jMenu6);
+
+        jMenu7.setText("Productos");
+
+        jMenuItem11.setText("Listar  Productos");
+        jMenu7.add(jMenuItem11);
+
+        jMenuItem23.setText("Eliminar Productos");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem23);
+
+        jMenuItem17.setText("Actualizar Productos");
+        jMenu7.add(jMenuItem17);
+
+        jMenu1.add(jMenu7);
 
         jMenuBar1.add(jMenu1);
 
@@ -342,10 +349,6 @@ public class AdminModule extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -368,15 +371,20 @@ public class AdminModule extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(this.agents);
+        agentCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST);
+
         DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
-        adminCSV.writeCSV(this.admin);
+        adminCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST);
 //        agentCSV.readCSV();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -386,10 +394,12 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -413,7 +423,6 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JLabel jlDate;
