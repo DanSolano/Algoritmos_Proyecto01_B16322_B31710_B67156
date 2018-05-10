@@ -15,6 +15,7 @@ import GUI.CRUDagent.CreateAgent;
 import GUI.CRUDagent.DeleteAgent;
 import GUI.CRUDagent.ListAgents;
 import GUI.CRUDagent.UpdateAgent;
+import GUI.RUDclient.ListClients;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
 import java.util.ArrayList;
@@ -361,7 +362,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        ListClients listClients = new ListClients();
+        listClients.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
