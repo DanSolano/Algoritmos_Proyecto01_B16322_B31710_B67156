@@ -1049,11 +1049,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(this.agents);
-        DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
-        adminCSV.writeCSV(this.admin);
-//        agentCSV.readCSV();
+       
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

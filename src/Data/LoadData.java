@@ -9,7 +9,8 @@ import ADT.LinkedList.DoubleLinkedCircularList;
 import ADT.Stack.LinkedStack;
 import Domain.Client;
 import Domain.Driver;
-import Domain.OrderDetails;
+import Domain.Order;
+import Domain.Products;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.StackException;
@@ -27,7 +28,7 @@ public class LoadData {
 
     ArrayList<Detail> DETAIL_LIST;
 
-    ArrayList<OrderDetails> ORDER_DETAIL_LIST;
+    ArrayList<Order> ORDER_DETAIL_LIST;
     DoubleLinkedCircularList DRINK_LIST;
     DoubleLinkedCircularList FOOD_LIST;
     DoubleLinkedCircularList DESSERT_LIST;
@@ -57,6 +58,13 @@ public class LoadData {
         return restaurants;
     }
 
+    public ArrayList<Products> getProducts() {
+        DataCSV productsCSV = new DataCSV(StringPath.PATH_PRODUCTS);
+        ArrayList<Products> products = new ArrayList<Products>();
+        products = (ArrayList<Products>) productsCSV.readProducts();
+        return products;
+    }
+
     public ArrayList<User> getAgents() {
         DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
         ArrayList<User> agents = new ArrayList<User>();
@@ -72,12 +80,12 @@ public class LoadData {
     }
 
     public LinkedStack getOrdersDetails() throws StackException {
-        DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER_DETAIL);
-        ArrayList<OrderDetails> ordersDetail = new ArrayList<OrderDetails>();
-        ordersDetail = (ArrayList<OrderDetails>) orderDetailCSV.readOrderDetails();
+        DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER);
+        ArrayList<Order> ordersDetail = new ArrayList<Order>();
+        ordersDetail = (ArrayList<Order>) orderDetailCSV.readOrderDetails();
         LinkedStack ordersDetails = new LinkedStack();
-        for (OrderDetails orderDetails : ordersDetail) {
-            OrderDetails oD = orderDetails;
+        for (Order orderDetails : ordersDetail) {
+            Order oD = orderDetails;
             ordersDetails.push(oD);
 
         }

@@ -11,25 +11,35 @@ package Domain;
  */
 public class Client {
 
+    private String id;
     private String name;
-    private String lastName;
-    private String Mail;
+    private String lastNameA;
+    private String lastNameB;
+    private String mail;
     private String phoneNumber;
     private String province;
-    private String canton;
-    private String district;
+    private String exactAddress;
 
     public Client() {
     }
 
-    public Client(String name, String lastName, String Mail, String phoneNumber, String province, String canton, String district) {
+    public Client(String id, String name, String lastNameA, String lastNameB, String mail, String phoneNumber, String province, String exactAddress) {
+        this.id = id;
         this.name = name;
-        this.lastName = lastName;
-        this.Mail = Mail;
+        this.lastNameA = lastNameA;
+        this.lastNameB = lastNameB;
+        this.mail = mail;
         this.phoneNumber = phoneNumber;
         this.province = province;
-        this.canton = canton;
-        this.district = district;
+        this.exactAddress = exactAddress;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,20 +50,28 @@ public class Client {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastNameA() {
+        return lastNameA;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastNameA(String lastNameA) {
+        this.lastNameA = lastNameA;
+    }
+
+    public String getLastNameB() {
+        return lastNameB;
+    }
+
+    public void setLastNameB(String lastNameB) {
+        this.lastNameB = lastNameB;
     }
 
     public String getMail() {
-        return Mail;
+        return mail;
     }
 
-    public void setMail(String Mail) {
-        this.Mail = Mail;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPhoneNumber() {
@@ -72,20 +90,12 @@ public class Client {
         this.province = province;
     }
 
-    public String getCanton() {
-        return canton;
+    public String getExactAddress() {
+        return exactAddress;
     }
 
-    public void setCanton(String canton) {
-        this.canton = canton;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setExactAddress(String exactAddress) {
+        this.exactAddress = exactAddress;
     }
 
 }

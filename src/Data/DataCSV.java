@@ -2,12 +2,12 @@ package Data;
 
 import ADT.LinkedList.DoubleLinkedCircularList;
 import Domain.Client;
-import Domain.Details;
 import Domain.Driver;
-import Domain.OrderDetails;
+import Domain.Order;
 import Domain.Products;
 import Domain.Restaurant;
 import Domain.User;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
@@ -38,7 +38,6 @@ public class DataCSV {
     DoubleLinkedCircularList foods;
     DoubleLinkedCircularList desserts;
     DoubleLinkedCircularList others;
-    ArrayList<Details> details;
     // Constructor
 
     public DataCSV(String path) {
@@ -70,14 +69,22 @@ public class DataCSV {
             users.add((User) object);
         }
         return users;
-
     }
 
-    public ArrayList<OrderDetails> readOrderDetails() {
+    public ArrayList<Products> readProducts() {
         ArrayList<Object> list = readCSV();
-        ArrayList<OrderDetails> users = new ArrayList<OrderDetails>();
+        ArrayList<Products> users = new ArrayList<Products>();
         for (Object object : list) {
-            users.add((OrderDetails) object);
+            users.add((Products) object);
+        }
+        return users;
+    }
+
+    public ArrayList<Order> readOrderDetails() {
+        ArrayList<Object> list = readCSV();
+        ArrayList<Order> users = new ArrayList<Order>();
+        for (Object object : list) {
+            users.add((Order) object);
         }
         return users;
 
@@ -113,63 +120,69 @@ public class DataCSV {
 
             if (alreadyExists.exists()) {
 
-//                CsvWriter csvOutput = new CsvWriter(new FileWriter(outputFile, true), ',');
-//            } else {
                 CsvReader dataImport = new CsvReader(path);
+                dataImport.setDelimiter(';');
+
                 dataImport.readHeaders();
 
                 while (dataImport.readRecord()) {
 
                     if (path.equals(StringPath.PATH_ADMIN) || path.equals(StringPath.PATH_AGENT)) {
+
                         String name = dataImport.get(0);
                         String userName = dataImport.get(1);
                         String mail = dataImport.get(2);
                         String password = dataImport.get(3);
-                        int code = Integer.parseInt(dataImport.get(4));
+                        String code = dataImport.get(4);
                         String kindUser = dataImport.get(5);
 
                         objeclArrList.add(new User(name, userName, mail, password, code, kindUser));
+
                     } else if (path.equals(StringPath.PATH_RESTAURANT)) {
                         String dni = dataImport.get(0);
                         String name = dataImport.get(1);
                         String location = dataImport.get(2);
-                        this.readProducts(dni);
+                        String province = dataImport.get(3);
+                        this.distributeProducts(dni);
 
-                        objeclArrList.add(new Restaurant(dni, name, location, this.drinks, this.foods, this.desserts, this.others));
+                        objeclArrList.add(new Restaurant(dni, name, location, province, this.drinks, this.foods, this.desserts, this.others));
+
+                    } else if (path.equals(StringPath.PATH_PRODUCTS)) {
+                        String id = dataImport.get(0);
+                        String idRestaurant = dataImport.get(1);
+                        String name = dataImport.get(2);
+                        String price = dataImport.get(3);
+                        String typeProduct = dataImport.get(4);
+
+                        objeclArrList.add(new Products(id, idRestaurant, name, price, typeProduct));
 
                     } else if (path.equals(StringPath.PATH_CLIENT)) {
-                        String name = dataImport.get(0);
-                        String lastName = dataImport.get(1);
-                        String mail = dataImport.get(2);
-                        String phoneNumber = dataImport.get(3);
-                        String province = dataImport.get(4);
-                        String canton = dataImport.get(5);
-                        String district = dataImport.get(6);
 
-                        objeclArrList.add(new Client(name, lastName, mail, phoneNumber, province, canton, district));
-
-                    } else if (path.equals(StringPath.PATH_ORDER_DETAIL)) {
-                        int ordercounter = Integer.parseInt(dataImport.get(0));
-                        String clienteName = dataImport.get(1);
-                        String agentCode = dataImport.get(2);
-                        String dateOrder = dataImport.get(3);
-                        String province = dataImport.get(4);
-                        String driverDni = dataImport.get(5);
-                        String district = dataImport.get(6);
-
-                        this.readDetails(ordercounter);
-                        objeclArrList.add(new OrderDetails(ordercounter, clienteName, agentCode, dateOrder, province, driverDni, this.details));
-                    } else if (path.equals(StringPath.PATH_DRIVER)) {
-                        int ordercounter = Integer.parseInt(dataImport.get(0));
-                        String dni = dataImport.get(1);
-                        String name = dataImport.get(2);
-                        int age = Integer.parseInt(dataImport.get(3));
-                        String vehcle = dataImport.get(4);
+                        String id = dataImport.get(0);
+                        String name = dataImport.get(1);
+                        String lastNameA = dataImport.get(2);
+                        String lastNameB = dataImport.get(3);
+                        String mail = dataImport.get(4);
                         String phoneNumber = dataImport.get(5);
-                        String district = dataImport.get(6);
+                        String province = dataImport.get(6);
+                        String exactAddress = dataImport.get(7);
 
-                        this.readDetails(ordercounter);
-                        objeclArrList.add(new Driver(dni, name, age, vehcle, phoneNumber));
+                        objeclArrList.add(new Client(id, name, lastNameA, lastNameB, mail, phoneNumber, province, exactAddress));
+
+                    } else if (path.equals(StringPath.PATH_DRIVER)) {
+
+                        //ID,Nombre,Apellido1,Apellido 2,Edad,tipo,Telefono,Placa vehículo,Cédula
+                        String id = dataImport.get(0);
+                        String name = dataImport.get(1);
+                        String lastNameA = dataImport.get(2);
+                        String lastNameB = dataImport.get(3);
+                        String age = dataImport.get(4);
+                        String kindVehicle = dataImport.get(5);
+                        String phoneNumber = dataImport.get(6);
+                        String vehiclePlate = dataImport.get(7);
+                        String dni = dataImport.get(8);
+
+                        objeclArrList.add(new Driver(id, name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
                     }
 
                 }
@@ -189,46 +202,7 @@ public class DataCSV {
 
     }
 
-    private void readProducts(String dni) {
-        this.path = StringPath.PATH_PRODUCTS;
-        ArrayList<Object> list = readCSV();
-        this.drinks = new DoubleLinkedCircularList();//0
-        this.foods = new DoubleLinkedCircularList();//1
-        this.desserts = new DoubleLinkedCircularList();//2
-        this.others = new DoubleLinkedCircularList();//3
-
-        for (Object object : list) {
-            Products product = (Products) object;
-
-            if (product.getTypeProduct() == 0 && product.getDni().equals(dni)) {
-                this.drinks.insert(product);
-            } else if (product.getTypeProduct() == 1 && product.getDni().equals(dni)) {
-                this.foods.insert(product);
-            } else if (product.getTypeProduct() == 2 && product.getDni().equals(dni)) {
-                this.desserts.insert(product);
-            } else if (product.getTypeProduct() == 3 && product.getDni().equals(dni)) {
-                this.others.insert(product);
-            }
-
-        }
-
-    }
-
-    private void readDetails(int ordercounter) {
-        this.path = StringPath.PATH_PRODUCTS;
-        ArrayList<Object> list = readCSV();
-        this.details = new ArrayList<>();
-        for (Object object : list) {
-            Details details = (Details) object;
-            if (details.getOrderId() == ordercounter) {
-                this.details.add(details);
-            }
-
-        }
-
-    }
-
-    public void writeCSV(ArrayList<User> clientLinketList) {
+    public void writeCSV(ArrayList<Object> writeList) {
 
         String outputFile = path;
 
@@ -244,25 +218,136 @@ public class DataCSV {
 
             try {
 
-                CsvWriter csvOutput = new CsvWriter(new FileWriter(outputFile, true), ',');
-
-                csvOutput.write("Name");
-                csvOutput.write("UserName");
-                csvOutput.write("Mail");
-                csvOutput.write("Password");
-                csvOutput.write("Code");
-                csvOutput.write("Kind of User");
-                csvOutput.endRecord();
-
-                for (User agent : clientLinketList) {
-
-                    csvOutput.write(agent.getName());
-                    csvOutput.write(agent.getUserName());
-                    csvOutput.write(agent.getMail());
-                    csvOutput.write(agent.getPassword());
-                    csvOutput.write(agent.getCode() + "");
-                    csvOutput.write(agent.getKindUser());
+                CsvWriter csvOutput = new CsvWriter(new FileWriter(outputFile, true), ';');
+//                csvOutput.setDelimiter(';');
+                if (path.equals(StringPath.PATH_ADMIN) || path.equals(StringPath.PATH_AGENT)) {
+                    csvOutput.write("Name");
+                    csvOutput.write("UserName");
+                    csvOutput.write("Mail");
+                    csvOutput.write("Password");
+                    csvOutput.write("Code");
+                    csvOutput.write("Kind of User");
                     csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        User agent = (User) object;
+                        csvOutput.write(agent.getName());
+                        csvOutput.write(agent.getUserName());
+                        csvOutput.write(agent.getMail());
+                        csvOutput.write(agent.getPassword());
+                        csvOutput.write(agent.getCode() + "");
+                        csvOutput.write(agent.getKindUser());
+                        csvOutput.endRecord();
+                    }
+
+                } else if (path.equals(StringPath.PATH_CLIENT)) {
+
+                    csvOutput.write("ID");
+                    csvOutput.write("Name");
+                    csvOutput.write("Last Name A");
+                    csvOutput.write("Last Name B");
+                    csvOutput.write("Mail");
+                    csvOutput.write("Phone Number");
+                    csvOutput.write("Province");
+                    csvOutput.write("Exact Address");
+                    csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        Client client = (Client) object;
+                        csvOutput.write(client.getId());
+                        csvOutput.write(client.getName());
+                        csvOutput.write(client.getLastNameA());
+                        csvOutput.write(client.getLastNameB());
+                        csvOutput.write(client.getMail());
+                        csvOutput.write(client.getPhoneNumber());
+                        csvOutput.write(client.getProvince());
+                        csvOutput.write(client.getExactAddress());
+
+                        csvOutput.endRecord();
+                    }
+
+                } else if (path.equals(StringPath.PATH_DRIVER)) {
+
+                    csvOutput.write("ID");
+                    csvOutput.write("Name");
+                    csvOutput.write("Last Name A");
+                    csvOutput.write("Last Name B");
+                    csvOutput.write("Age");
+                    csvOutput.write("Kind Vehicle");
+                    csvOutput.write("Phone Number");
+                    csvOutput.write("Vehicle Plate");
+                    csvOutput.write("DNI");
+                    csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        Driver client = (Driver) object;
+                        csvOutput.write(client.getId());
+                        csvOutput.write(client.getName());
+                        csvOutput.write(client.getLastNameA());
+                        csvOutput.write(client.getLastNameB());
+                        csvOutput.write(client.getAge());
+                        csvOutput.write(client.getKindVehicle());
+                        csvOutput.write(client.getPhoneNumber());
+                        csvOutput.write(client.getVehiclePlate());
+                        csvOutput.write(client.getDni());
+
+                        csvOutput.endRecord();
+                    }
+
+                } else if (path.equals(StringPath.PATH_ORDER)) {
+                    csvOutput.write("Id Order");
+                    csvOutput.write("Id Client");
+                    csvOutput.write("Id Restaurant");
+                    csvOutput.write("Id Product");
+                    csvOutput.write("Quantity");
+                    csvOutput.write("Total items");
+                    csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        Order order = (Order) object;
+                        csvOutput.write(order.getId());
+                        csvOutput.write(order.getClientId());
+                        csvOutput.write(order.getRestaurantId());
+                        csvOutput.write(order.getProductoId());
+                        csvOutput.write(order.getQuantity());
+                        csvOutput.write(order.getTotal());
+                        csvOutput.endRecord();
+                    }
+
+                } else if (path.equals(StringPath.PATH_RESTAURANT)) {
+                    csvOutput.write("id");
+                    csvOutput.write("Name");
+                    csvOutput.write("Province");
+                    csvOutput.write("Location");
+                    csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        Restaurant agent = (Restaurant) object;
+                        csvOutput.write(agent.getDni());
+                        csvOutput.write(agent.getName());
+                        csvOutput.write(agent.getProvince());
+                        csvOutput.write(agent.getLocation());
+                        csvOutput.endRecord();
+                    }
+
+                } else if (path.equals(StringPath.PATH_PRODUCTS)) {
+                    csvOutput.write("Id");
+                    csvOutput.write("Id Restaurant");
+                    csvOutput.write("Name");
+                    csvOutput.write("price");
+                    csvOutput.write("typeProduct");
+                    csvOutput.endRecord();
+
+                    for (Object object : writeList) {
+                        Products agent = (Products) object;
+                        csvOutput.write(agent.getId());
+                        csvOutput.write(agent.getIdRestaurant());
+                        csvOutput.write(agent.getName());
+                        csvOutput.write(agent.getPrice());
+                        csvOutput.write(agent.getTypeProduct());
+                        csvOutput.endRecord();
+                    }
+
                 }
 
                 csvOutput.close();
@@ -273,6 +358,31 @@ public class DataCSV {
         }
     }
 
+    private void distributeProducts(String dni) {
+
+        ArrayList<Products> list = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
+        this.drinks = new DoubleLinkedCircularList();//0
+        this.foods = new DoubleLinkedCircularList();//1
+        this.desserts = new DoubleLinkedCircularList();//2
+        this.others = new DoubleLinkedCircularList();//3
+
+        for (Products object : list) {
+            Products product = (Products) object;
+            int typeProd = Integer.parseInt(product.getTypeProduct());
+            if (typeProd == 0 && product.getId().equals(dni)) {
+                this.drinks.insert(product);
+            } else if (typeProd == 1 && product.getId().equals(dni)) {
+                this.foods.insert(product);
+            } else if (typeProd == 2 && product.getId().equals(dni)) {
+                this.desserts.insert(product);
+            } else if (typeProd == 3 && product.getId().equals(dni)) {
+                this.others.insert(product);
+            }
+
+        }
+
+    }
+
     private boolean isDirectory() {
         File createDir = new File(StringPath.PATH_DIR);
 
@@ -280,7 +390,7 @@ public class DataCSV {
             return false;//false porque el directorio ya existe
         }
         return true;//true cuando CREA directorio nuevo
-        
+
     }
 
 }
