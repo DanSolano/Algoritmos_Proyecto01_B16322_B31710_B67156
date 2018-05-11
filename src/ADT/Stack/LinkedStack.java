@@ -32,7 +32,7 @@ public class LinkedStack implements StackInterface {
      */
     @Override
     public int getSize() {
-        return this.cont;
+        return this.cont+1;
     }
 
     /**
@@ -71,7 +71,7 @@ public class LinkedStack implements StackInterface {
      */
     @Override
     public Object peek() {
-        return this.top;
+        return this.top.element;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class LinkedStack implements StackInterface {
         if (isEmpty()) {
             throw new StackException("Esta vacia");
         } else {
-            Object temp = this.top;
+            Object temp = this.top.element;
             this.top = this.top.next;
             this.cont--;
             return temp;

@@ -3,30 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.RUDclient;
+package GUI.CRUD.Restaurant;
 
-import Domain.Client;
+import Domain.Driver;
+import Domain.Restaurant;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Queue;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author daniel
  */
-public class ListClients extends javax.swing.JFrame {
+public class ListRestaurant extends javax.swing.JFrame {
 
     /**
      * Creates new form ListAgents
      */
     DefaultTableModel model;
-    LinkedList<Client> clients;
+    ArrayList<Restaurant> clients;
 
-    public ListClients() {
+    public ListRestaurant() {
         initComponents();
-        this.clients = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
+        this.clients = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         fillJtClient(this.clients);
     }
 
@@ -45,6 +46,7 @@ public class ListClients extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Conductores");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -64,7 +66,7 @@ public class ListClients extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtAgents);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Reegresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -82,9 +84,9 @@ public class ListClients extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(352, 352, 352)
+                        .addGap(496, 496, 496)
                         .addComponent(jButton1)))
                 .addGap(20, 20, 20))
         );
@@ -93,9 +95,9 @@ public class ListClients extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,7 +107,7 @@ public class ListClients extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,25 +135,22 @@ public class ListClients extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtAgents;
     // End of variables declaration//GEN-END:variables
- public void fillJtClient(LinkedList<Client> clientList) {
+ public void fillJtClient(ArrayList<Restaurant> clientList) {
 
         model = new DefaultTableModel();
 
+        model.addColumn("Id");
         model.addColumn("Nombre");
-        model.addColumn("Apellidos");
-        model.addColumn("E-Mail");
-        model.addColumn("Telefono");
         model.addColumn("Provincia");
-        model.addColumn("Canton");
-        model.addColumn("Distrito");
+        model.addColumn("Ubicacion");
+       
 
         this.jtAgents.setModel(model);
 
         if (!clientList.isEmpty()) {
 
-            for (Client client : clients) {
-
-                model.addRow(new Object[]{client.getName(), client.getLastName(), client.getMail(), client.getPhoneNumber(), client.getProvince(), client.getCanton(), client.getDistrict()});
+            for (Restaurant restaurant : clients) {
+                model.addRow(new Object[]{restaurant.getDni(), restaurant.getName(), restaurant.getProvince(), restaurant.getLocation()});
             }
 
         }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.RUDclient;
+package GUI.CRUD.Client;
 
 import Domain.Client;
 import GUI.AdminModule;
@@ -408,7 +408,7 @@ public class UpdateClient extends javax.swing.JFrame {
 
             if (client.getMail().equals(clientMail)) {
                 this.indexUser = counter;
-                jtfLastName.setText(client.getLastName());
+                jtfLastName.setText(client.getLastNameA());
                 jtfName.setText(client.getMail());
                 jbUpdate.setEnabled(true);
             }

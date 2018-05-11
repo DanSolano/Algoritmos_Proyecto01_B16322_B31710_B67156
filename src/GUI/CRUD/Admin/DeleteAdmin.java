@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.CRUDadmin;
+package GUI.CRUD.Admin;
 
 import Domain.User;
 import GUI.AdminModule;

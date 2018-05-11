@@ -11,12 +11,12 @@ package Utilities;
  */
 public class StringPath {
 
+    public static final String PATH_DIR = "./data";
     public static final String PATH_ADMIN = "./data/admin.csv";
     public static final String PATH_AGENT = "./data/agentes.csv";
-    public static final String PATH_CLIENT = "./data/client.csv";
+    public static final String PATH_CLIENT = "./data/Clientes.csv";
+    public static final String PATH_DRIVER = "./data/Conductores.csv";
+    public static final String PATH_ORDER = "./data/Orden.csv";
+    public static final String PATH_PRODUCTS = "./data/products.csv";
     public static final String PATH_RESTAURANT = "./data/restaurant.csv";
-    public static final String PATH_DRIVER = "./data/conductores.csv";
-    public static final String PATH_ORDER_DETAIL = "./data/detalles de orden.csv";
-    public static final String PATH_PRODUCTS = "./data/productos.csv";
-    public static final String PATH_DIR = "./data";
 }

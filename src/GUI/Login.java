@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Business.UserBusiness;
 import Domain.User;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
