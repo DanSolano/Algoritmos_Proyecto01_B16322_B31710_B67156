@@ -6,6 +6,7 @@
 package GUI.CRUD.Order;
 
 import ADT.Stack.LinkedStack;
+import Utilities.GetDataById;
 import Domain.Client;
 import Domain.Order;
 import Domain.Products;
@@ -156,20 +157,21 @@ public class ListOrder extends javax.swing.JFrame {
         this.jtAgents.setModel(model);
 
         if (!orders.isEmpty()) {
+            GetDataById getDataById = new GetDataById();
             try {
                 for (int i = 0; i <= orders.getSize(); i++) {
 
                     Order order = (Order) orders.pop();
-                    String nameClient = getClientName(order.getClientId());
-                    String nameRestaurant = getRestaurantName(order.getRestaurantId());
-                    String nameProduct = getproductName(order.getProductoId());
+                    String nameClient = getDataById.getClientName(order.getClientId());
+                    String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
+                    String nameProduct = getDataById.getproductName(order.getProductoId());
                     model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
 
                 }
                 Order order = (Order) orders.pop();
-                String nameClient = getClientName(order.getClientId());
-                String nameRestaurant = getRestaurantName(order.getRestaurantId());
-                String nameProduct = getproductName(order.getProductoId());
+                String nameClient = getDataById.getClientName(order.getClientId());
+                String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
+                String nameProduct = getDataById.getproductName(order.getProductoId());
                 model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
 
             } catch (StackException ex) {
@@ -178,45 +180,6 @@ public class ListOrder extends javax.swing.JFrame {
         }
 
     }//Fin metodo que llena la tabla
-
-    private String getRestaurantName(String idRestaurant) {
-        ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
-        String name = "";
-        for (Restaurant restaurant : rest) {
-            if (restaurant.getDni().equals(idRestaurant)) {
-                name = restaurant.getName();
-                break;
-
-            }
-        }
-        return name;
-    }
-
-    private String getClientName(String clientId) {
-        LinkedList<Client> clients = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
-        String name = "";
-        for (Client client : clients) {
-            if (client.getId().equals(clientId)) {
-                name = client.getName();
-                break;
-
-            }
-        }
-        return name;
-    }
-
-    private String getproductName(String id) {
-        ArrayList<Products> clients = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
-        String name = "";
-        for (Products products : clients) {
-            if (products.getId().equals(id)) {
-                name = products.getName();
-                break;
-
-            }
-        }
-        return name;
-    }
 
     private void back() {
         this.dispose();
