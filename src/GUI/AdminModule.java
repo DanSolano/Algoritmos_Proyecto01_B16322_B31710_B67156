@@ -17,6 +17,10 @@ import GUI.CRUD.Agent.DeleteAgent;
 import GUI.CRUD.Agent.ListAgents;
 import GUI.CRUD.Agent.UpdateAgent;
 import GUI.CRUD.Client.ListClients;
+import GUI.CRUD.Driver.ListDriver;
+import GUI.CRUD.Order.ListOrder;
+import GUI.CRUD.Restaurant.Products.ListProducts;
+import GUI.CRUD.Restaurant.ListRestaurant;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
 import java.util.ArrayList;
@@ -91,6 +95,8 @@ public class AdminModule extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -282,6 +288,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu6.add(jMenuItem8);
 
         jMenuItem10.setText("Listar  Restaurantes");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem10);
 
         jMenuItem16.setText("Actualizar Restaurante");
@@ -295,6 +306,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu7.setText("Productos");
 
         jMenuItem11.setText("Listar  Productos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem11);
 
         jMenuItem23.setText("Eliminar Productos");
@@ -309,6 +325,18 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu7.add(jMenuItem17);
 
         jMenu1.add(jMenu7);
+
+        jMenu8.setText("jMenu8");
+
+        jMenuItem9.setText("Lista  Ordenes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem9);
+
+        jMenu1.add(jMenu8);
 
         jMenuBar1.add(jMenu1);
 
@@ -407,7 +435,7 @@ public class AdminModule extends javax.swing.JFrame {
 
         DataCSV prodctsCSV = new DataCSV(StringPath.PATH_PRODUCTS);
         prodctsCSV.writeCSV(anyArrayList.productsToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST));
-        
+
         DataCSV restaurantsCSV = new DataCSV(StringPath.PATH_RESTAURANT);
         restaurantsCSV.writeCSV(anyArrayList.restaurantToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST));
 
@@ -429,8 +457,28 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        ListDriver listDriver = new ListDriver();
+        this.dispose();
+        listDriver.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        ListProducts listProducts = new ListProducts();
+        this.dispose();
+        listProducts.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        ListRestaurant listRestaurant = new ListRestaurant();
+        this.dispose();
+        listRestaurant.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ListOrder listOrder = new ListOrder();
+        this.dispose();
+        listOrder.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -446,6 +494,7 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -469,6 +518,7 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JLabel jlDate;

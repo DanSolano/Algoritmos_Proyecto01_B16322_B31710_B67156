@@ -183,6 +183,17 @@ public class DataCSV {
                         String dni = dataImport.get(8);
 
                         objeclArrList.add(new Driver(id, name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
+                    } else if (path.equals(StringPath.PATH_ORDER)) {
+
+                        //ID,Nombre,Apellido1,Apellido 2,Edad,tipo,Telefono,Placa vehículo,Cédula
+                        String id = dataImport.get(0);
+                        String clientId = dataImport.get(1);
+                        String restaurantId = dataImport.get(2);
+                        String productId = dataImport.get(3);
+                        String quantity = dataImport.get(4);
+                        String totalItems = dataImport.get(5);
+
+                        objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems));
                     }
 
                 }
