@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.CRUDagent;
+package GUI.CRUD.Admin;
 
 import Domain.User;
 import GUI.AdminModule;
@@ -19,21 +19,21 @@ import java.util.regex.Pattern;
  *
  * @author daniel
  */
-public class UpdateAgent extends javax.swing.JFrame {
+public class UpdateAdmin extends javax.swing.JFrame {
 
-    private ArrayList<User> agents;
-    private ArrayList<User> admin;
+    private ArrayList<User> admins;
+
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
 
     /**
      * Creates new form CreateClient
      */
-    public UpdateAgent() {
+    public UpdateAdmin() {
         initComponents();
         this.indexUser = -1;
-        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
-        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        this.admins = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+
         jbUpdate.setEnabled(false);
         textAutocompleter = new TextAutoCompleter(jtfUser);
         textAutocompleter.setCaseSensitive(false);
@@ -69,7 +69,7 @@ public class UpdateAgent extends javax.swing.JFrame {
         jpfPassB = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Actualizar Informacion de Agente");
+        setTitle("Actualizar Informacion de Administrador");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -148,12 +148,10 @@ public class UpdateAgent extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -254,7 +252,7 @@ public class UpdateAgent extends javax.swing.JFrame {
         String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512);
         String shaNothing = "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e";
 
-        User u = this.agents.get(this.indexUser);
+        User u = this.admins.get(this.indexUser);
         String oldEmail = u.getMail();
         String oldUsername = u.getUserName();
         String newEmail = jtfMail.getText().trim();
@@ -263,23 +261,23 @@ public class UpdateAgent extends javax.swing.JFrame {
         if (pass.equals(shaNothing) && passB.equals(shaNothing)) {//validate passwordfield are not modified
             if (exist(newEmail, newUsername) && (newEmail.equals(oldEmail) && newUsername.equals(oldUsername))) {
                 u.setName(jtfName.getText().trim());
-                this.agents.set(this.indexUser, u);
+                this.admins.set(this.indexUser, u);
                 clearFields();
             } else if (exist(newEmail, newUsername) && (newEmail.equals(oldEmail) && !newUsername.equals(oldUsername))) {
                 u.setName(jtfName.getText().trim());
                 u.setUserName(newUsername);
-                this.agents.set(this.indexUser, u);
+                this.admins.set(this.indexUser, u);
                 clearFields();
             } else if (exist(newEmail, newUsername) && (!newEmail.equals(oldEmail) && newUsername.equals(oldUsername))) {
                 u.setName(jtfName.getText().trim());
                 u.setMail(newEmail);
-                this.agents.set(this.indexUser, u);
+                this.admins.set(this.indexUser, u);
                 clearFields();
             } else if (!exist(newEmail, newUsername)) {
                 u.setName(jtfName.getText().trim());
                 u.setUserName(newUsername);
                 u.setMail(newEmail);
-                this.agents.set(this.indexUser, u);
+                this.admins.set(this.indexUser, u);
                 clearFields();
             } else if (exist(newEmail, newUsername) && (!newEmail.equals(oldEmail) && !newUsername.equals(oldUsername))) {
                 jlError.setText("El usuario o Mail se encuentra registrado.");
@@ -291,26 +289,26 @@ public class UpdateAgent extends javax.swing.JFrame {
                 if (exist(newEmail, newUsername) && (newEmail.equals(oldEmail) && newUsername.equals(oldUsername))) {
                     u.setName(jtfName.getText().trim());
                     u.setPassword(pass);
-                    this.agents.set(this.indexUser, u);
+                    this.admins.set(this.indexUser, u);
                     clearFields();
                 } else if (exist(newEmail, newUsername) && (newEmail.equals(oldEmail) && !newUsername.equals(oldUsername))) {
                     u.setName(jtfName.getText().trim());
                     u.setUserName(newUsername);
                     u.setPassword(pass);
-                    this.agents.set(this.indexUser, u);
+                    this.admins.set(this.indexUser, u);
                     clearFields();
                 } else if (exist(newEmail, newUsername) && (!newEmail.equals(oldEmail) && newUsername.equals(oldUsername))) {
                     u.setName(jtfName.getText().trim());
                     u.setMail(newEmail);
                     u.setPassword(pass);
-                    this.agents.set(this.indexUser, u);
+                    this.admins.set(this.indexUser, u);
                     clearFields();
                 } else if (!exist(newEmail, newUsername)) {
                     u.setName(jtfName.getText().trim());
                     u.setUserName(newUsername);
                     u.setMail(newEmail);
                     u.setPassword(pass);
-                    this.agents.set(this.indexUser, u);
+                    this.admins.set(this.indexUser, u);
                     clearFields();
                 } else if (exist(newEmail, newUsername) && (!newEmail.equals(oldEmail) && !newUsername.equals(oldUsername))) {
                     jlError.setText("El usuario o Mail se encuentra registrado.");
@@ -414,9 +412,9 @@ public class UpdateAgent extends javax.swing.JFrame {
 
     private boolean exist(String email, String user) {
         boolean exist = false;
-        for (User agent : agents) {
-            if (agent.getUserName().equals(user)
-                    || agent.getMail().equals(email)) {
+        for (User admin : admins) {
+            if (admin.getUserName().equals(user)
+                    || admin.getMail().equals(email)) {
                 exist = true;
             }
         }
@@ -424,16 +422,16 @@ public class UpdateAgent extends javax.swing.JFrame {
     }
 
     private void uploadSearchByUser() {
-        ArrayList<User> agents = this.agents;
-        for (int i = 0; i < agents.size(); i++) {
-            textAutocompleter.addItem(agents.get(i).getUserName());
+        ArrayList<User> administrators = this.admins;
+        for (int i = 0; i < administrators.size(); i++) {
+            textAutocompleter.addItem(administrators.get(i).getUserName());
         }
     }
 
     private void searchUser() {
         String user = jtfUser.getText().trim();
         int counter = -1;
-        for (User agent : agents) {
+        for (User agent : admins) {
             counter++;
 
             if (agent.getUserName().equals(user)) {

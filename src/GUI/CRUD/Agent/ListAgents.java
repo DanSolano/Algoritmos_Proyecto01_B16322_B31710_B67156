@@ -3,31 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.RUDclient;
+package GUI.CRUD.Agent;
 
-import Domain.Client;
+import Domain.User;
 import GUI.AdminModule;
+import GUI.AgentsModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author daniel
  */
-public class ListClients extends javax.swing.JFrame {
+public class ListAgents extends javax.swing.JFrame {
 
     /**
      * Creates new form ListAgents
      */
     DefaultTableModel model;
-    LinkedList<Client> clients;
+    ArrayList<User> agents;
+    ArrayList<User> admin;
 
-    public ListClients() {
+    public ListAgents() {
         initComponents();
-        this.clients = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
-        fillJtClient(this.clients);
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        fillJtAgents(this.agents);
     }
 
     /**
@@ -64,7 +66,7 @@ public class ListClients extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtAgents);
 
-        jButton1.setText("Reegresar");
+        jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -82,9 +84,9 @@ public class ListClients extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(496, 496, 496)
+                        .addGap(352, 352, 352)
                         .addComponent(jButton1)))
                 .addGap(20, 20, 20))
         );
@@ -93,9 +95,9 @@ public class ListClients extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,7 +107,7 @@ public class ListClients extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,27 +135,21 @@ public class ListClients extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtAgents;
     // End of variables declaration//GEN-END:variables
- public void fillJtClient(LinkedList<Client> clientList) {
+ public void fillJtAgents(ArrayList<User> agentList) {
 
         model = new DefaultTableModel();
 
-        model.addColumn("Id");
         model.addColumn("Nombre");
-        model.addColumn("Primer Apellido");
-        model.addColumn("Segundo Apellido");
+        model.addColumn("Nombre de Usuario");
         model.addColumn("E-Mail");
-        model.addColumn("Teléfono");
-        model.addColumn("Provincia");
-        model.addColumn("Direccion Exacta");
+        model.addColumn("Codigo");
 
         this.jtAgents.setModel(model);
 
-        if (!clientList.isEmpty()) {
+        if (!agentList.isEmpty()) {
 
-            for (Client client : clients) {
-                //mail, phoneNumber, province, exactAddress));
-                model.addRow(new Object[]{client.getId(), client.getName(), client.getLastNameA(), client.getLastNameB(), client.getMail(),
-                    client.getPhoneNumber(), client.getProvince(), client.getExactAddress()});
+            for (User agent : agents) {
+                model.addRow(new Object[]{agent.getName(), agent.getUserName(), agent.getMail(), agent.getCode()});
             }
 
         }

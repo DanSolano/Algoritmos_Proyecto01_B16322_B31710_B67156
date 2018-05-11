@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.CRUDadmin;
+package GUI.CRUD.Agent;
 
-import GUI.CRUDadmin.*;
 import Domain.User;
 import GUI.AdminModule;
+import GUI.AgentsModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
 import java.util.ArrayList;
@@ -18,16 +18,16 @@ import java.util.regex.Pattern;
  *
  * @author daniel
  */
-public class CreateAdmin extends javax.swing.JFrame {
+public class CreateAgent extends javax.swing.JFrame {
 
-    ArrayList<User> admins;
+    ArrayList<User> agents;
 
     /**
      * Creates new form CreateClient
      */
-    public CreateAdmin() {
+    public CreateAgent() {
         initComponents();
-        this.admins = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         jbSave.setEnabled(false);
     }
 
@@ -56,7 +56,7 @@ public class CreateAdmin extends javax.swing.JFrame {
         jlError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Crear Nuevo Administrador");
+        setTitle("Crear Nuevo Agente");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -233,13 +233,12 @@ public class CreateAdmin extends javax.swing.JFrame {
                 && !jtfName.getText().trim().isEmpty()
                 && !jtfUser.getText().trim().isEmpty()
                 && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
-
-            int code = Integer.parseInt(this.admins.get(this.admins.size()).getCode() + 1);//return  the last code and +1 for the new admin
-            this.admins.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code + "", "admin"));
-            Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
-//            AdminCSV adminCSV = new AdminCSV();
-//            adminCSV.writeCSV(this.admins);
-//            adminCSV.readCSV();
+             int code = Integer.parseInt(this.agents.get(this.agents.size()).getCode() + 1);//return  the last code and +1 for the new admin
+            this.agents.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code+"", "agent"));
+            Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST = this.agents;
+//            AgentCSV agentCSV = new AgentCSV();
+//            agentCSV.writeCSV(this.agents);
+//            agentCSV.readCSV();
         } else {
             jlError.setText("Debe ingresar todos los datos.");
         }
@@ -331,7 +330,7 @@ public class CreateAdmin extends javax.swing.JFrame {
     }
 
     private void back() {
-        Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST = this.agents;
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
@@ -339,9 +338,9 @@ public class CreateAdmin extends javax.swing.JFrame {
 
     private boolean exist(String email, String user) {
         boolean exist = false;
-        for (User admin : admins) {
-            if (admin.getUserName().equals(user)
-                    || admin.getMail().equals(email)) {
+        for (User agent : agents) {
+            if (agent.getUserName().equals(user)
+                    || agent.getMail().equals(email)) {
                 exist = true;
             }
         }
