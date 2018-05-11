@@ -144,7 +144,7 @@ public class ListOrder extends javax.swing.JFrame {
     private javax.swing.JTable jtAgents;
     // End of variables declaration//GEN-END:variables
  public void fillJtClient(LinkedStack orders) {
-
+        LinkedStack auxStack = new LinkedStack();
         model = new DefaultTableModel();
 
         model.addColumn("Id");
@@ -166,16 +166,21 @@ public class ListOrder extends javax.swing.JFrame {
                     String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
                     String nameProduct = getDataById.getproductName(order.getProductoId());
                     model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
-
+                    Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
+                             order.getQuantity(), order.getTotal());
+                    auxStack.push(auxOrder);
                 }
                 Order order = (Order) orders.pop();
                 String nameClient = getDataById.getClientName(order.getClientId());
                 String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
                 String nameProduct = getDataById.getproductName(order.getProductoId());
                 model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
-
+                Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
+                         order.getQuantity(), order.getTotal());
+                auxStack.push(auxOrder);
+                Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = auxStack;
             } catch (StackException ex) {
-                System.err.println("Maaae");
+                System.err.println("Error de lectura de las ordenes");
             }
         }
 

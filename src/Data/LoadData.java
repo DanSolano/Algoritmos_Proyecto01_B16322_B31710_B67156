@@ -87,7 +87,6 @@ public class LoadData {
         for (Order orderDetails : ordersDetail) {
             Order oD = orderDetails;
             ordersDetails.push(oD);
-
         }
         return ordersDetails;
     }

@@ -19,6 +19,7 @@ import java.util.LinkedList;
 public class GetDataById {
 
     public GetDataById() {
+        
     }
 
     public String getRestaurantName(String idRestaurant) {
@@ -34,6 +35,7 @@ public class GetDataById {
         return name;
     }
 
+    
     public String getClientName(String clientId) {
         LinkedList<Client> clients = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
         String name = "";
