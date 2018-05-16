@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.CRUDadmin;
+package GUI.CRUD.Agent;
 
 import Domain.User;
 import GUI.AdminModule;
@@ -16,19 +16,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author daniel
  */
-public class ListAdmins extends javax.swing.JFrame {
+public class ListAgents extends javax.swing.JFrame {
 
     /**
      * Creates new form ListAgents
      */
     DefaultTableModel model;
-    ArrayList<User> admins;
-    
+    ArrayList<User> agents;
+    ArrayList<User> admin;
 
-    public ListAdmins() {
+    public ListAgents() {
         initComponents();
-        this.admins = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
-        fillJtAgents(this.admins);
+        this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+        this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        fillJtAgents(this.agents);
     }
 
     /**
@@ -147,7 +148,7 @@ public class ListAdmins extends javax.swing.JFrame {
 
         if (!agentList.isEmpty()) {
 
-            for (User agent : admins) {
+            for (User agent : agents) {
                 model.addRow(new Object[]{agent.getName(), agent.getUserName(), agent.getMail(), agent.getCode()});
             }
 
@@ -156,7 +157,6 @@ public class ListAdmins extends javax.swing.JFrame {
     }//Fin metodo que llena la tabla
 
     private void back() {
-        Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);

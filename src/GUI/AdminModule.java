@@ -6,19 +6,27 @@
 package GUI;
 
 import Data.DataCSV;
+import Data.AnyToArrayList;
 import Domain.User;
-import GUI.CRUDadmin.CreateAdmin;
-import GUI.CRUDadmin.DeleteAdmin;
-import GUI.CRUDadmin.ListAdmins;
-import GUI.CRUDadmin.UpdateAdmin;
-import GUI.CRUDagent.CreateAgent;
-import GUI.CRUDagent.DeleteAgent;
-import GUI.CRUDagent.ListAgents;
-import GUI.CRUDagent.UpdateAgent;
-import GUI.RUDclient.ListClients;
+import GUI.CRUD.Admin.CreateAdmin;
+import GUI.CRUD.Admin.DeleteAdmin;
+import GUI.CRUD.Admin.ListAdmins;
+import GUI.CRUD.Admin.UpdateAdmin;
+import GUI.CRUD.Agent.CreateAgent;
+import GUI.CRUD.Agent.DeleteAgent;
+import GUI.CRUD.Agent.ListAgents;
+import GUI.CRUD.Agent.UpdateAgent;
+import GUI.CRUD.Client.ListClients;
+import GUI.CRUD.Driver.ListDriver;
+import GUI.CRUD.Order.ListOrder;
+import GUI.CRUD.Restaurant.Products.ListProducts;
+import GUI.CRUD.Restaurant.ListRestaurant;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartPanel;
+import Data.ChartData;
 
 /**
  *
@@ -60,6 +68,7 @@ public class AdminModule extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -90,6 +99,8 @@ public class AdminModule extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -108,14 +119,32 @@ public class AdminModule extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Pie Chart");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Bar Chart");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Line Chart");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -123,10 +152,11 @@ public class AdminModule extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(137, 137, 137)
                 .addComponent(jLabel1)
                 .addContainerGap(518, Short.MAX_VALUE))
@@ -136,16 +166,24 @@ public class AdminModule extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addGap(19, 19, 19)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton3))
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
 
+        jButton4.getAccessibleContext().setAccessibleName("");
+
         jScrollPane1.setViewportView(jDesktopPane1);
+        jDesktopPane1.getAccessibleContext().setAccessibleName("");
 
         jMenu1.setText("File");
 
@@ -255,6 +293,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem4.setText("Listar Conductor");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem4);
 
         jMenuItem21.setText("Eliminar Conductor");
@@ -276,6 +319,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu6.add(jMenuItem8);
 
         jMenuItem10.setText("Listar  Restaurantes");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem10);
 
         jMenuItem16.setText("Actualizar Restaurante");
@@ -289,6 +337,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu7.setText("Productos");
 
         jMenuItem11.setText("Listar  Productos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem11);
 
         jMenuItem23.setText("Eliminar Productos");
@@ -303,6 +356,18 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu7.add(jMenuItem17);
 
         jMenu1.add(jMenu7);
+
+        jMenu8.setText("jMenu8");
+
+        jMenuItem9.setText("Lista  Ordenes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem9);
+
+        jMenu1.add(jMenu8);
 
         jMenuBar1.add(jMenu1);
 
@@ -386,16 +451,37 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        AnyToArrayList anyArrayList = new AnyToArrayList();
         DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST);
+        agentCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST));
 
         DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
-        adminCSV.writeCSV(Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST);
-//        agentCSV.readCSV();
+        adminCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST));
+
+        DataCSV clientCSV = new DataCSV(StringPath.PATH_CLIENT);
+        clientCSV.writeCSV(anyArrayList.clientToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST));
+
+        DataCSV driverCSV = new DataCSV(StringPath.PATH_DRIVER);
+        driverCSV.writeCSV(anyArrayList.driversToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE));
+
+        DataCSV prodctsCSV = new DataCSV(StringPath.PATH_PRODUCTS);
+        prodctsCSV.writeCSV(anyArrayList.productsToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST));
+
+        DataCSV restaurantsCSV = new DataCSV(StringPath.PATH_RESTAURANT);
+        restaurantsCSV.writeCSV(anyArrayList.restaurantToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST));
+
+
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ChartData chart = new ChartData();
+        ChartPanel panel = new ChartPanel(chart.areaChart);
+        JFrame window = new JFrame("Gafico de Ventas semestral");
+        window.getContentPane().add(panel);
+        window.pack();
+        window.setVisible(true);
+        window.setResizable(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
@@ -408,11 +494,60 @@ public class AdminModule extends javax.swing.JFrame {
         deleteAdmin.setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        ListDriver listDriver = new ListDriver();
+        this.dispose();
+        listDriver.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        ListProducts listProducts = new ListProducts();
+        this.dispose();
+        listProducts.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        ListRestaurant listRestaurant = new ListRestaurant();
+        this.dispose();
+        listRestaurant.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ListOrder listOrder = new ListOrder();
+        this.dispose();
+        listOrder.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ChartData chart = new ChartData();
+        ChartPanel panel = new ChartPanel(chart.barChart);
+        JFrame window = new JFrame("Gafico de Ventas semestral");
+        window.getContentPane().add(panel);
+        window.pack();
+        window.setVisible(true);
+        window.setResizable(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ChartData chart = new ChartData();
+        ChartPanel panel = new ChartPanel(chart.lineChart);
+        JFrame window = new JFrame("Gafico de Ventas semestral");
+        window.getContentPane().add(panel);
+        window.pack();
+        window.setVisible(true);
+        window.setResizable(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -422,6 +557,7 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -445,6 +581,7 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JLabel jlDate;

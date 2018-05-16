@@ -16,29 +16,27 @@ public class Restaurant {
     private String dni;//we use this to rename the image with a counter that identifies the image that belongs to the restaurant.
     private String name;
     private String location;
-    private DoubleLinkedCircularList drinks = new DoubleLinkedCircularList();
-    private DoubleLinkedCircularList foods = new DoubleLinkedCircularList();
-    private DoubleLinkedCircularList desserts = new DoubleLinkedCircularList();
-    private DoubleLinkedCircularList others = new DoubleLinkedCircularList();
+    private String province;
+    private DoubleLinkedCircularList drinks;// = new DoubleLinkedCircularList();
+    private DoubleLinkedCircularList foods;// = new DoubleLinkedCircularList();
+    private DoubleLinkedCircularList desserts;// = new DoubleLinkedCircularList();
+    private DoubleLinkedCircularList others;// = new DoubleLinkedCircularList();
 
     public Restaurant() {
     }
 
-    public Restaurant(String dni, String name, String location) {
+    public Restaurant(String dni, String name, String location, String province, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
         this.dni = dni;
         this.name = name;
         this.location = location;
-    }
-
-    public Restaurant(String dni, String name, String location, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
-        this.dni = dni;
-        this.name = name;
-        this.location = location;
+        this.province = province;
         this.drinks = drinks;
         this.foods = foods;
         this.desserts = desserts;
         this.others = others;
     }
+
+   
 
     public String getDni() {
         return dni;
@@ -62,6 +60,14 @@ public class Restaurant {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public DoubleLinkedCircularList getDrinks() {
