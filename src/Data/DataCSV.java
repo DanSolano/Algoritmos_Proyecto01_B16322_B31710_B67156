@@ -354,8 +354,8 @@ public class DataCSV {
                         csvOutput.write(agent.getId());
                         csvOutput.write(agent.getIdRestaurant());
                         csvOutput.write(agent.getName());
-                        csvOutput.write(agent.getPrice());
-                        csvOutput.write(agent.getTypeProduct());
+                        csvOutput.write(agent.getPrice() + "");
+                        csvOutput.write(agent.getTypeProduct() + "");
                         csvOutput.endRecord();
                     }
 

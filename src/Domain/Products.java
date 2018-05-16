@@ -14,36 +14,47 @@ import javax.swing.ImageIcon;
  */
 public class Products {
 
-    private String dni;//we use this to rename the image with a counter that identifies the image that belongs to the restaurant.
+    private String id;//we use this to rename the image with a counter that identifies the image that belongs to the restaurant.
+    private String idRestaurant;
     private String name;
-    private double price;
-    private int typeProduct;//1=Drinks 2=Foods 3=Desserts 4=Others
+    private String price;
+    private String typeProduct;//1=Drinks 2=Foods 3=Desserts 4=Others
     private ImageIcon imageIcon;
 
-    public Products(String dni, String name, double price, int typeProduct, ImageIcon imageIcon) {
-        this.dni = dni;
+    public Products() {
+    }
+
+    public Products(String id, String idRestaurant, String name, String price, String typeProduct) {
+        this.id = id;
+        this.idRestaurant = idRestaurant;
+        this.name = name;
+        this.price = price;
+        this.typeProduct = typeProduct;
+    }
+
+    public Products(String id, String idRestaurant, String name, String price, String typeProduct, ImageIcon imageIcon) {
+        this.id = id;
+        this.idRestaurant = idRestaurant;
         this.name = name;
         this.price = price;
         this.typeProduct = typeProduct;
         this.imageIcon = imageIcon;
     }
 
-    public Products() {
+    public String getId() {
+        return id;
     }
 
-    public Products(String dni, String name, double price, int typeProduct) {
-        this.dni = dni;
-        this.name = name;
-        this.price = price;
-        this.typeProduct = typeProduct;
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    public String getIdRestaurant() {
+        return idRestaurant;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setIdRestaurant(String idRestaurant) {
+        this.idRestaurant = idRestaurant;
     }
 
     public String getName() {
@@ -54,19 +65,19 @@ public class Products {
         this.name = name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getTypeProduct() {
+    public String getTypeProduct() {
         return typeProduct;
     }
 
-    public void setTypeProduct(int typeProduct) {
+    public void setTypeProduct(String typeProduct) {
         this.typeProduct = typeProduct;
     }
 
@@ -75,10 +86,7 @@ public class Products {
     }
 
     public void setImageIcon(ImageIcon imageIcon) {
-        Image image = imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-        this.imageIcon = new ImageIcon(image);
+        this.imageIcon = imageIcon;
     }
-    
-    
 
 }

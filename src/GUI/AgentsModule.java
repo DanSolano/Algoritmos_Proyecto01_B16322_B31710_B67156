@@ -6,6 +6,7 @@
 package GUI;
 
 import ADT.LinkedList.DoubleLinkedCircularList;
+import Data.AnyToArrayList;
 import Data.DataCSV;
 import Domain.Products;
 import Domain.Restaurant;
@@ -50,17 +51,17 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private int position2 = 2;
     private int position3 = 3;
     private int position4 = 4;
-    private  Products products0 = new Products();
-    private  Products products1 = new Products();
-    private  Products products2 = new Products();
-    private  Products products3 = new Products();
-    private  Products products4 = new Products();
-    private  Products products5 = new Products();
+    private Products products0 = new Products();
+    private Products products1 = new Products();
+    private Products products2 = new Products();
+    private Products products3 = new Products();
+    private Products products4 = new Products();
+    private Products products5 = new Products();
 
     /**
      * Creates new form AgentsModule
      */
-    public AgentsModule()  {
+    public AgentsModule() {
         initComponents();
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
@@ -841,44 +842,44 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
+        AnyToArrayList anyArrayList = new AnyToArrayList();
         DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(this.agents);
-        DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
+        agentCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST));
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
-            position0 = position1;
-            position1 = position2;
-            position2 = position3;
-            position3 = position4;
-            position4++;
-            if (position4 == drinksProducts.size()) {
-                position4 = 0;
-            }
-            addJlabel(position0, position1, position2, position3, position4);
+
+        position0 = position1;
+        position1 = position2;
+        position2 = position3;
+        position3 = position4;
+        position4++;
+        if (position4 == drinksProducts.size()) {
+            position4 = 0;
+        }
+        addJlabel(position0, position1, position2, position3, position4);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-            position4 = position3;
-            position3 = position2;
-            position2 = position1;
-            position1 = position0;
-            position0--;
-            if (position0 < 0) {
-                position0 = drinksProducts.size() - 1;
-            }
-            addJlabel(position0, position1, position2, position3, position4);
-       
+
+        position4 = position3;
+        position3 = position2;
+        position2 = position1;
+        position1 = position0;
+        position0--;
+        if (position0 < 0) {
+            position0 = drinksProducts.size() - 1;
+        }
+        addJlabel(position0, position1, position2, position3, position4);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
-       System.out.println(products0.getName());
+        System.out.println(products0.getName());
     }//GEN-LAST:event_jLabelDrinks0MouseReleased
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
-       System.out.println(products1.getName());
+        System.out.println(products1.getName());
     }//GEN-LAST:event_jLabelDrinks1MouseReleased
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
@@ -886,11 +887,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks2MouseReleased
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
-         System.out.println(products3.getName());
+        System.out.println(products3.getName());
     }//GEN-LAST:event_jLabelDrinks3MouseReleased
 
     private void jLabelFoods0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFoods0MouseReleased
-       System.out.println(products4.getName());
+        System.out.println(products4.getName());
     }//GEN-LAST:event_jLabelFoods0MouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1007,57 +1008,52 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void loadImage() {
         drinksProducts = new LinkedList<Products>();
-        products0.setDni("sin DNI");
+        products0.setId("sin DNI");
         products0.setName("Hamburquesa");
-        products0.setPrice(1000);
-        products0.setTypeProduct(0);
+        products0.setPrice(1000 + "");
+        products0.setTypeProduct(0 + "");
         products0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida0.jpg")));
         drinksProducts.add(products0);
 
-        
-        products1.setDni("sin DNI 1");
+        products1.setId("sin DNI 1");
         products1.setName("Papas Fritas");
-        products1.setPrice(900);
-        products1.setTypeProduct(1);
+        products1.setPrice(900 + "");
+        products1.setTypeProduct(1 + "");
         products1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida1.jpg")));
         drinksProducts.add(products1);
 
-       
-        products2.setDni("sin DNI 1");
+        products2.setId("sin DNI 1");
         products2.setName("Pizza");
-        products2.setPrice(1200);
-        products2.setTypeProduct(2);
+        products2.setPrice(1200 + "");
+        products2.setTypeProduct(2 + "");
         products2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida2.jpg")));
         drinksProducts.add(products2);
 
-        
-        products3.setDni("sin DNI 1");
+        products3.setId("sin DNI 1");
         products3.setName("Pollo");
-        products3.setPrice(900);
-        products3.setTypeProduct(3);
+        products3.setPrice(900 + "");
+        products3.setTypeProduct(3 + "");
         products3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida3.jpg")));
         drinksProducts.add(products3);
 
-       
-        products4.setDni("sin DNI 1");
+        products4.setId("sin DNI 1");
         products4.setName("Pure");
-        products4.setPrice(900);
-        products4.setTypeProduct(4);
+        products4.setPrice(900 + "");
+        products4.setTypeProduct(4 + "");
         products4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida4.jpg")));
         drinksProducts.add(products4);
 
-        
-        products5.setDni("sin DNI 1");
+        products5.setId("sin DNI 1");
         products5.setName("Sandwich");
-        products5.setPrice(900);
-        products5.setTypeProduct(1);
+        products5.setPrice(900 + "");
+        products5.setTypeProduct(1 + "");
         products5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImages/comida5.jpg")));
         drinksProducts.add(products5);
     }
 
     private void addJlabel(int position0, int position1, int position2, int position3, int position4) {
         LinkedList<Products> drinkTemp = drinksProducts;
-        
+
         jLabelDrinks0.setIcon(drinkTemp.get(position0).getImageIcon());
         products0 = drinkTemp.get(position0);
         jLabelDrinks1.setIcon(drinkTemp.get(position1).getImageIcon());
