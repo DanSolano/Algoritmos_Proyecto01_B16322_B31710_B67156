@@ -1155,16 +1155,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }
 
     private void showTable() {
-        Object matrxTable[][] = new Object[2][4];
+        Object matrixTable[][] = new Object[2][4];
 
-        for (int i = 0; i < matrxTable.length; i++) {
-            matrxTable[i][0] = "Restaurante #";
-            matrxTable[i][1] = productsShow.getName();
-            matrxTable[i][2] = "";
-            matrxTable[i][3] = "";
+        for (int i = 0; i < matrixTable.length; i++) {
+            matrixTable[i][0] = "Restaurante #";
+            matrixTable[i][1] = productsShow.getName();
+            matrixTable[i][2] = "";
+            matrixTable[i][3] = "";
         }
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                matrxTable,
+                matrixTable,
                 new String[]{
                     "Restaurante", "Producto", "Monto", "Adicinal"
                 }));
