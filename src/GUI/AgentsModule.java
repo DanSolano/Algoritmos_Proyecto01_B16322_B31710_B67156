@@ -948,6 +948,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
         System.out.println(products0.getName());
+         System.out.println("funcionaaaaaaaaaaaaaaaaaa");
         productsShow = products0;
         showTable();
     }//GEN-LAST:event_jLabelDrinks0MouseReleased
