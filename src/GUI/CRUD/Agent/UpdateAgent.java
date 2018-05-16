@@ -450,6 +450,7 @@ public class UpdateAgent extends javax.swing.JFrame {
         jtfUser.setText("");
         jpfPass.setText("");
         jpfPassB.setText("");
+        jlError.setText("Agente Actualizado");
     }
 
 }

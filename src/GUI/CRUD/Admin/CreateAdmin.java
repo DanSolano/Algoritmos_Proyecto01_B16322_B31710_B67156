@@ -215,30 +215,35 @@ public class CreateAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
+        String pass = new String(jpfPass.getPassword()).trim();
+        String passB = new String(jpfPassB.getPassword()).trim();
+        if (!pass.isEmpty() && !passB.isEmpty()) {
+            pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512).trim();
+            passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512).trim();
 
-        String pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512).trim();
-        String passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512).trim();
-        String shaNothing = "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e";
-        String email = jtfMail.getText().trim();
-        String user = jtfUser.getText().trim();
-        if (exist(email, user)) {
-            jlError.setText("El nombre de usuario o correo ya está en uso.");
-        } else if (!pass.equals(passB) || !isMail(email) || pass.equals(shaNothing)
-                || passB.equals(shaNothing)) {//validate that the email and password are valid
-            jlError.setText("Correo o contraseña con errores.");
-            jbSave.setEnabled(false);
-        } else if (pass.equals(passB) && isMail(email) && !pass.equals(shaNothing)
-                && !passB.equals(shaNothing)
-                && !jtfName.getText().trim().isEmpty()
-                && !jtfUser.getText().trim().isEmpty()
-                && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
+            String email = jtfMail.getText().trim();
+            String user = jtfUser.getText().trim();
+            if (exist(email, user)) {
+                jlError.setText("El nombre de usuario o correo ya está en uso.");
+            } else if (!pass.equals(passB) || !isMail(email)) {//validate that the email and password are valid
+                jlError.setText("Correo o contraseña con errores.");
+                jbSave.setEnabled(false);
+            } else if (pass.equals(passB) && isMail(email)
+                    && !jtfName.getText().trim().isEmpty()
+                    && !jtfUser.getText().trim().isEmpty()
+                    && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
 
-            int code = Integer.parseInt(this.admins.get(this.admins.size()).getCode() + 1);//return  the last code and +1 for the new admin
-            this.admins.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code + "", "admin"));
-            Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
-//            AdminCSV adminCSV = new AdminCSV();
-//            adminCSV.writeCSV(this.admins);
-//            adminCSV.readCSV();
+                int code = Integer.parseInt(this.admins.get(this.admins.size()).getCode() + 1);//return  the last code and +1 for the new admin
+                this.admins.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code + "", "admin"));
+                Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = this.admins;
+                jlError.setText("Administrador crado.");
+                jtfUser.setText("");
+                jtfMail.setText("");
+                jtfName.setText("");
+                jpfPass.setText("");
+                jpfPassB.setText("");
+
+            }
         } else {
             jlError.setText("Debe ingresar todos los datos.");
         }
