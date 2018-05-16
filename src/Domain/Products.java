@@ -5,6 +5,9 @@
  */
 package Domain;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author daniel
@@ -15,6 +18,15 @@ public class Products {
     private String name;
     private double price;
     private int typeProduct;//1=Drinks 2=Foods 3=Desserts 4=Others
+    private ImageIcon imageIcon;
+
+    public Products(String dni, String name, double price, int typeProduct, ImageIcon imageIcon) {
+        this.dni = dni;
+        this.name = name;
+        this.price = price;
+        this.typeProduct = typeProduct;
+        this.imageIcon = imageIcon;
+    }
 
     public Products() {
     }
@@ -57,5 +69,16 @@ public class Products {
     public void setTypeProduct(int typeProduct) {
         this.typeProduct = typeProduct;
     }
+
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
+
+    public void setImageIcon(ImageIcon imageIcon) {
+        Image image = imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        this.imageIcon = new ImageIcon(image);
+    }
+    
+    
 
 }
