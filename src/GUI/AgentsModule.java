@@ -15,6 +15,7 @@ import Exceptions.ListException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.ImageManage;
 import Utilities.StringPath;
+import com.sun.corba.se.spi.orb.StringPair;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
