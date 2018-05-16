@@ -5,6 +5,8 @@
  */
 package Domain;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author daniel
@@ -21,6 +23,20 @@ public class Driver {
     private String phoneNumber;
     private String vehiclePlate;
     private String dni;
+    private ImageIcon imageDriver;
+
+    public Driver(String id, String name, String lastNameA, String lastNameB, String age, String kindVehicle, String phoneNumber, String vehiclePlate, String dni, ImageIcon imageDriver) {
+        this.id = id;
+        this.name = name;
+        this.lastNameA = lastNameA;
+        this.lastNameB = lastNameB;
+        this.age = age;
+        this.kindVehicle = kindVehicle;
+        this.phoneNumber = phoneNumber;
+        this.vehiclePlate = vehiclePlate;
+        this.dni = dni;
+        this.imageDriver = imageDriver;
+    }
 
     public Driver() {
     }
@@ -107,6 +123,14 @@ public class Driver {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public ImageIcon getImageIcon() {
+        return imageDriver;
+    }
+
+    public void setImageIcon(ImageIcon imageDriver) {
+        this.imageDriver = imageDriver;
     }
 
 }
