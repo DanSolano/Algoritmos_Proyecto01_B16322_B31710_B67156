@@ -28,6 +28,7 @@ import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import Data.ChartData;
 import Data.SaveAll;
+import GUI.CRUD.Driver.CreateDriver;
 
 /**
  *
@@ -424,7 +425,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
+        CreateDriver createDriver = new CreateDriver();
+        createDriver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
