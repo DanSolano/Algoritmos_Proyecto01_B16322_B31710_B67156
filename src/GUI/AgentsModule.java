@@ -7,26 +7,18 @@ package GUI;
 
 import ADT.LinkedList.DoubleLinkedCircularList;
 import Data.AnyToArrayList;
-import Data.DataCSV;
+import Data.SaveAll;
 import Domain.Products;
 import Domain.Restaurant;
 import Domain.User;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringPath;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -841,10 +833,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
-        AnyToArrayList anyArrayList = new AnyToArrayList();
-        DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST));
+        SaveAll saveAll = new SaveAll();
+        saveAll.save();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import Data.ChartData;
+import Data.SaveAll;
 
 /**
  *
@@ -451,26 +452,8 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        AnyToArrayList anyArrayList = new AnyToArrayList();
-        DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
-        agentCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST));
-
-        DataCSV adminCSV = new DataCSV(StringPath.PATH_ADMIN);
-        adminCSV.writeCSV(anyArrayList.userToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST));
-
-        DataCSV clientCSV = new DataCSV(StringPath.PATH_CLIENT);
-        clientCSV.writeCSV(anyArrayList.clientToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST));
-
-        DataCSV driverCSV = new DataCSV(StringPath.PATH_DRIVER);
-        driverCSV.writeCSV(anyArrayList.driversToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE));
-
-        DataCSV prodctsCSV = new DataCSV(StringPath.PATH_PRODUCTS);
-        prodctsCSV.writeCSV(anyArrayList.productsToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST));
-
-        DataCSV restaurantsCSV = new DataCSV(StringPath.PATH_RESTAURANT);
-        restaurantsCSV.writeCSV(anyArrayList.restaurantToArrayListObject(Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST));
-
-
+        SaveAll saveAll = new SaveAll();
+        saveAll.save();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -481,7 +464,7 @@ public class AdminModule extends javax.swing.JFrame {
         window.pack();
         window.setVisible(true);
         window.setResizable(false);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
@@ -519,7 +502,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
