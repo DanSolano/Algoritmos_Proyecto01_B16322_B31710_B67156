@@ -331,25 +331,26 @@ public class CreateDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //Añadiendole un filtro
+  //Añadiendole un filtro
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
         JFileChooser selector = new JFileChooser();
         selector.setFileFilter(filter);
         int estado = selector.showOpenDialog(null);
         File archivoelegido = selector.getSelectedFile();
 
-        String ruta = archivoelegido.getPath();
-        if (archivoelegido.exists()) {
+        
+       
+        if (estado == JFileChooser.APPROVE_OPTION) {
+             if (archivoelegido.exists()) {
             System.out.println("bien");
         } else {
             System.out.println("no bien");
         }
-        if (estado == JFileChooser.APPROVE_OPTION) {
 
             try {
 
                 jlDriverImage.setVisible(true);
+                String ruta = archivoelegido.getPath();
                 ImageIcon imagen = new ImageIcon(ruta);
                 BufferedImage bi = ImageIO.read(archivoelegido);
 
@@ -367,6 +368,8 @@ public class CreateDriver extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(CreateDriver.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (estado == JFileChooser.CANCEL_OPTION) {
+            System.out.println("Cancel was selected");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
