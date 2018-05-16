@@ -259,6 +259,7 @@ public class DeleteAgent extends javax.swing.JFrame {
 
     private void clearFields() {
         jtfUser.setText("");
+        jlInformation.setText("Agente Eliminado");
     }
 
     private void delete() {

@@ -450,6 +450,7 @@ public class UpdateAdmin extends javax.swing.JFrame {
         jtfUser.setText("");
         jpfPass.setText("");
         jpfPassB.setText("");
+        jlError.setText("Administrador actualizado.");
     }
 
 }

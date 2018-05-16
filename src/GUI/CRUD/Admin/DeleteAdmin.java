@@ -166,6 +166,7 @@ public class DeleteAdmin extends javax.swing.JFrame {
         textAutocompleter.removeItemByValue(jtfUser.getText().trim());
         delete();
 
+
     }//GEN-LAST:event_jbUpdateActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -256,6 +257,7 @@ public class DeleteAdmin extends javax.swing.JFrame {
 
     private void clearFields() {
         jtfUser.setText("");
+        jlInformation.setText("Administrador Eliminado");
     }
 
     private void delete() {
@@ -263,6 +265,7 @@ public class DeleteAdmin extends javax.swing.JFrame {
         jlInformation.setText("Administrador eliminado con exito.");
         jbUpdate.setEnabled(false);
         clearFields();
+
     }
 
     private void autoCompleter() {
