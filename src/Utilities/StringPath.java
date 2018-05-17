@@ -12,6 +12,7 @@ package Utilities;
 public class StringPath {
 
     public static final String PATH_DIR = "./data";
+    public static final String PATH_DRIVER_PHOTO = "./data/Driver/";
     public static final String PATH_ADMIN = "./data/admin.csv";
     public static final String PATH_AGENT = "./data/agentes.csv";
     public static final String PATH_CLIENT = "./data/Clientes.csv";

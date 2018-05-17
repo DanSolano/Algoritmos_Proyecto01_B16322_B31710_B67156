@@ -87,7 +87,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField1" max="32767" attributes="0"/>
+                              <Component id="jtfDni" max="32767" attributes="0"/>
                               <Component id="jSpinner1" pref="268" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -113,7 +113,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtPlate" min="-2" pref="223" max="-2" attributes="0"/>
+                                  <Component id="jtfPlate" min="-2" pref="223" max="-2" attributes="0"/>
                                   <Component id="jtPhoneNumber" min="-2" pref="223" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -150,7 +150,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfDni" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -166,7 +166,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtPlate" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfPlate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -203,7 +203,7 @@
             <Property name="text" type="java.lang.String" value="  "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtPlate">
+        <Component class="javax.swing.JTextField" name="jtfPlate">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
@@ -260,7 +260,7 @@
             <Property name="text" type="java.lang.String" value="Apellido 1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jtfDni">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>

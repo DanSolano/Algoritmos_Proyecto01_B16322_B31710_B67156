@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -33,6 +35,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CreateDriver extends javax.swing.JFrame {
 
     Queue drivers;
+    BufferedImage bi;
+    File archivoelegido;
+    private boolean flag;
 
     /**
      * Creates new form CreateClient
@@ -40,7 +45,7 @@ public class CreateDriver extends javax.swing.JFrame {
     public CreateDriver() {
         initComponents();
         this.drivers = Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE;
-        jbSave.setEnabled(false);
+//        jbSave.setEnabled(false);
     }
 
     /**
@@ -55,7 +60,7 @@ public class CreateDriver extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jlError = new javax.swing.JLabel();
         jtKindVehicle = new javax.swing.JTextField();
-        jtPlate = new javax.swing.JTextField();
+        jtfPlate = new javax.swing.JTextField();
         jtPhoneNumber = new javax.swing.JTextField();
         jbSave = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -67,7 +72,7 @@ public class CreateDriver extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfDni = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
         jtLastnameB = new javax.swing.JTextField();
@@ -87,7 +92,7 @@ public class CreateDriver extends javax.swing.JFrame {
 
         jtKindVehicle.setText("  ");
 
-        jtPlate.setText(" ");
+        jtfPlate.setText(" ");
 
         jtPhoneNumber.setText(" ");
 
@@ -112,7 +117,7 @@ public class CreateDriver extends javax.swing.JFrame {
 
         jLabel2.setText("Apellido 1");
 
-        jTextField1.setText(" ");
+        jtfDni.setText(" ");
 
         jLabel6.setText("Apellido 2");
 
@@ -135,7 +140,7 @@ public class CreateDriver extends javax.swing.JFrame {
 
         jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtKindVehicle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtPlate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfPlate, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtPhoneNumber, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbSave, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -147,7 +152,7 @@ public class CreateDriver extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfName, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtLastnameB, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -190,9 +195,8 @@ public class CreateDriver extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(jtfDni)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
@@ -210,7 +214,7 @@ public class CreateDriver extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
                             .addGap(99, 99, 99)
@@ -237,7 +241,7 @@ public class CreateDriver extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -249,7 +253,7 @@ public class CreateDriver extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jtPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -295,74 +299,77 @@ public class CreateDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
+        try {
 
-//        String pass = new String(jpfPass.getPassword()).trim();
-//        String passB = new String(jpfPassB.getPassword()).trim();
-//        if (!pass.isEmpty() && !passB.isEmpty()) {
-//            pass = StringMD.getStringMessageDigest(new String(jpfPass.getPassword()).trim(), StringMD.SHA512).trim();
-//            passB = StringMD.getStringMessageDigest(new String(jpfPassB.getPassword()).trim(), StringMD.SHA512).trim();
-//
-//            String email = jtfMail.getText().trim();
-//            String user = jtLastnameA.getText().trim();
-//            if (exist(email, user)) {
-//                jlError.setText("El nombre de usuario o correo ya está en uso.");
-//            } else if (!pass.equals(passB) || !isMail(email)) {//validate that the email and password are valid
-//                jlError.setText("Correo o contraseña con errores.");
-//                jbSave.setEnabled(false);
-//            } else if (pass.equals(passB) && isMail(email)
-//                    && !jtfName.getText().trim().isEmpty()
-//                    && !jtLastnameA.getText().trim().isEmpty()
-//                    && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
-//
-//                //                int code = Integer.parseInt(this.drivers.get(this.drivers.size()).getCode() + 1);//return  the last code and +1 for the new admin
-//                //                this.drivers.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code + "", "agent"));
-//                Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE = this.drivers;
-//                jlError.setText("Agente crado.");
-//                jtLastnameA.setText("");
-//                jtfMail.setText("");
-//                jtfName.setText("");
-//                jpfPass.setText("");
-//                jpfPassB.setText("");
-//
-//            }
-//        } else {
-//            jlError.setText("Debe ingresar todos los datos.");
-//        }
+            if (flag == true && !jtfName.getText().trim().isEmpty()
+                    && !jtLastnameA.getText().trim().isEmpty()
+                    && !jtLastnameB.getText().trim().isEmpty()
+                    && !jtfDni.getText().trim().isEmpty()
+                    && (jSpinner1.getComponentCount() > 0)
+                    && !jtPhoneNumber.getText().trim().isEmpty()
+                    && !jtKindVehicle.getText().trim().isEmpty()
+                    && !jtfPlate.getText().trim().isEmpty()
+                    && !jtPhoneNumber.getText().trim().isEmpty()) {
+                if (isDirectory()) {
+                    boolean alreadyExists = new File(StringPath.PATH_DRIVER_PHOTO).exists();
+                    if (!alreadyExists) {
+                        File directorio = new File(StringPath.PATH_DRIVER_PHOTO);
+                        directorio.mkdir();
+                    }
+
+                }
+
+                int id = this.drivers.size() + 1;
+                String name = jtfName.getText().trim();
+                String lastNameA = jtLastnameA.getText().trim();
+                String lastNameB = jtLastnameB.getText().trim();
+                String age = jSpinner1.getComponentCount() + "";
+                String kindVehicle = jtKindVehicle.getText().trim();
+                String phoneNumber = jtPhoneNumber.getText().trim();
+                String vehiclePlate = jtfPlate.getText().trim();
+                String dni = jtfDni.getText().trim();
+
+                if (!existDniDriver(dni) || !existPlateDriver(vehiclePlate)) {
+                    this.drivers.add(new Driver(id + "", name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
+                    File outputfile = new File(StringPath.PATH_DRIVER_PHOTO + archivoelegido.getName());
+                    File outputfile2 = new File(StringPath.PATH_DRIVER_PHOTO + dni + ".jpg");//
+
+                    ImageIO.write(bi, "png", outputfile);
+                    boolean correcto = outputfile.renameTo(outputfile2);
+                    if (correcto) {
+                        System.out.println("MAE----------------->" + correcto);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CreateDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  //Añadiendole un filtro
+        //Añadiendole un filtro
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
         JFileChooser selector = new JFileChooser();
         selector.setFileFilter(filter);
         int estado = selector.showOpenDialog(null);
-        File archivoelegido = selector.getSelectedFile();
+        this.archivoelegido = selector.getSelectedFile();
 
-        
-       
         if (estado == JFileChooser.APPROVE_OPTION) {
-             if (archivoelegido.exists()) {
-            System.out.println("bien");
-        } else {
-            System.out.println("no bien");
-        }
+            if (archivoelegido.exists()) {
+                System.out.println("bien");
+            } else {
+                System.out.println("no bien");
+            }
 
             try {
 
                 jlDriverImage.setVisible(true);
-                String ruta = archivoelegido.getPath();
+                String ruta = this.archivoelegido.getPath();
                 ImageIcon imagen = new ImageIcon(ruta);
-                BufferedImage bi = ImageIO.read(archivoelegido);
+                this.bi = ImageIO.read(this.archivoelegido);
 
-                File outputfile = new File(StringPath.PATH_DIR + "/Driver/" + archivoelegido.getName());
-                File outputfile2 = new File(StringPath.PATH_DIR + "/Driver/" + "reresha" + ".jpg");//
-
-                ImageIO.write(bi, "png", outputfile);
-                boolean correcto = outputfile.renameTo(outputfile2);
-                if (correcto) {
-                    System.out.println("MAE----------------->" + correcto);
-                }
                 jlDriverImage.setIcon(imagen);
+                this.flag = true;
 
 //jlDriverImage.setBounds(20, 30, 60, 36);
             } catch (IOException ex) {
@@ -370,6 +377,7 @@ public class CreateDriver extends javax.swing.JFrame {
             }
         } else if (estado == JFileChooser.CANCEL_OPTION) {
             System.out.println("Cancel was selected");
+            this.flag = false;
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -388,7 +396,6 @@ public class CreateDriver extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbSave;
     private javax.swing.JLabel jlDriverImage;
     private javax.swing.JLabel jlError;
@@ -396,8 +403,9 @@ public class CreateDriver extends javax.swing.JFrame {
     private javax.swing.JTextField jtLastnameA;
     private javax.swing.JTextField jtLastnameB;
     private javax.swing.JTextField jtPhoneNumber;
-    private javax.swing.JTextField jtPlate;
+    private javax.swing.JTextField jtfDni;
     private javax.swing.JTextField jtfName;
+    private javax.swing.JTextField jtfPlate;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -439,5 +447,39 @@ public class CreateDriver extends javax.swing.JFrame {
 //            }
 //        }
         return exist;
+    }
+
+    private boolean isDirectory() {
+        File createDir = new File(StringPath.PATH_DRIVER_PHOTO);
+
+        if (createDir.mkdir()) {
+            return false;//false porque el directorio ya existe
+        }
+        return true;//true cuando CREA directorio nuevo
+
+    }
+
+    private boolean existDniDriver(String dni) {
+        for (Iterator iterator = this.drivers.iterator(); iterator.hasNext();) {
+            Driver next = (Driver) iterator.next();
+            if (next.getDni().equals(dni)) {
+                JOptionPane.showMessageDialog(null, "Numero de cedula ya está registrado.");
+                jtfDni.setText("");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean existPlateDriver(String plate) {
+        for (Iterator iterator = this.drivers.iterator(); iterator.hasNext();) {
+            Driver next = (Driver) iterator.next();
+            if (next.getVehiclePlate().equals(plate)) {
+                jtfPlate.setText("");
+                JOptionPane.showMessageDialog(null, "Numero placa ya está registrado.");
+                return true;
+            }
+        }
+        return false;
     }
 }
