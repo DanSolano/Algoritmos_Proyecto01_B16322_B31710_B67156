@@ -98,7 +98,7 @@ public class UpdateDriver extends javax.swing.JFrame {
 
         jtfPhoneNumber.setText(" ");
 
-        jbSave.setText("Actualiar");
+        jbSave.setText("Actualizar");
         jbSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSaveActionPerformed(evt);

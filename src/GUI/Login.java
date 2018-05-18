@@ -6,6 +6,7 @@
 package GUI;
 
 import Domain.User;
+import GUI.CRUD.Driver.DeleteDriver;
 import GUI.CRUD.Driver.UpdateDriver;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.StringMD;
@@ -208,7 +209,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        UpdateDriver u = new UpdateDriver();
+        DeleteDriver u = new DeleteDriver();
         u.setVisible(true);
         this.dispose();
         // TODO add your handling code here:
