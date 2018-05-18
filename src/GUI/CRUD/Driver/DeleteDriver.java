@@ -6,14 +6,11 @@
 package GUI.CRUD.Driver;
 
 import Domain.Driver;
-import GUI.CRUD.Admin.*;
-import Domain.User;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.regex.Matcher;
@@ -27,8 +24,6 @@ public class DeleteDriver extends javax.swing.JFrame {
 
     private TextAutoCompleter textAutocompleter;
     private Queue drivers;
-    private BufferedImage bi;
-    private File archivoelegido;
     private Driver driverSearch;
     private String id;
 
