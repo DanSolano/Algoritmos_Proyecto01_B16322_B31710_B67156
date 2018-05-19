@@ -26,7 +26,16 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import Data.ChartData;
 import Data.SaveAll;
+import GUI.CRUD.Client.DeleteClient;
+import GUI.CRUD.Client.UpdateClient;
 import GUI.CRUD.Driver.CreateDriver;
+import GUI.CRUD.Driver.DeleteDriver;
+import GUI.CRUD.Driver.UpdateDriver;
+import GUI.CRUD.Restaurant.CreateRestaurant;
+import GUI.CRUD.Restaurant.DeleteRestaurant;
+import GUI.CRUD.Restaurant.Products.DeleteProduct;
+import GUI.CRUD.Restaurant.Products.UpdateProduct;
+import GUI.CRUD.Restaurant.UpdateRestaurant;
 import Utilities.StringPath;
 import com.orsonpdf.PDFDocument;
 import com.orsonpdf.PDFGraphics2D;
@@ -397,6 +406,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu5.add(jMenuItem21);
 
         jMenuItem15.setText("Actualizar Conductor");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem15);
 
         jMenu1.add(jMenu5);
@@ -420,9 +434,19 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu6.add(jMenuItem10);
 
         jMenuItem16.setText("Actualizar Restaurante");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem16);
 
         jMenuItem22.setText("Eliminar Restaurante");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem22);
 
         jMenu1.add(jMenu6);
@@ -446,6 +470,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu7.add(jMenuItem23);
 
         jMenuItem17.setText("Actualizar Productos");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem17);
 
         jMenu1.add(jMenu7);
@@ -495,7 +524,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        CreateRestaurant createRestaurant = new CreateRestaurant();
+        createRestaurant.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
@@ -505,7 +536,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        // TODO add your handling code here:
+        DeleteClient deleteClient = new DeleteClient();
+        deleteClient.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -559,7 +592,9 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        // TODO add your handling code here:
+        DeleteProduct deleteProduct= new DeleteProduct();
+         this.dispose();
+        deleteProduct.setVisible(true);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
@@ -594,7 +629,7 @@ public class AdminModule extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.lastButtonClicked = StringPath.PIE_CHART;
-        
+
         ChartPanel panel = new ChartPanel(chart.pieChart);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
@@ -641,12 +676,40 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        // TODO add your handling code here:
+        DeleteDriver deleteDriver = new DeleteDriver();
+        this.dispose();
+        deleteDriver.setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
+        UpdateClient updateClient = new UpdateClient();
+        this.dispose();
+        updateClient.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        UpdateDriver updateDriver = new UpdateDriver();
+        this.dispose();
+        updateDriver.setVisible(true);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        UpdateRestaurant updateRestaurant = new UpdateRestaurant();
+        this.dispose();
+        updateRestaurant.setVisible(true);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        DeleteRestaurant deleteRestaurant = new DeleteRestaurant();
+        this.dispose();
+        deleteRestaurant.setVisible(true);
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        UpdateProduct updateProduct = new UpdateProduct();
+        this.dispose();
+        updateProduct.setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
