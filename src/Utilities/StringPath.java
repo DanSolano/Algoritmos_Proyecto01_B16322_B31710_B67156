@@ -20,4 +20,8 @@ public class StringPath {
     public static final String PATH_ORDER = "./data/Orden.csv";
     public static final String PATH_PRODUCTS = "./data/products.csv";
     public static final String PATH_RESTAURANT = "./data/restaurant.csv";
+    public static final String AREA_CHART = "AreaChart";
+    public static final String PIE_CHART = "PieChart";
+    public static final String BAR_CHART="BarChart";
+    public static final String LINE_CHART= "LineChart";
 }

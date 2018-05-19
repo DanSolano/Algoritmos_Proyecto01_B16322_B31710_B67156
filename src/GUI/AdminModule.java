@@ -22,19 +22,20 @@ import GUI.CRUD.Order.ListOrder;
 import GUI.CRUD.Restaurant.Products.ListProducts;
 import GUI.CRUD.Restaurant.ListRestaurant;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
-import Utilities.StringPath;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import Data.ChartData;
 import Data.SaveAll;
 import GUI.CRUD.Driver.CreateDriver;
+import Utilities.StringPath;
 import com.orsonpdf.PDFDocument;
 import com.orsonpdf.PDFGraphics2D;
 import com.orsonpdf.Page;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.jfree.chart.JFreeChart;
 
 /**
  *
@@ -53,6 +54,10 @@ public class AdminModule extends javax.swing.JFrame {
     private String ampm;
     private Thread thread;
     ChartData chart = new ChartData();
+    public PDFDocument pdfDoc = new PDFDocument();
+    public Page page = pdfDoc.createPage(new Rectangle(612, 468));
+    public PDFGraphics2D graphic = page.getGraphics2D();
+    String lastButtonClicked;
 
     public AdminModule() {
 
@@ -255,7 +260,7 @@ public class AdminModule extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jButton4.getAccessibleContext().setAccessibleName("");
@@ -276,6 +281,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuItem12.setText("Actualizar Cliente");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem12);
 
         jMenuItem18.setText("Eliminar Cliente");
@@ -379,6 +389,11 @@ public class AdminModule extends javax.swing.JFrame {
         jMenu5.add(jMenuItem4);
 
         jMenuItem21.setText("Eliminar Conductor");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem21);
 
         jMenuItem15.setText("Actualizar Conductor");
@@ -455,14 +470,13 @@ public class AdminModule extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
 
         pack();
@@ -536,6 +550,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.lastButtonClicked = StringPath.AREA_CHART;
         ChartPanel panel = new ChartPanel(chart.areaChart);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
@@ -578,6 +593,8 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.lastButtonClicked = StringPath.PIE_CHART;
+        
         ChartPanel panel = new ChartPanel(chart.pieChart);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
@@ -585,6 +602,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.lastButtonClicked = StringPath.BAR_CHART;
         ChartPanel panel = new ChartPanel(chart.barChart);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
@@ -593,6 +611,7 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.lastButtonClicked = StringPath.LINE_CHART;
         ChartPanel panel = new ChartPanel(chart.lineChart);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
@@ -611,10 +630,40 @@ public class AdminModule extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
+        JFileChooser chooser = new JFileChooser();
+        chooser.showSaveDialog(this);
+        kindChart().draw(graphic, new Rectangle(0, 0, 612, 468));
+        //chart.areaChart.draw(graphic, new Rectangle(0, 0, 612, 468));
+        pdfDoc.writeToFile(new File(chooser.getSelectedFile() + ".pdf"));
+        JOptionPane.showMessageDialog(null, "El archivo se a guardado Exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private JFreeChart kindChart() {
+        switch (this.lastButtonClicked) {
+            case "AreaChart":
+                return chart.areaChart;
+            case "PieChart":
+                return chart.pieChart;
+            case "BarChart":
+                return chart.barChart;
+            case "LineChart":
+                return chart.lineChart;
+            default:
+                return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

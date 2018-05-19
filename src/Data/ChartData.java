@@ -10,12 +10,12 @@ import Domain.Order;
 import Domain.Restaurant;
 import Exceptions.StackException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.GetDataById;
 import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
 /**
  * Class for create Charts
@@ -40,12 +40,13 @@ public class ChartData {
         barChart();
         lineChart();
         pieChart();
+
     }
 
-    private void areaChart() {
+    public void areaChart() {
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        
+
 //        if (!orders.isEmpty()) {
 //            GetDataById getDataById = new GetDataById();
 //            try {
@@ -53,10 +54,11 @@ public class ChartData {
 //                    Order order = (Order) orders.pop();
 //                    if (order.getRestaurantId().equals(i)) {
 //                        String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
-//                        datos.addValue(12, nameRestaurant, "Ventas Totales");
+//                        datos.addValue(Integer.parseInt(order.getId()), nameRestaurant, "Enero");
 //                    }
+//                    areaChart = ChartFactory.createAreaChart("Ganacias de los Restaurantes", "Meses", "Cantidad", datos);
 //                }
-//                
+//
 //            } catch (StackException ex) {
 //                System.err.println("Error de lectura de las ordenes!!!");
 //            }
@@ -74,22 +76,21 @@ public class ChartData {
         datos.addValue(13, "Restaurante 2", "Mayo");
         datos.addValue(25, "Restaurante 2", "Junio");
         areaChart = ChartFactory.createAreaChart("Ganacias de los Restaurantes", "Meses", "Cantidad", datos);
-        
 
     }
 
-    private void barChart() {
+    public void barChart() {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         datos.addValue(23, "Restaurante 1", "Enero");
         datos.addValue(23, "Restaurante 1", "Marzo");
         datos.addValue(23, "Restaurante 1", "Abril");
         datos.addValue(23, "Restaurante 1", "Febrero");
 
-        barChart = ChartFactory.createBarChart3D("Ganancias de los Restaurante ", null, null, datos);
+        barChart = ChartFactory.createBarChart3D("Ganancias de los Restaurantes ", null, null, datos);
 
     }
 
-    private void lineChart() {
+    public void lineChart() {
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         datos.addValue(177, "Negocio 1", "Enero");
@@ -101,9 +102,10 @@ public class ChartData {
         datos.addValue(755, "Negocio 1", "Julio");
 
         lineChart = ChartFactory.createLineChart("Ganancias de los Restaurantes", "", "", datos);
+
     }
 
-    private void pieChart() {
+    public void pieChart() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Enero", new Double(20));
         dataset.setValue("Febrero", new Double(20));
@@ -115,11 +117,3 @@ public class ChartData {
     }
 
 }
-
-//PDFDocument pdfDoc = new PDFDocument();
-//        pdfDoc.setAuthor("Daniel, Jesus, Luis");
-//        Page page = pdfDoc.createPage(new Rectangle(612, 468));
-//        PDFGraphics2D g2 = page.getGraphics2D();
-//        areaChart.draw(g2, new Rectangle(0, 0, 612, 468));
-//        
-//        pdfDoc.writeToFile(new File("./data/JFreeChart-PDF.pdf"));

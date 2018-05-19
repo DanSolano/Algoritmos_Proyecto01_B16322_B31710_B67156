@@ -56,7 +56,7 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
 
         } catch (Exception ex) {
         }
-
+        
         Login login = new Login();
         login.setVisible(true);
 
