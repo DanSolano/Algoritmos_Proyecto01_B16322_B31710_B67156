@@ -33,6 +33,7 @@ import GUI.CRUD.Driver.DeleteDriver;
 import GUI.CRUD.Driver.UpdateDriver;
 import GUI.CRUD.Restaurant.CreateRestaurant;
 import GUI.CRUD.Restaurant.DeleteRestaurant;
+import GUI.CRUD.Restaurant.Products.CreateProduct;
 import GUI.CRUD.Restaurant.Products.DeleteProduct;
 import GUI.CRUD.Restaurant.Products.UpdateProduct;
 import GUI.CRUD.Restaurant.UpdateRestaurant;
@@ -132,6 +133,7 @@ public class AdminModule extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
 
@@ -477,6 +479,14 @@ public class AdminModule extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem17);
 
+        jMenuItem24.setText("Crear Producto");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem24);
+
         jMenu1.add(jMenu7);
 
         jMenu8.setText("jMenu8");
@@ -592,8 +602,8 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        DeleteProduct deleteProduct= new DeleteProduct();
-         this.dispose();
+        DeleteProduct deleteProduct = new DeleteProduct();
+        this.dispose();
         deleteProduct.setVisible(true);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
@@ -710,6 +720,12 @@ public class AdminModule extends javax.swing.JFrame {
         this.dispose();
         updateProduct.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        CreateProduct createProduct = new CreateProduct();
+        this.dispose();
+        createProduct.setVisible(true);
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -764,6 +780,7 @@ public class AdminModule extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
