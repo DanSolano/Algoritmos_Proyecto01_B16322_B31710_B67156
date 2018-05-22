@@ -181,7 +181,7 @@ public class ListProducts extends javax.swing.JFrame {
         ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         String name = "";
         for (Restaurant restaurant : rest) {
-            if (restaurant.getDni().equals(idRestaurant)) {
+            if (restaurant.getId().equals(idRestaurant)) {
                 name = restaurant.getName();
                 break;
 

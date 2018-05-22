@@ -59,15 +59,15 @@ public class CreateDriver extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jlError = new javax.swing.JLabel();
-        jtKindVehicle = new javax.swing.JTextField();
-        jtfPlate = new javax.swing.JTextField();
-        jtPhoneNumber = new javax.swing.JTextField();
+        jtfKindVehicle = new javax.swing.JTextField();
+        jtfVehiclePlate = new javax.swing.JTextField();
+        jtfPhoneNumber = new javax.swing.JTextField();
         jbSave = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtLastnameA = new javax.swing.JTextField();
+        jtfLastnameA = new javax.swing.JTextField();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -75,7 +75,7 @@ public class CreateDriver extends javax.swing.JFrame {
         jtfDni = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
-        jtLastnameB = new javax.swing.JTextField();
+        jtfLastnameB = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jlDriverImage = new javax.swing.JLabel();
@@ -90,11 +90,11 @@ public class CreateDriver extends javax.swing.JFrame {
 
         jlError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jtKindVehicle.setText("  ");
+        jtfKindVehicle.setText("  ");
 
-        jtfPlate.setText(" ");
+        jtfVehiclePlate.setText(" ");
 
-        jtPhoneNumber.setText(" ");
+        jtfPhoneNumber.setText(" ");
 
         jbSave.setText("Guardar");
         jbSave.addActionListener(new java.awt.event.ActionListener() {
@@ -139,15 +139,15 @@ public class CreateDriver extends javax.swing.JFrame {
         jlDriverImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jDesktopPane1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtKindVehicle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtfPlate, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtPhoneNumber, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfKindVehicle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfVehiclePlate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfPhoneNumber, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbSave, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtLastnameA, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfLastnameA, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jSpinner1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -155,7 +155,7 @@ public class CreateDriver extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jtfDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtLastnameB, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfLastnameB, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlDriverImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -184,11 +184,11 @@ public class CreateDriver extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfName, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                            .addComponent(jtLastnameA)))
+                            .addComponent(jtfLastnameA)))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jtLastnameB))
+                        .addComponent(jtfLastnameB))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -214,11 +214,11 @@ public class CreateDriver extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtfVehiclePlate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
                             .addGap(99, 99, 99)
-                            .addComponent(jtKindVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtfKindVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -233,11 +233,11 @@ public class CreateDriver extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jtLastnameA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfLastnameA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jtLastnameB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfLastnameB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -249,15 +249,15 @@ public class CreateDriver extends javax.swing.JFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jtKindVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfKindVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jtfPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfVehiclePlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,44 +302,46 @@ public class CreateDriver extends javax.swing.JFrame {
         try {
 
             if (flag == true && !jtfName.getText().trim().isEmpty()
-                    && !jtLastnameA.getText().trim().isEmpty()
-                    && !jtLastnameB.getText().trim().isEmpty()
+                    && !jtfLastnameA.getText().trim().isEmpty()
+                    && !jtfLastnameB.getText().trim().isEmpty()
                     && !jtfDni.getText().trim().isEmpty()
                     && (jSpinner1.getComponentCount() > 0)
-                    && !jtPhoneNumber.getText().trim().isEmpty()
-                    && !jtKindVehicle.getText().trim().isEmpty()
-                    && !jtfPlate.getText().trim().isEmpty()
-                    && !jtPhoneNumber.getText().trim().isEmpty()) {
+                    && !jtfPhoneNumber.getText().trim().isEmpty()
+                    && !jtfKindVehicle.getText().trim().isEmpty()
+                    && !jtfVehiclePlate.getText().trim().isEmpty()
+                    && !jtfPhoneNumber.getText().trim().isEmpty()) {
                 if (isDirectory()) {
                     boolean alreadyExists = new File(StringPath.PATH_DRIVER_PHOTO).exists();
                     if (!alreadyExists) {
                         File directorio = new File(StringPath.PATH_DRIVER_PHOTO);
-                        directorio.mkdir();
+                        directorio.mkdirs();
                     }
 
                 }
 
                 int id = this.drivers.size() + 1;
                 String name = jtfName.getText().trim();
-                String lastNameA = jtLastnameA.getText().trim();
-                String lastNameB = jtLastnameB.getText().trim();
+                String lastNameA = jtfLastnameA.getText().trim();
+                String lastNameB = jtfLastnameB.getText().trim();
                 String age = jSpinner1.getComponentCount() + "";
-                String kindVehicle = jtKindVehicle.getText().trim();
-                String phoneNumber = jtPhoneNumber.getText().trim();
-                String vehiclePlate = jtfPlate.getText().trim();
+                String kindVehicle = jtfKindVehicle.getText().trim();
+                String phoneNumber = jtfPhoneNumber.getText().trim();
+                String vehiclePlate = jtfVehiclePlate.getText().trim();
                 String dni = jtfDni.getText().trim();
 
                 if (!existDniDriver(dni) || !existPlateDriver(vehiclePlate)) {
                     this.drivers.add(new Driver(id + "", name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
+                    clearFields();
                     File outputfile = new File(StringPath.PATH_DRIVER_PHOTO + archivoelegido.getName());
                     File outputfile2 = new File(StringPath.PATH_DRIVER_PHOTO + dni + ".jpg");//
 
                     ImageIO.write(bi, "png", outputfile);
                     boolean correcto = outputfile.renameTo(outputfile2);
                     if (correcto) {
-                        System.out.println("MAE----------------->" + correcto);
                     }
                 }
+            } else {
+                jlError.setText("Debe llenar todos los datos y seleccionar una imagen");
             }
         } catch (IOException ex) {
             Logger.getLogger(CreateDriver.class.getName()).log(Level.SEVERE, null, ex);
@@ -399,13 +401,13 @@ public class CreateDriver extends javax.swing.JFrame {
     private javax.swing.JButton jbSave;
     private javax.swing.JLabel jlDriverImage;
     private javax.swing.JLabel jlError;
-    private javax.swing.JTextField jtKindVehicle;
-    private javax.swing.JTextField jtLastnameA;
-    private javax.swing.JTextField jtLastnameB;
-    private javax.swing.JTextField jtPhoneNumber;
     private javax.swing.JTextField jtfDni;
+    private javax.swing.JTextField jtfKindVehicle;
+    private javax.swing.JTextField jtfLastnameA;
+    private javax.swing.JTextField jtfLastnameB;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JTextField jtfPlate;
+    private javax.swing.JTextField jtfPhoneNumber;
+    private javax.swing.JTextField jtfVehiclePlate;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -415,38 +417,11 @@ public class CreateDriver extends javax.swing.JFrame {
      * @return true if the String is a email and false if the String is not an
      * email
      */
-    private boolean isMail(String email) {
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
-        Matcher mather = pattern.matcher(email);
-
-        if (mather.find() == true) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
     private void back() {
         Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE = this.drivers;
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
-    }
-
-    private boolean exist(String email, String user) {
-        boolean exist = false;
-//        for (Driver agent : drivers) {
-//            if (agent.getUserName().equals(user)
-//                    || agent.getMail().equals(email)) {
-//                exist = true;
-//            }
-//        }
-        return exist;
     }
 
     private boolean isDirectory() {
@@ -475,11 +450,22 @@ public class CreateDriver extends javax.swing.JFrame {
         for (Iterator iterator = this.drivers.iterator(); iterator.hasNext();) {
             Driver next = (Driver) iterator.next();
             if (next.getVehiclePlate().equals(plate)) {
-                jtfPlate.setText("");
+                jtfVehiclePlate.setText("");
                 JOptionPane.showMessageDialog(null, "Numero placa ya está registrado.");
                 return true;
             }
         }
         return false;
+    }
+
+    private void clearFields() {
+        jtfDni.setText("");
+        jtfName.setText("");
+        jtfLastnameA.setText("");
+        jtfLastnameB.getText().trim();
+        jSpinner1.setValue(0);
+        jtfKindVehicle.setText("");
+        jtfPhoneNumber.setText("");
+        jtfVehiclePlate.setText("");
     }
 }

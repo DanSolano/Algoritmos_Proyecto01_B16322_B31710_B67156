@@ -13,7 +13,7 @@ import ADT.LinkedList.DoubleLinkedCircularList;
  */
 public class Restaurant {
 
-    private String dni;//we use this to rename the image with a counter that identifies the image that belongs to the restaurant.
+    private String id;
     private String name;
     private String location;
     private String province;
@@ -25,8 +25,8 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String dni, String name, String location, String province, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
-        this.dni = dni;
+    public Restaurant(String id, String name, String location, String province, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.province = province;
@@ -36,14 +36,19 @@ public class Restaurant {
         this.others = others;
     }
 
-   
-
-    public String getDni() {
-        return dni;
+    public Restaurant(String id, String name, String location, String province) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.province = province;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -1101,42 +1101,42 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         products0.setName("Hamburquesa");
         products0.setPrice(1000 + "");
         products0.setTypeProduct(0 + "");
-        products0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
+        products0.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida0.jpg")));
         drinksProducts.insert(products0);
 
         products1.setId("sin DNI 1");
         products1.setName("Papas Fritas");
         products1.setPrice(900 + "");
         products1.setTypeProduct(1 + "");
-        products1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
+        products1.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida1.jpg")));
         drinksProducts.insert(products1);
 
         products2.setId("sin DNI 1");
         products2.setName("Pizza");
         products2.setPrice(1200 + "");
         products2.setTypeProduct(2 + "");
-        products2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
+        products2.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida2.jpg")));
         drinksProducts.insert(products2);
 
         products3.setId("sin DNI 1");
         products3.setName("Pollo");
         products3.setPrice(900 + "");
         products3.setTypeProduct(3 + "");
-        products3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
+        products3.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida3.jpg")));
         drinksProducts.insert(products3);
 
         products4.setId("sin DNI 1");
         products4.setName("Pure");
         products4.setPrice(900 + "");
         products4.setTypeProduct(4 + "");
-        products4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
+        products4.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida4.jpg")));
         drinksProducts.insert(products4);
 
         products5.setId("sin DNI 1");
         products5.setName("Sandwich");
         products5.setPrice(900 + "");
         products5.setTypeProduct(1 + "");
-        products5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida5.jpg")));
+        products5.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida5.jpg")));
         drinksProducts.insert(products5);
     }
 

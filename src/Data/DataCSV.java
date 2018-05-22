@@ -74,11 +74,11 @@ public class DataCSV {
     
     public ArrayList<Products> readProducts() {
         ArrayList<Object> list = readCSV();
-        ArrayList<Products> users = new ArrayList<Products>();
+        ArrayList<Products> products = new ArrayList<Products>();
         for (Object object : list) {
-            users.add((Products) object);
+            products.add((Products) object);
         }
-        return users;
+        return products;
     }
     
     public ArrayList<Order> readOrderDetails() {
@@ -335,7 +335,7 @@ public class DataCSV {
                     
                     for (Object object : writeList) {
                         Restaurant agent = (Restaurant) object;
-                        csvOutput.write(agent.getDni());
+                        csvOutput.write(agent.getId());
                         csvOutput.write(agent.getName());
                         csvOutput.write(agent.getProvince());
                         csvOutput.write(agent.getLocation());

@@ -139,18 +139,17 @@ public class ListRestaurant extends javax.swing.JFrame {
 
         model = new DefaultTableModel();
 
-        model.addColumn("Id");
+        model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Provincia");
         model.addColumn("Ubicacion");
-       
 
         this.jtAgents.setModel(model);
 
         if (!clientList.isEmpty()) {
 
             for (Restaurant restaurant : clients) {
-                model.addRow(new Object[]{restaurant.getDni(), restaurant.getName(), restaurant.getProvince(), restaurant.getLocation()});
+                model.addRow(new Object[]{restaurant.getId(),restaurant.getName(), restaurant.getProvince(), restaurant.getLocation()});
             }
 
         }

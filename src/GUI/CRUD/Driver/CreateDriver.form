@@ -72,13 +72,13 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jtfName" pref="264" max="32767" attributes="0"/>
-                              <Component id="jtLastnameA" max="32767" attributes="0"/>
+                              <Component id="jtfLastnameA" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jtLastnameB" max="32767" attributes="0"/>
+                          <Component id="jtfLastnameB" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -113,13 +113,13 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfPlate" min="-2" pref="223" max="-2" attributes="0"/>
-                                  <Component id="jtPhoneNumber" min="-2" pref="223" max="-2" attributes="0"/>
+                                  <Component id="jtfVehiclePlate" min="-2" pref="223" max="-2" attributes="0"/>
+                                  <Component id="jtfPhoneNumber" min="-2" pref="223" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="99" pref="99" max="-2" attributes="0"/>
-                              <Component id="jtKindVehicle" min="-2" pref="223" max="-2" attributes="0"/>
+                              <Component id="jtfKindVehicle" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -140,12 +140,12 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtLastnameA" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfLastnameA" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtLastnameB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfLastnameB" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -161,17 +161,17 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtKindVehicle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfKindVehicle" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfPlate" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfVehiclePlate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -198,17 +198,17 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtKindVehicle">
+        <Component class="javax.swing.JTextField" name="jtfKindVehicle">
           <Properties>
             <Property name="text" type="java.lang.String" value="  "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfPlate">
+        <Component class="javax.swing.JTextField" name="jtfVehiclePlate">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtPhoneNumber">
+        <Component class="javax.swing.JTextField" name="jtfPhoneNumber">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
@@ -241,7 +241,7 @@
             <Property name="text" type="java.lang.String" value="Edad"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtLastnameA">
+        <Component class="javax.swing.JTextField" name="jtfLastnameA">
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner1">
         </Component>
@@ -272,7 +272,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtfName">
         </Component>
-        <Component class="javax.swing.JTextField" name="jtLastnameB">
+        <Component class="javax.swing.JTextField" name="jtfLastnameB">
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>

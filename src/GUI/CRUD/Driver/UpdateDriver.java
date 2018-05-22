@@ -297,40 +297,54 @@ public class UpdateDriver extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
-        if (!jtfName.getText().trim().isEmpty()
-                && !jtfLastnameA.getText().trim().isEmpty()
-                && !jtfLastnameB.getText().trim().isEmpty()
-                && !jtfDni.getText().trim().isEmpty()
-                && (jSpinner1.getComponentCount() > 0)
-                && !jtfPhoneNumber.getText().trim().isEmpty()
-                && !jtfKindVehicle.getText().trim().isEmpty()
-                && !jtfVehiclePlate.getText().trim().isEmpty()
-                && !jtfPhoneNumber.getText().trim().isEmpty()) {
+        if (jtfDni.getText().trim().isEmpty()) {
+            jlError.setText("Debe ingresar una cedula");
+        } else {
+            for (Iterator iterator = drivers.iterator(); iterator.hasNext();) {
+                this.driverSearch = (Driver) iterator.next();
+                if (this.driverSearch.getDni().equals(jtfDni.getText().trim())) {
+                    if (!jtfName.getText().trim().isEmpty()
+                            && !jtfLastnameA.getText().trim().isEmpty()
+                            && !jtfLastnameB.getText().trim().isEmpty()
+                            && !jtfDni.getText().trim().isEmpty()
+                            && (jSpinner1.getComponentCount() > 0)
+                            && !jtfPhoneNumber.getText().trim().isEmpty()
+                            && !jtfKindVehicle.getText().trim().isEmpty()
+                            && !jtfVehiclePlate.getText().trim().isEmpty()
+                            && !jtfPhoneNumber.getText().trim().isEmpty()) {
 
-            String name = jtfName.getText().trim();
-            String lastNameA = jtfLastnameA.getText().trim();
-            String lastNameB = jtfLastnameB.getText().trim();
-            String age = jSpinner1.getValue().toString()+ "";
-            JOptionPane.showMessageDialog(null, age);
-            String kindVehicle = jtfKindVehicle.getText().trim();
-            String phoneNumber = jtfPhoneNumber.getText().trim();
-            String vehiclePlate = jtfVehiclePlate.getText().trim();
+                        String name = jtfName.getText().trim();
+                        String lastNameA = jtfLastnameA.getText().trim();
+                        String lastNameB = jtfLastnameB.getText().trim();
+                        String age = jSpinner1.getValue().toString() + "";
+//                        JOptionPane.showMessageDialog(null, age);
+                        String kindVehicle = jtfKindVehicle.getText().trim();
+                        String phoneNumber = jtfPhoneNumber.getText().trim();
+                        String vehiclePlate = jtfVehiclePlate.getText().trim();
 
+                        if (!existPlateWithOtherDriver(vehiclePlate)) {
 
-            if (!existPlateWithOtherDriver(vehiclePlate)) {
+                            this.drivers.remove(this.driverSearch);
+                            this.driverSearch.setId(id);
+                            this.driverSearch.setName(name);
+                            this.driverSearch.setLastNameA(lastNameA);
+                            this.driverSearch.setLastNameB(lastNameB);
+                            this.driverSearch.setAge(age);
+                            this.driverSearch.setKindVehicle(kindVehicle);
+                            this.driverSearch.setPhoneNumber(phoneNumber);
+                            this.driverSearch.setVehiclePlate(vehiclePlate);
+                            this.drivers.add(driverSearch);
+                            clearFields();
+                            break;
 
-                this.drivers.remove(this.driverSearch);
-                this.driverSearch.setId(id);
-                this.driverSearch.setName(name);
-                this.driverSearch.setLastNameA(lastNameA);
-                this.driverSearch.setLastNameB(lastNameB);
-                this.driverSearch.setAge(age);
-                this.driverSearch.setKindVehicle(kindVehicle);
-                this.driverSearch.setPhoneNumber(phoneNumber);
-                this.driverSearch.setVehiclePlate(vehiclePlate);
-                this.drivers.add(driverSearch);
+                        }
+                    }
+                } else {
+                    jlError.setText("Cedula ingresada no existe en el sistema");
+                }
 
             }
+
         }
     }//GEN-LAST:event_jbSaveActionPerformed
 
@@ -341,7 +355,7 @@ public class UpdateDriver extends javax.swing.JFrame {
             for (Iterator iterator = drivers.iterator(); iterator.hasNext();) {
                 this.driverSearch = (Driver) iterator.next();
                 if (this.driverSearch.getDni().equals(jtfDni.getText().trim())) {
-                     this.id = this.driverSearch.getId();
+                    this.id = this.driverSearch.getId();
                     jtfName.setText(this.driverSearch.getName());
                     jtfKindVehicle.setText(this.driverSearch.getKindVehicle());
                     jtfVehiclePlate.setText(this.driverSearch.getVehiclePlate());
@@ -350,8 +364,9 @@ public class UpdateDriver extends javax.swing.JFrame {
                     jtfPhoneNumber.setText(this.driverSearch.getPhoneNumber());
                     int age = Integer.parseInt(this.driverSearch.getAge());
                     jSpinner1.setValue(age);
-                    jtfDni.enable(false);
                     break;
+                } else {
+                    jlError.setText("Cedula ingresada no existe en el sistema");
                 }
 
             }
@@ -391,60 +406,11 @@ public class UpdateDriver extends javax.swing.JFrame {
      * @return true if the String is a email and false if the String is not an
      * email
      */
-    private boolean isMail(String email) {
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
-        Matcher mather = pattern.matcher(email);
-
-        if (mather.find() == true) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
     private void back() {
         Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE = this.drivers;
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
-    }
-
-    private boolean exist(String email, String user) {
-        boolean exist = false;
-//        for (Driver agent : drivers) {
-//            if (agent.getUserName().equals(user)
-//                    || agent.getMail().equals(email)) {
-//                exist = true;
-//            }
-//        }
-        return exist;
-    }
-
-    private boolean isDirectory() {
-        File createDir = new File(StringPath.PATH_DRIVER_PHOTO);
-
-        if (createDir.mkdir()) {
-            return false;//false porque el directorio ya existe
-        }
-        return true;//true cuando CREA directorio nuevo
-
-    }
-
-    private boolean existDniDriver(String dni) {
-        for (Iterator iterator = this.drivers.iterator(); iterator.hasNext();) {
-            Driver next = (Driver) iterator.next();
-            if (next.getDni().equals(dni)) {
-                JOptionPane.showMessageDialog(null, "Numero de cedula ya está registrado.");
-                jtfDni.setText("");
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean existPlateWithOtherDriver(String plate) {
@@ -460,5 +426,16 @@ public class UpdateDriver extends javax.swing.JFrame {
             return false;
         }
         return false;
+    }
+
+    private void clearFields() {
+        jtfDni.setText("");
+        jtfName.setText("");
+        jtfLastnameA.setText("");
+        jtfLastnameB.getText().trim();
+        jSpinner1.setValue(0);
+        jtfKindVehicle.setText("");
+        jtfPhoneNumber.setText("");
+        jtfVehiclePlate.setText("");
     }
 }

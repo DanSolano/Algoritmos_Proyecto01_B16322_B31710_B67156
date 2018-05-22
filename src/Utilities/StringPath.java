@@ -13,6 +13,8 @@ public class StringPath {
 
     public static final String PATH_DIR = "./data";
     public static final String PATH_DRIVER_PHOTO = "./data/Driver/";
+    public static final String PATH_REST_PHOTO = "./data/Restaurant/";
+    public static final String PATH_REST_PRODUCT_PHOTO = "/data/Restaurant/";//Se le concatena restaurant.getName()+restaurant.getId()
     public static final String PATH_ADMIN = "./data/admin.csv";
     public static final String PATH_AGENT = "./data/agentes.csv";
     public static final String PATH_CLIENT = "./data/Clientes.csv";
@@ -22,6 +24,6 @@ public class StringPath {
     public static final String PATH_RESTAURANT = "./data/restaurant.csv";
     public static final String AREA_CHART = "AreaChart";
     public static final String PIE_CHART = "PieChart";
-    public static final String BAR_CHART="BarChart";
-    public static final String LINE_CHART= "LineChart";
+    public static final String BAR_CHART = "BarChart";
+    public static final String LINE_CHART = "LineChart";
 }

@@ -208,6 +208,7 @@ public class Login extends javax.swing.JFrame {
 
     private boolean isAgent(String sha, String userOrMail) {
         for (User agent : agents) {
+            //this.agentLogin = agent;
             if ((agent.getUserName().equals(userOrMail) || agent.getMail().equals(userOrMail)) && agent.getPassword().equals(sha)) {
                 return true;
             }
