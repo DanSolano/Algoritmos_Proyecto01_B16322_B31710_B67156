@@ -66,7 +66,6 @@ public class UpdateRestaurant extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jlInformation = new javax.swing.JLabel();
-        jbChargeImage = new javax.swing.JButton();
         jlDriverImage = new javax.swing.JLabel();
         jcbProvince = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
@@ -89,13 +88,6 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         });
 
         jlInformation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jbChargeImage.setText("Seleccionar Imagen");
-        jbChargeImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbChargeImageActionPerformed(evt);
-            }
-        });
 
         jlDriverImage.setText(" ");
         jlDriverImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -132,7 +124,6 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         });
 
         jDesktopPane1.setLayer(jlInformation, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbChargeImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlDriverImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jcbProvince, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -164,15 +155,13 @@ public class UpdateRestaurant extends javax.swing.JFrame {
                                 .addComponent(jtfName)
                                 .addComponent(jtfLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                                 .addComponent(jtfId)))
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbChargeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(26, 26, 26)
-                                .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(26, 26, 26)
+                            .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(165, 165, 165)))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jButton3)
@@ -212,11 +201,9 @@ public class UpdateRestaurant extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbChargeImage))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
@@ -246,56 +233,35 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         back();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jbChargeImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChargeImageActionPerformed
-        //Añadiendole un filtro
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
-        JFileChooser selector = new JFileChooser();
-        selector.setFileFilter(filter);
-        int estado = selector.showOpenDialog(null);
-        this.archivoelegido = selector.getSelectedFile();
-
-        if (estado == JFileChooser.APPROVE_OPTION) {
-            if (archivoelegido.exists()) {
-                System.out.println("bien");
-            } else {
-                System.out.println("no bien");
-            }
-
-            try {
-
-                jlDriverImage.setVisible(true);
-                String ruta = this.archivoelegido.getPath();
-                this.imagen = new ImageIcon(ruta);
-                this.bi = ImageIO.read(this.archivoelegido);
-
-                ImageManage im = new ImageManage();
-                imagen = im.resizeImage100(this.imagen);
-                jlDriverImage.setIcon(this.imagen);
-                this.flag = true;
-
-//jlDriverImage.setBounds(20, 30, 60, 36);
-            } catch (IOException ex) {
-                Logger.getLogger(UpdateRestaurant.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (estado == JFileChooser.CANCEL_OPTION) {
-            System.out.println("Cancel was selected");
-            this.flag = false;
-        }
-
-    }//GEN-LAST:event_jbChargeImageActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (flag == false || jtfName.getText().trim().isEmpty() || jtfLocation.getText().trim().isEmpty() || jcbProvince.getSelectedIndex() == 0) {
             jlInformation.setText("Debe ingresar todos los datos.");
         } else {
-//            restaurants.remove(restaurantSearch);
-            restaurantSearch.setName(jtfName.getText());
-            restaurantSearch.setProvince(jcbProvince.getSelectedItem().toString());
-            restaurantSearch.setLocation(jtfLocation.getText());
-//            restaurants.add(restaurantSearch);
-            
+            if (!search(jtfName.getText(), jtfLocation.getText(), jcbProvince.getSelectedItem().toString())) {
 
-            
+                File oldNameFolder = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId());//nombre viejo de la imagen
+                String oldImg = "/" + restaurantSearch.getName() + restaurantSearch.getId() + ".jpg";
+
+                System.out.println("-------------= " + StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId() + "/" + restaurantSearch.getName() + restaurantSearch.getId() + ".jpg");
+// + restaurant.getName() + restaurant.getId() + "/" + restaurant.getName() + restaurant.getId() + ".jpg"
+                restaurantSearch.setName(jtfName.getText());
+                restaurantSearch.setProvince(jcbProvince.getSelectedItem().toString());
+                restaurantSearch.setLocation(jtfLocation.getText());
+                File oldNameImage = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId() + oldImg);//nombre viejo de la imagen4
+                File newNameFolder = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId());
+
+                boolean correctoFold = oldNameFolder.renameTo(newNameFolder);
+
+                if (correctoFold) {
+                    File newNameImage = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId() + "/" + restaurantSearch.getName() + restaurantSearch.getId() + ".jpg");
+                    boolean correcto = oldNameImage.renameTo(newNameImage);
+                    if (correcto) {
+                        jlInformation.setText("Agregado exitosamenteF");
+                    }
+                }
+            } else {
+                jlInformation.setText("Ya existe.");
+            }
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -317,7 +283,6 @@ public class UpdateRestaurant extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JButton jbChargeImage;
     private javax.swing.JComboBox<String> jcbProvince;
     private javax.swing.JLabel jlDriverImage;
     private javax.swing.JLabel jlInformation;
@@ -343,23 +308,13 @@ public class UpdateRestaurant extends javax.swing.JFrame {
 
     }
 
-    private boolean existRestId(int id) {
-        for (Iterator<Restaurant> iterator = restaurants.iterator(); iterator.hasNext();) {
-            Restaurant restaurant = iterator.next();
-            System.out.println(restaurant.getId());
-            int restId = Integer.parseInt(restaurant.getId());
-            if (restId == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private boolean search(String name, String location, String province) {
         for (Iterator<Restaurant> iterator = restaurants.iterator(); iterator.hasNext();) {
             Restaurant restaurant = iterator.next();
-            if (restaurant.getName().equals(name) && restaurant.getProvince().equals(province) && restaurant.getLocation().equals(location)) {
-                return true;
+            if (!restaurant.getId().equals(restaurantSearch.getId())) {
+                if (restaurant.getName().equals(name) && restaurant.getProvince().equals(province) && restaurant.getLocation().equals(location)) {
+                    return true;
+                }
             }
         }
         return false;
