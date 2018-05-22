@@ -13,5 +13,11 @@ public class ImageManage {
         imageIcon = new ImageIcon(image);
         return imageIcon;
     }
+    
+      public ImageIcon resizeImage100(ImageIcon imageIcon) {
+        Image image = imageIcon.getImage().getScaledInstance(WIDTH_JLABEL_IMAGE*2, HEIGTH_JLABEL_IMAGE*2, Image.SCALE_DEFAULT);
+        imageIcon = new ImageIcon(image);
+        return imageIcon;
+    }
 
 }

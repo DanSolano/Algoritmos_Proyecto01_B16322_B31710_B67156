@@ -1,9 +1,10 @@
-id;Name;Province;Location
-1;Fitos;San José;San Pedro
-2;Empanaderia;San José;San Pedro
-3;Fitos;San José;Los Yoses
-5;asfd;Alajuela;asdf
-6;asdf;Puntarenas;asdf
-4;asdf;asdf;Alajuela
-7;MELVIN;Cartago;Se la come
-8;MELVIN;Cartago;Paraiso
+id;Name;Location;Province
+1;Fitos;San Pedro;San José
+2;Empanaderia;San Pedro;San José
+3;Fitos;Los Yoses;San José
+5;asfd;asdf;Alajuela
+6;asdf;asdf;Puntarenas
+4;asdf;Alajuela;Alajuela
+7;MELVIN;Se la come;Cartago
+8;MELVIN;Paraiso;Cartago
+9;EL QUE SEA;Taras;Puntarenas

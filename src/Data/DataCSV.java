@@ -44,7 +44,7 @@ public class DataCSV {
     public DataCSV(String path) {
         this.path = path;
     }
-    
+
     public LinkedList<Client> readClient() {
         ArrayList<Object> list = readCSV();
         LinkedList<Client> users = new LinkedList<Client>();
@@ -53,7 +53,7 @@ public class DataCSV {
         }
         return users;
     }
-    
+
     public Queue<Driver> readDrivers() {
         ArrayList<Object> list = readCSV();
         Queue<Driver> drivers = new LinkedList<Driver>();
@@ -62,7 +62,7 @@ public class DataCSV {
         }
         return drivers;
     }
-    
+
     public ArrayList<User> readAgentAdmin() {
         ArrayList<Object> list = readCSV();
         ArrayList<User> users = new ArrayList<User>();
@@ -71,7 +71,7 @@ public class DataCSV {
         }
         return users;
     }
-    
+
     public ArrayList<Products> readProducts() {
         ArrayList<Object> list = readCSV();
         ArrayList<Products> products = new ArrayList<Products>();
@@ -80,7 +80,7 @@ public class DataCSV {
         }
         return products;
     }
-    
+
     public ArrayList<Order> readOrderDetails() {
         ArrayList<Object> list = readCSV();
         ArrayList<Order> users = new ArrayList<Order>();
@@ -88,9 +88,9 @@ public class DataCSV {
             users.add((Order) object);
         }
         return users;
-        
+
     }
-    
+
     public ArrayList<Restaurant> readRestaurants() {
         ArrayList<Object> list = readCSV();
         ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -98,7 +98,7 @@ public class DataCSV {
             restaurants.add((Restaurant) object);
         }
         return restaurants;
-        
+
     }
 
     // Métodos
@@ -110,55 +110,55 @@ public class DataCSV {
      * @throws IOException
      */
     private ArrayList<Object> readCSV() {
-        
+
         String outputFile = this.path;
-        
+
         try {
-            
+
             ArrayList<Object> objeclArrList = new ArrayList<>();
-            
+
             File alreadyExists = new File(outputFile);
-            
+
             if (alreadyExists.exists()) {
-                
+
                 CsvReader dataImport = new CsvReader(outputFile, ';', Charset.forName("UTF-8"));
                 dataImport.setDelimiter(';');
-                
+
                 dataImport.readHeaders();
-                
+
                 while (dataImport.readRecord()) {
-                    
+
                     if (path.equals(StringPath.PATH_ADMIN) || path.equals(StringPath.PATH_AGENT)) {
-                        
+
                         String name = dataImport.get(0);
                         String userName = dataImport.get(1);
                         String mail = dataImport.get(2);
                         String password = dataImport.get(3);
                         String code = dataImport.get(4);
                         String kindUser = dataImport.get(5);
-                        
+
                         objeclArrList.add(new User(name, userName, mail, password, code, kindUser));
-                        
+
                     } else if (path.equals(StringPath.PATH_RESTAURANT)) {
                         String dni = dataImport.get(0);
                         String name = dataImport.get(1);
                         String location = dataImport.get(2);
                         String province = dataImport.get(3);
                         this.distributeProducts(dni);
-                        
+
                         objeclArrList.add(new Restaurant(dni, name, location, province, this.drinks, this.foods, this.desserts, this.others));
-                        
+
                     } else if (path.equals(StringPath.PATH_PRODUCTS)) {
                         String id = dataImport.get(0);
                         String idRestaurant = dataImport.get(1);
                         String name = dataImport.get(2);
                         String price = dataImport.get(3);
                         String typeProduct = dataImport.get(4);
-                        
+
                         objeclArrList.add(new Products(id, idRestaurant, name, price, typeProduct));
-                        
+
                     } else if (path.equals(StringPath.PATH_CLIENT)) {
-                        
+
                         String id = dataImport.get(0);
                         String name = dataImport.get(1);
                         String lastNameA = dataImport.get(2);
@@ -167,9 +167,9 @@ public class DataCSV {
                         String phoneNumber = dataImport.get(5);
                         String province = dataImport.get(6);
                         String exactAddress = dataImport.get(7);
-                        
+
                         objeclArrList.add(new Client(id, name, lastNameA, lastNameB, mail, phoneNumber, province, exactAddress));
-                        
+
                     } else if (path.equals(StringPath.PATH_DRIVER)) {
 
                         //ID,Nombre,Apellido1,Apellido 2,Edad,tipo,Telefono,Placa vehículo,Cédula
@@ -182,7 +182,7 @@ public class DataCSV {
                         String phoneNumber = dataImport.get(6);
                         String vehiclePlate = dataImport.get(7);
                         String dni = dataImport.get(8);
-                        
+
                         objeclArrList.add(new Driver(id, name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
                     } else if (path.equals(StringPath.PATH_ORDER)) {
 
@@ -193,43 +193,43 @@ public class DataCSV {
                         String productId = dataImport.get(3);
                         String quantity = dataImport.get(4);
                         String totalItems = dataImport.get(5);
-                        
+
                         objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems));
                     }
-                    
+
                 }
-                
+
                 dataImport.close();
-                
+
             }
-            
+
             return objeclArrList;
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataCSV.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(DataCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        
+
     }
-    
+
     public void writeCSV(ArrayList<Object> writeList) {
-        
+
         String outputFile = this.path;
-        
+
         boolean alreadyExists = new File(outputFile).exists();
         if (isDirectory()) {
-            
+
             if (alreadyExists) {
                 File ArchivoEmpleados = new File(outputFile);
                 File directorio = new File(StringPath.PATH_DIR);
                 directorio.mkdir();
                 ArchivoEmpleados.delete();
             }
-            
+
             try {
-                
+
                 CsvWriter csvOutput = new CsvWriter(outputFile, ';', Charset.forName("UTF-8"));
 //                csvOutput.setDelimiter(';');
                 if (outputFile.equals(StringPath.PATH_ADMIN) || outputFile.equals(StringPath.PATH_AGENT)) {
@@ -240,7 +240,7 @@ public class DataCSV {
                     csvOutput.write("Code");
                     csvOutput.write("Kind of User");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         User agent = (User) object;
                         csvOutput.write(agent.getName());
@@ -251,9 +251,9 @@ public class DataCSV {
                         csvOutput.write(agent.getKindUser());
                         csvOutput.endRecord();
                     }
-                    
+
                 } else if (outputFile.equals(StringPath.PATH_CLIENT)) {
-                    
+
                     csvOutput.write("ID");
                     csvOutput.write("Name");
                     csvOutput.write("Last Name A");
@@ -263,7 +263,7 @@ public class DataCSV {
                     csvOutput.write("Province");
                     csvOutput.write("Exact Address");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         Client client = (Client) object;
                         csvOutput.write(client.getId());
@@ -274,12 +274,12 @@ public class DataCSV {
                         csvOutput.write(client.getPhoneNumber());
                         csvOutput.write(client.getProvince());
                         csvOutput.write(client.getExactAddress());
-                        
+
                         csvOutput.endRecord();
                     }
-                    
+
                 } else if (outputFile.equals(StringPath.PATH_DRIVER)) {
-                    
+
                     csvOutput.write("ID");
                     csvOutput.write("Name");
                     csvOutput.write("Last Name A");
@@ -290,7 +290,7 @@ public class DataCSV {
                     csvOutput.write("Vehicle Plate");
                     csvOutput.write("DNI");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         Driver client = (Driver) object;
                         csvOutput.write(client.getId());
@@ -302,10 +302,10 @@ public class DataCSV {
                         csvOutput.write(client.getPhoneNumber());
                         csvOutput.write(client.getVehiclePlate());
                         csvOutput.write(client.getDni());
-                        
+
                         csvOutput.endRecord();
                     }
-                    
+
                 } else if (outputFile.equals(StringPath.PATH_ORDER)) {
                     csvOutput.write("Id Order");
                     csvOutput.write("Id Client");
@@ -314,7 +314,7 @@ public class DataCSV {
                     csvOutput.write("Quantity");
                     csvOutput.write("Total items");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         Order order = (Order) object;
                         csvOutput.write(order.getId());
@@ -325,23 +325,23 @@ public class DataCSV {
                         csvOutput.write(order.getTotal());
                         csvOutput.endRecord();
                     }
-                    
+
                 } else if (outputFile.equals(StringPath.PATH_RESTAURANT)) {
                     csvOutput.write("id");
                     csvOutput.write("Name");
-                    csvOutput.write("Province");
                     csvOutput.write("Location");
+                    csvOutput.write("Province");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         Restaurant agent = (Restaurant) object;
                         csvOutput.write(agent.getId());
                         csvOutput.write(agent.getName());
-                        csvOutput.write(agent.getProvince());
                         csvOutput.write(agent.getLocation());
+                        csvOutput.write(agent.getProvince());
                         csvOutput.endRecord();
                     }
-                    
+
                 } else if (outputFile.equals(StringPath.PATH_PRODUCTS)) {
                     csvOutput.write("Id");
                     csvOutput.write("Id Restaurant");
@@ -349,7 +349,7 @@ public class DataCSV {
                     csvOutput.write("price");
                     csvOutput.write("typeProduct");
                     csvOutput.endRecord();
-                    
+
                     for (Object object : writeList) {
                         Products agent = (Products) object;
                         csvOutput.write(agent.getId());
@@ -359,19 +359,19 @@ public class DataCSV {
                         csvOutput.write(agent.getTypeProduct() + "");
                         csvOutput.endRecord();
                     }
-                    
+
                 }
-                
+
                 csvOutput.close();
-                
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     private void distributeProducts(String dni) {
-        
+
         ArrayList<Products> list = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
         this.drinks = new DoubleLinkedCircularList();//0
         this.foods = new DoubleLinkedCircularList();//1
@@ -390,19 +390,19 @@ public class DataCSV {
             } else if (typeProd == 3 && product.getId().equals(dni)) {
                 this.others.insert(product);
             }
-            
+
         }
-        
+
     }
-    
+
     private boolean isDirectory() {
         File createDir = new File(StringPath.PATH_DIR);
-        
+
         if (createDir.mkdir()) {
             return false;//false porque el directorio ya existe
         }
         return true;//true cuando CREA directorio nuevo
 
     }
-    
+
 }

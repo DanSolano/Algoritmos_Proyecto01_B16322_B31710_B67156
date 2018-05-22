@@ -25,6 +25,13 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public Restaurant(String id, String name, String location, String province) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.province = province;
+    }
+
     public Restaurant(String id, String name, String location, String province, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
         this.id = id;
         this.name = name;
@@ -34,13 +41,6 @@ public class Restaurant {
         this.foods = foods;
         this.desserts = desserts;
         this.others = others;
-    }
-
-    public Restaurant(String id, String name, String location, String province) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-        this.province = province;
     }
 
     public String getId() {
@@ -106,5 +106,6 @@ public class Restaurant {
     public void setOthers(DoubleLinkedCircularList others) {
         this.others = others;
     }
+    
 
 }

@@ -11,6 +11,7 @@ import Domain.Restaurant;
 import Domain.User;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.ImageManage;
 import Utilities.StringMD;
 import Utilities.StringPath;
 import java.awt.Image;
@@ -91,6 +92,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
             }
         });
 
+        jlDriverImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlDriverImage.setText(" ");
         jlDriverImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -242,7 +244,8 @@ public class CreateRestaurant extends javax.swing.JFrame {
                 String ruta = this.archivoelegido.getPath();
                 ImageIcon imagen = new ImageIcon(ruta);
                 this.bi = ImageIO.read(this.archivoelegido);
-
+                ImageManage im = new ImageManage();
+                imagen = im.resizeImage100(imagen);
                 jlDriverImage.setIcon(imagen);
                 this.flag = true;
 
@@ -332,7 +335,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
      * email
      */
     private boolean isDirectory() {
-        File createDir = new File(StringPath.PATH_DRIVER_PHOTO);
+        File createDir = new File(StringPath.PATH_REST_PHOTO);
 
         if (createDir.mkdir()) {
             return false;//false porque el directorio ya existe
@@ -356,7 +359,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
     private boolean existRestaurant(String name, String location, String province) {
         for (Iterator<Restaurant> iterator = restaurants.iterator(); iterator.hasNext();) {
             Restaurant restaurant = iterator.next();
-            if (restaurant.getName().equals(name) && restaurant.getLocation().equals(location) && restaurant.getProvince().equals(province)) {
+            if (restaurant.getName().equals(name) && restaurant.getProvince().equals(province) && restaurant.getLocation().equals(location)) {
                 return true;
             }
         }

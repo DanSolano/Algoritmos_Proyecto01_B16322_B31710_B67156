@@ -11,6 +11,7 @@ import Domain.Restaurant;
 import Domain.User;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.ImageManage;
 import Utilities.StringMD;
 import Utilities.StringPath;
 import java.awt.Image;
@@ -37,9 +38,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class UpdateRestaurant extends javax.swing.JFrame {
 
     ArrayList<Restaurant> restaurants = new ArrayList<>();
+    ImageIcon imagen;
     int idCountRest;
     BufferedImage bi;
     File archivoelegido;
+    Restaurant restaurantSearch;
     private boolean flag;
 
     /**
@@ -75,6 +78,7 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jtfId = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Actualizar Restaurante");
@@ -111,7 +115,7 @@ public class UpdateRestaurant extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Crear");
+        jButton4.setText("Actualizar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -119,6 +123,13 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         });
 
         jLabel3.setText("ID:");
+
+        jButton1.setText("Buscar ID Restaurante");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jlInformation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbChargeImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -133,6 +144,7 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtfId, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -166,9 +178,15 @@ public class UpdateRestaurant extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addGap(96, 96, 96)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButton1)
+                        .addContainerGap(125, Short.MAX_VALUE))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,8 +198,9 @@ public class UpdateRestaurant extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(24, 24, 24)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,10 +265,12 @@ public class UpdateRestaurant extends javax.swing.JFrame {
 
                 jlDriverImage.setVisible(true);
                 String ruta = this.archivoelegido.getPath();
-                ImageIcon imagen = new ImageIcon(ruta);
+                this.imagen = new ImageIcon(ruta);
                 this.bi = ImageIO.read(this.archivoelegido);
 
-                jlDriverImage.setIcon(imagen);
+                ImageManage im = new ImageManage();
+                imagen = im.resizeImage100(this.imagen);
+                jlDriverImage.setIcon(this.imagen);
                 this.flag = true;
 
 //jlDriverImage.setBounds(20, 30, 60, 36);
@@ -267,46 +288,14 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         if (flag == false || jtfName.getText().trim().isEmpty() || jtfLocation.getText().trim().isEmpty() || jcbProvince.getSelectedIndex() == 0) {
             jlInformation.setText("Debe ingresar todos los datos.");
         } else {
-            if (isDirectory()) {
+//            restaurants.remove(restaurantSearch);
+            restaurantSearch.setName(jtfName.getText());
+            restaurantSearch.setProvince(jcbProvince.getSelectedItem().toString());
+            restaurantSearch.setLocation(jtfLocation.getText());
+//            restaurants.add(restaurantSearch);
+            
 
-                String name = jtfName.getText().trim();
-                String location = jtfLocation.getText().trim();
-                String province = jcbProvince.getSelectedItem().toString();
-                if (!search(name, location, province)) {
-                    try {
-
-                        this.idCountRest = 1;
-                        while (existRestId(idCountRest)) {
-                            this.idCountRest++;
-                        }
-                        boolean alreadyExists = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/").exists();
-                        if (!alreadyExists) {
-                            File directorio = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/");
-                            directorio.mkdirs();
-                        }
-                        restaurants.add(new Restaurant(this.idCountRest + "", name, location, province));
-                        jtfName.setText("");
-                        jtfLocation.setText("");
-                        jcbProvince.setSelectedIndex(0);
-                        File outputfile = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/" + archivoelegido.getName());
-                        File outputfile2 = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/" + name + ".jpg");//
-                        if (outputfile2.exists()) {
-                            outputfile2.delete();
-                        }
-                        ImageIO.write(bi, "png", outputfile);
-                        boolean correcto = outputfile.renameTo(outputfile2);
-                        if (correcto) {
-                            jlInformation.setText("Agregado exitosamenteF");
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(UpdateRestaurant.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    jlInformation.setText("El restaurante ya existe.");
-                }
-
-                // jlInformation.setText("NICE. " + idCountRest + jcbProvince.getSelectedItem().toString());
-            }
+            
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -314,8 +303,13 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         back();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        searchRestaurantByID(jtfId.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -340,7 +334,7 @@ public class UpdateRestaurant extends javax.swing.JFrame {
      * email
      */
     private boolean isDirectory() {
-        File createDir = new File(StringPath.PATH_DRIVER_PHOTO);
+        File createDir = new File(StringPath.PATH_REST_PHOTO);
 
         if (createDir.mkdir()) {
             return false;//false porque el directorio ya existe
@@ -364,7 +358,7 @@ public class UpdateRestaurant extends javax.swing.JFrame {
     private boolean search(String name, String location, String province) {
         for (Iterator<Restaurant> iterator = restaurants.iterator(); iterator.hasNext();) {
             Restaurant restaurant = iterator.next();
-            if (restaurant.getName().equals(name) && restaurant.getLocation().equals(location) && restaurant.getProvince().equals(province)) {
+            if (restaurant.getName().equals(name) && restaurant.getProvince().equals(province) && restaurant.getLocation().equals(location)) {
                 return true;
             }
         }
@@ -377,4 +371,29 @@ public class UpdateRestaurant extends javax.swing.JFrame {
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
     }
+
+    private void searchRestaurantByID(String idSearch) {
+        for (Restaurant restaurant : restaurants) {
+            if (restaurant.getId().equals(idSearch)) {
+                this.restaurantSearch = restaurant;
+                this.restaurantSearch.setId(idSearch);
+
+                // jlInformation.setText("NICE. " + idCountRest + jcbProvince.getSelectedItem().toString());z
+                jtfLocation.setText(restaurant.getLocation());
+                jtfName.setText(restaurant.getName());
+                jcbProvince.setSelectedItem(restaurant.getProvince());
+//                System.err.println("---------" + StringPath.PATH_REST_PHOTO + restaurant.getName() + restaurant.getId() + "/" + restaurant.getName() + restaurant.getId() + ".jpg");
+                imagen = new ImageIcon(StringPath.PATH_REST_PHOTO + restaurant.getName() + restaurant.getId() + "/" + restaurant.getName() + restaurant.getId() + ".jpg");
+                ImageManage im = new ImageManage();
+                imagen = im.resizeImage100(imagen);
+                jlDriverImage.setIcon(imagen);
+                flag = true;
+                break;
+            } else {
+                jlInformation.setText("El ID: " + idSearch + " no existe.");
+            }
+
+        }
+    }
+
 }

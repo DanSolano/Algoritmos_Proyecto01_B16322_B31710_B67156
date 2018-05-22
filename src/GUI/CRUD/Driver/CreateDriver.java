@@ -9,6 +9,7 @@ import Domain.Driver;
 import Domain.User;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.ImageManage;
 import Utilities.StringMD;
 import Utilities.StringPath;
 import java.awt.Image;
@@ -369,7 +370,8 @@ public class CreateDriver extends javax.swing.JFrame {
                 String ruta = this.archivoelegido.getPath();
                 ImageIcon imagen = new ImageIcon(ruta);
                 this.bi = ImageIO.read(this.archivoelegido);
-
+                ImageManage im = new ImageManage();
+                imagen = im.resizeImage100(imagen);
                 jlDriverImage.setIcon(imagen);
                 this.flag = true;
 
