@@ -73,20 +73,23 @@ public class DoubleLinkedCircularList implements List {
     }
 
     @Override
-    public void insert(Object element) {
+   public void insert(Object element)  {
+        
+        Node node = new Node(element);
+
         if (start == null) {
-            start = end = new Node(element);
+            start = node;
+            start.next = start;
+            start.previoius = start;
         } else {
-            Node auxNode = start;
-            while (auxNode != end) {
-                auxNode = auxNode.next;
-            } // se sale del while cuando aux es igual a fin
-            Node nuevoNodo = new Node(element);
-            auxNode.next = nuevoNodo;
-            // fin apunta a nuevo nodo
-            end = nuevoNodo;
-            // se hace el enlace circular
-            end.next = start;
+            Node aux = start;
+            while (aux.next != start) {
+                aux = aux.next;
+            }
+            aux.next = node;
+            node.next = start;
+            node.previoius = aux;
+            start.previoius = node;
         }
     }
 
@@ -176,8 +179,8 @@ public class DoubleLinkedCircularList implements List {
         }
     }
 
-    @Override
-    public Object getNode(int position) throws ListException {
+    //@Override
+    public Object getElement(int position) throws ListException {
         int counter = 0;
 
         if (isEmpty()) {
@@ -197,6 +200,28 @@ public class DoubleLinkedCircularList implements List {
             return end.element;
         }
         return auxNode.element;
+    }
+       @Override
+    public Node getNode(int position) throws ListException {
+        int counter = 0;
+
+        if (isEmpty()) {
+            throw new ListException("Esta vacia");
+        }
+        Node auxNode = start;
+        while (auxNode != end && counter != position) {
+            auxNode = auxNode.next;
+            counter++;
+        }
+        if (counter == position) {
+            return auxNode;
+        }
+        //que pasa si llega al utimo nodo o al nodo apuntado por fin
+        if (auxNode == end && counter + 1 == position)// es el ultimo nodo
+        {
+            return end;
+        }
+        return auxNode;
     }
 
 }

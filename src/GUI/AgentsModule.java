@@ -6,12 +6,16 @@
 package GUI;
 
 import ADT.LinkedList.DoubleLinkedCircularList;
+import ADT.Node;
+import ADT.Stack.LinkedStack;
 import Data.AnyToArrayList;
 import Data.SaveAll;
+import Domain.Order;
 import Domain.Products;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.ListException;
+import Exceptions.StackException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.ImageManage;
 import Utilities.StringPath;
@@ -23,6 +27,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,12 +44,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private String minutes;
     private String seconds;
     private String ampm;
+    private String selectionString;
     private Thread thread;
-    private int position0 = 0;
-    private int position1 = 1;
-    private int position2 = 2;
-    private int position3 = 3;
-    private int position4 = 4;
+    private Order order;
     private ImageManage resize = new ImageManage();
     private Products productsShow = new Products();
     private Products products0 = new Products();
@@ -53,19 +55,24 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private Products products3 = new Products();
     private Products products4 = new Products();
     private Products products5 = new Products();
+    private DefaultTableModel tableModel;
+    private LinkedStack stackOrder = new LinkedStack();
+    Node newNode;
 
     /**
      * Creates new form AgentsModule
      */
-    public AgentsModule()  {
+    public AgentsModule() {
         initComponents();
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         this.drinks = new DoubleLinkedCircularList();
         loadImage();
+
         try {
-            addJlabel(position0, position1, position2, position3, position4);
+            newNode = drinksProducts.getNode(0);
+            addJlabel(newNode);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,7 +148,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabelDrinks1 = new javax.swing.JLabel();
         jLabelDrinks2 = new javax.swing.JLabel();
         jLabelDrinks3 = new javax.swing.JLabel();
-        jLabelFoods0 = new javax.swing.JLabel();
+        jLabelDrinks4 = new javax.swing.JLabel();
         jLabelDrinks0 = new javax.swing.JLabel();
         jLDrink0 = new javax.swing.JLabel();
         jLabelFoods1 = new javax.swing.JLabel();
@@ -160,6 +167,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLVarios2 = new javax.swing.JLabel();
         jLVarios3 = new javax.swing.JLabel();
         jLVarios4 = new javax.swing.JLabel();
+        jbAumentar = new javax.swing.JButton();
+        jbDisminuir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -267,15 +276,17 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Restaurante", "Producto", "Monto", "Adicional"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton9.setText("<=");
@@ -398,10 +409,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLabelFoods0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jLabelFoods0.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelDrinks4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLabelDrinks4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabelFoods0MouseReleased(evt);
+                jLabelDrinks4MouseReleased(evt);
             }
         });
 
@@ -445,6 +456,20 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLVarios3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLVarios4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jbAumentar.setText("Aumentar");
+        jbAumentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAumentarActionPerformed(evt);
+            }
+        });
+
+        jbDisminuir.setText("Disminuir");
+        jbDisminuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDisminuirActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -500,7 +525,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLabelDrinks1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabelFoods0, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabelDrinks4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks0, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLDrink0, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelFoods1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -519,6 +544,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLVarios2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLVarios3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLVarios4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbAumentar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbDisminuir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -555,7 +582,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLabelFoods0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(jLDrink0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,25 +704,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jButton9)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton10))
                                     .addComponent(jLabel25)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGap(244, 244, 244)
@@ -713,12 +721,33 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addComponent(jLabel22)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jlHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                        .addGap(0, 63, Short.MAX_VALUE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                                                .addComponent(jlHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                                .addGap(11, 11, 11)
+                                                .addComponent(jButton9)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton10)
+                                            .addComponent(jbAumentar)
+                                            .addComponent(jbDisminuir))))))
+                        .addGap(0, 58, Short.MAX_VALUE))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,8 +785,15 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel22)
                                     .addComponent(jlHour, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(jbAumentar)
+                                .addGap(60, 60, 60)
+                                .addComponent(jbDisminuir)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -819,8 +855,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelFoods0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))
+                                            .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -904,77 +940,208 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        position0 = position1;
-        position1 = position2;
-        position2 = position3;
-        position3 = position4;
-        position4++;
         try {
-            if (position4 == drinksProducts.getSize()) {
-                position4 = 0;
-            }
-        } catch (ListException ex) {
-            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            addJlabel(position0, position1, position2, position3, position4);
+            newNode = newNode.next;
+            addJlabel(newNode);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        position4 = position3;
-        position3 = position2;
-        position2 = position1;
-        position1 = position0;
-        position0--;
-        if (position0 < 0) {
-            try {
-                position0 = drinksProducts.getSize() - 1;
-            } catch (ListException ex) {
-                Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
         try {
-            addJlabel(position0, position1, position2, position3, position4);
+            newNode = newNode.previoius;
+            addJlabel(newNode);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
-        System.out.println(products0.getName());
-        productsShow = products0;
-        showTable();
+         productsShow = products0;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jLabelDrinks0MouseReleased
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
-        System.out.println(products1.getName());
-        productsShow = products1;
-        showTable();
+          productsShow = products1;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabelDrinks1MouseReleased
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
-        System.out.println(products2.getName());
-        productsShow = products2;
-        showTable();
+          productsShow = products2;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabelDrinks2MouseReleased
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
-        System.out.println(products3.getName());
         productsShow = products3;
-        showTable();
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabelDrinks3MouseReleased
 
-    private void jLabelFoods0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFoods0MouseReleased
-        System.out.println(products4.getName());
+    private void jLabelDrinks4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks4MouseReleased
         productsShow = products4;
-        showTable();
-    }//GEN-LAST:event_jLabelFoods0MouseReleased
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabelDrinks4MouseReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         //eventos de tabla
+        int selection = jTable1.rowAtPoint(evt.getPoint());
+        selectionString = "" + jTable1.getValueAt(selection, 1);
+        if (selectionString != "") {
+            jbAumentar.setEnabled(true);
+            jbDisminuir.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jbAumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAumentarActionPerformed
+        // TODO add your handling code here:
+         Order ordertemp;
+        try {
+            ordertemp = orderExist(selectionString);
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            }
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbAumentarActionPerformed
+
+    private void jbDisminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDisminuirActionPerformed
+  
+        //diminuye la cantidad de productos
+        Order ordertemp;
+        try {
+            ordertemp = orderExist(selectionString);
+            if (ordertemp != null) {
+                int cantidad = Integer.parseInt(ordertemp.getQuantity()) - 1;
+                if (cantidad >= 1) {
+                    ordertemp.setQuantity("" + cantidad);
+                    int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                    ordertemp.setTotal("" + totalPrice);
+                } else {
+                    deleteOrder(selectionString);
+                }
+
+            }
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbDisminuirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1028,7 +1195,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabelDrinks1;
     private javax.swing.JLabel jLabelDrinks2;
     private javax.swing.JLabel jLabelDrinks3;
-    private javax.swing.JLabel jLabelFoods0;
+    private javax.swing.JLabel jLabelDrinks4;
     private javax.swing.JLabel jLabelFoods1;
     private javax.swing.JLabel jLabelFoods2;
     private javax.swing.JLabel jLabelFoods3;
@@ -1052,6 +1219,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton jbAumentar;
+    private javax.swing.JButton jbDisminuir;
     private javax.swing.JLabel jlDate;
     private javax.swing.JLabel jlHour;
     // End of variables declaration//GEN-END:variables
@@ -1101,72 +1270,116 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         products0.setName("Hamburquesa");
         products0.setPrice(1000 + "");
         products0.setTypeProduct(0 + "");
-        products0.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida0.jpg")));
+        products0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
         drinksProducts.insert(products0);
 
         products1.setId("sin DNI 1");
         products1.setName("Papas Fritas");
         products1.setPrice(900 + "");
         products1.setTypeProduct(1 + "");
-        products1.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida1.jpg")));
+        products1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
         drinksProducts.insert(products1);
 
         products2.setId("sin DNI 1");
         products2.setName("Pizza");
         products2.setPrice(1200 + "");
         products2.setTypeProduct(2 + "");
-        products2.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida2.jpg")));
+        products2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
         drinksProducts.insert(products2);
 
         products3.setId("sin DNI 1");
         products3.setName("Pollo");
         products3.setPrice(900 + "");
         products3.setTypeProduct(3 + "");
-        products3.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida3.jpg")));
+        products3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
         drinksProducts.insert(products3);
 
         products4.setId("sin DNI 1");
         products4.setName("Pure");
         products4.setPrice(900 + "");
         products4.setTypeProduct(4 + "");
-        products4.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida4.jpg")));
+        products4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
         drinksProducts.insert(products4);
 
         products5.setId("sin DNI 1");
         products5.setName("Sandwich");
         products5.setPrice(900 + "");
         products5.setTypeProduct(1 + "");
-        products5.setImageIcon(new ImageIcon(getClass().getResource("/data/Restaurant/asdf/FoodImagesA/comida5.jpg")));
+        products5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida5.jpg")));
         drinksProducts.insert(products5);
     }
 
-    private void addJlabel(int position0, int position1, int position2, int position3, int position4) throws ListException {
-        DoubleLinkedCircularList drinkTemp = drinksProducts;
-        products0 = (Products) drinkTemp.getNode(position0);
+    private void addJlabel(Node newNode) throws ListException {
+        products0 = (Products) newNode.element;
+        products1 = (Products) newNode.next.element;
+        products2 = (Products) newNode.next.next.element;
+        products3 = (Products) newNode.next.next.next.element;
+        products4 = (Products) newNode.next.next.next.next.element;
+        products5 = (Products) newNode.next.next.next.next.next.element;
+
         jLabelDrinks0.setIcon(resize.resizeImage(products0.getImageIcon()));
-        products1 = (Products) drinkTemp.getNode(position1);
         jLabelDrinks1.setIcon(resize.resizeImage(products1.getImageIcon()));
-        products2 = (Products) drinkTemp.getNode(position2);
         jLabelDrinks2.setIcon(resize.resizeImage(products2.getImageIcon()));
-        products3 = (Products) drinkTemp.getNode(position3);
         jLabelDrinks3.setIcon(resize.resizeImage(products3.getImageIcon()));
-        products4 = (Products) drinkTemp.getNode(position4);
-        jLabelFoods0.setIcon(resize.resizeImage(products4.getImageIcon()));
+        jLabelDrinks4.setIcon(resize.resizeImage(products4.getImageIcon()));
     }
 
-    private void showTable() {
-        Object matrxTable[][] = new Object[2][4];
-
-        for (int i = 0; i < matrxTable.length; i++) {
-            matrxTable[i][0] = "Restaurante #";
-            matrxTable[i][1] = productsShow.getName();
-            matrxTable[i][2] = "";
-            matrxTable[i][3] = "";
+  /*Recordar que de moemento se esta utilizando una lista enlazada para pruebas de musytras de ordenes, pero se debe usar una pila
+    por eso el nombre de la variable 
+     */
+    private void showTable() throws StackException {
+        this.tableModel = new DefaultTableModel();
+        this.tableModel.addColumn("Restaurante");
+        this.tableModel.addColumn("Producto");
+        this.tableModel.addColumn("Monto");
+        this.tableModel.addColumn("Cantidad");
+        this.jTable1.setModel(tableModel);
+        LinkedStack orderTempStack = new LinkedStack();
+        //Muestra la pila en el table model creando una pila temporal para el intercambio de datos
+        while (!stackOrder.isEmpty()) {
+            Order orderTemp = new Order();
+            orderTemp = (Order) stackOrder.pop();
+            tableModel.addRow(new Object[]{orderTemp.getRestaurantId(), orderTemp.getProductoId(),
+                orderTemp.getTotal(), orderTemp.getQuantity()});
+            orderTempStack.push(orderTemp);
         }
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                matrxTable,
-                new String[]{
-                    "Restaurante", "Producto", "Monto", "Adicinal"
-                }));
+        //Reordenamiento de la pila temporar a la Principal
+        while (!orderTempStack.isEmpty()) {
+            stackOrder.push(orderTempStack.pop());
+        }
+    }
+    
+    
+    private Order orderExist(String order) throws StackException {
+        Order exist = null;
+        LinkedStack stackTemp = new LinkedStack();
+        Order orderTemp = new Order();
+        while (!stackOrder.isEmpty()) {
+
+            orderTemp = (Order) stackOrder.pop();
+            if (order.equals(orderTemp.getProductoId())) {
+                exist = orderTemp;
+            }
+            stackTemp.push(orderTemp);
+        }
+        //Reordenamiento de la pila temporar a la Principal
+        while (!stackTemp.isEmpty()) {
+            stackOrder.push(stackTemp.pop());
+        }
+        return exist;
+    }
+
+    private void deleteOrder(String order) throws StackException {
+        LinkedStack stackTemp = new LinkedStack();
+        while (!stackOrder.isEmpty()) {
+            Order orderTemp = new Order();
+            orderTemp = (Order) stackOrder.pop();
+            if (!order.equals(orderTemp.getProductoId())) {
+                stackTemp.push(orderTemp);
+            }
+        }
+        while (!stackTemp.isEmpty()) {
+            stackOrder.push(stackTemp.pop());
+        }
     }
 }
