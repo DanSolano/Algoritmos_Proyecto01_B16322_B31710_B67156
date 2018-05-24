@@ -41,6 +41,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private DoubleLinkedCircularList drinksProductsList;
     private DoubleLinkedCircularList foodsProductsList;//foods desserts others
     private DoubleLinkedCircularList dessertsProductsList;
+    private DoubleLinkedCircularList variousProductsList;
     private String hour;
     private String minutes;
     private String seconds;
@@ -68,11 +69,18 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private Products productsDesserts3 = new Products();
     private Products productsDesserts4 = new Products();
     private Products productsDesserts5 = new Products();
+    private Products productsVarious0 = new Products();
+    private Products productsVarious1 = new Products();
+    private Products productsVarious2 = new Products();
+    private Products productsVarious3 = new Products();
+    private Products productsVarious4 = new Products();
+    private Products productsVarious5 = new Products();
     private DefaultTableModel tableModel;
     private LinkedStack stackOrder = new LinkedStack();
     Node newNodeDrink;
     Node newNodeFood;
     Node newNodeDessert;
+    Node newNodeVarious;
 
     /**
      * Creates new form AgentsModule
@@ -88,9 +96,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             newNodeDrink = drinksProductsList.getNode(0);
             newNodeFood = foodsProductsList.getNode(0);
             newNodeDessert = dessertsProductsList.getNode(0);
+            newNodeVarious = variousProductsList.getNode(0);
             addLabelDrinks(newNodeDrink);
             addLabelFood(newNodeFood);
             addLabelDesserts(newNodeDessert);
+            addLabelVarious(newNodeVarious);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -154,14 +164,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jTable1 = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        jPanel29 = new javax.swing.JPanel();
-        jPanel30 = new javax.swing.JPanel();
-        jPanel31 = new javax.swing.JPanel();
-        jPanel32 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
-        jPanel34 = new javax.swing.JPanel();
-        jPanel35 = new javax.swing.JPanel();
-        jPanel36 = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jLabelDrinks1 = new javax.swing.JLabel();
         jLabelDrinks2 = new javax.swing.JLabel();
@@ -187,6 +190,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLVarious0 = new javax.swing.JLabel();
         jbAumentar = new javax.swing.JButton();
         jbDisminuir = new javax.swing.JButton();
+        jLDriver0 = new javax.swing.JLabel();
+        jLDriver1 = new javax.swing.JLabel();
+        jLDriver2 = new javax.swing.JLabel();
+        jLDriver3 = new javax.swing.JLabel();
+        jLDriver4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -341,98 +349,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jLabel25.setText("Conductores:");
 
-        jPanel29.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel31.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-        jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel32.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
         jButton10.setText("=>");
-
-        jPanel34.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
-        jPanel34.setLayout(jPanel34Layout);
-        jPanel34Layout.setHorizontalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-        jPanel34Layout.setVerticalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel35.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
-        jPanel35.setLayout(jPanel35Layout);
-        jPanel35Layout.setHorizontalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 47, Short.MAX_VALUE)
-        );
-        jPanel35Layout.setVerticalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        jPanel36.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
 
         jButton11.setText("Confirmar");
 
@@ -596,6 +513,41 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jLDriver0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDriver0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDriver0MouseReleased(evt);
+            }
+        });
+
+        jLDriver1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDriver1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDriver1MouseReleased(evt);
+            }
+        });
+
+        jLDriver2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDriver2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDriver2MouseReleased(evt);
+            }
+        });
+
+        jLDriver3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDriver3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDriver3MouseReleased(evt);
+            }
+        });
+
+        jLDriver4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDriver4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDriver4MouseReleased(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -638,14 +590,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel25, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel29, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel30, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel31, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel32, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel34, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel35, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel36, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -671,6 +616,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLVarious0, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbAumentar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbDisminuir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDriver0, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDriver1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDriver2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDriver3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDriver4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -690,7 +640,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                                 .addComponent(jLDessert)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGap(0, 90, Short.MAX_VALUE)
                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(jButton5)
                                                     .addComponent(jButton3)
@@ -760,9 +710,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                                         .addGap(0, 0, Short.MAX_VALUE)
                                                         .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
+                                                        .addGap(26, 26, 26)
                                                         .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jButton8))))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,7 +756,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 73, Short.MAX_VALUE)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -831,9 +781,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel25)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(244, 244, 244)
-                                        .addComponent(jButton11))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -848,31 +795,31 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jlHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGap(33, 33, 33)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addComponent(jButton9)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jLDriver0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLDriver1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLDriver2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLDriver3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLDriver4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButton10)))
                                         .addGap(18, 18, 18)
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton10)
                                             .addComponent(jbAumentar)
-                                            .addComponent(jbDisminuir))))))
-                        .addGap(0, 58, Short.MAX_VALUE))))
+                                            .addComponent(jbDisminuir)))))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(224, 224, 224)
+                                .addComponent(jButton11)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,20 +867,28 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGap(60, 60, 60)
                                 .addComponent(jbDisminuir)))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11))
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(67, 67, 67)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLDriver0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLDriver2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLDriver4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(2, 2, 2))))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLDriver1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLDriver3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2)))
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton11)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel13)
@@ -974,16 +929,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                         .addComponent(jLabel9))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1006,34 +961,33 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGap(3, 3, 3))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLDessert)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(3, 3, 3)))
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(8, 8, 8)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addGap(2, 2, 2)))))
+                                                .addComponent(jLDessert)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(3, 3, 3)))
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
 
@@ -1560,25 +1514,17 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            newNodeDrink = newNodeDrink.next;
-            addLabelDrinks(newNodeDrink);
-        } catch (ListException ex) {
-            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        newNodeVarious = newNodeVarious.next;
+        addLabelVarious(newNodeVarious);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        try {
-            newNodeDrink = newNodeDrink.previoius;
-            addLabelDrinks(newNodeDrink);
-        } catch (ListException ex) {
-            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        newNodeVarious = newNodeVarious.previoius;
+        addLabelVarious(newNodeVarious);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jLVarious0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious0MouseReleased
-        productsShow = productsDrink1;
+        productsShow = productsVarious0;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1605,7 +1551,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLVarious0MouseReleased
 
     private void jLVarious1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious1MouseReleased
-        productsShow = productsDrink2;
+        productsShow = productsVarious1;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1632,7 +1578,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLVarious1MouseReleased
 
     private void jLVarious2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious2MouseReleased
-        productsShow = productsDrink2;
+        productsShow = productsVarious2;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1659,7 +1605,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLVarious2MouseReleased
 
     private void jLVarious3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious3MouseReleased
-        productsShow = productsDrink3;
+        productsShow = productsVarious3;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1686,7 +1632,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLVarious3MouseReleased
 
     private void jLVarious4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious4MouseReleased
-        productsShow = productsDrink4;
+        productsShow = productsVarious4;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1712,6 +1658,26 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jLVarious4MouseReleased
 
+    private void jLDriver0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDriver0MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLDriver0MouseReleased
+
+    private void jLDriver1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDriver1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLDriver1MouseReleased
+
+    private void jLDriver2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDriver2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLDriver2MouseReleased
+
+    private void jLDriver3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDriver3MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLDriver3MouseReleased
+
+    private void jLDriver4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDriver4MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLDriver4MouseReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1734,6 +1700,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLDesserts2;
     private javax.swing.JLabel jLDesserts3;
     private javax.swing.JLabel jLDesserts4;
+    private javax.swing.JLabel jLDriver0;
+    private javax.swing.JLabel jLDriver1;
+    private javax.swing.JLabel jLDriver2;
+    private javax.swing.JLabel jLDriver3;
+    private javax.swing.JLabel jLDriver4;
     private javax.swing.JLabel jLFood0;
     private javax.swing.JLabel jLFood1;
     private javax.swing.JLabel jLFood2;
@@ -1770,13 +1741,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabelDrinks3;
     private javax.swing.JLabel jLabelDrinks4;
     private javax.swing.JLabel jLabelProvincia;
-    private javax.swing.JPanel jPanel29;
-    private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel34;
-    private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1837,6 +1801,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         drinksProductsList = new DoubleLinkedCircularList();
         foodsProductsList = new DoubleLinkedCircularList();
         dessertsProductsList = new DoubleLinkedCircularList();
+        variousProductsList = new DoubleLinkedCircularList();
 
         productsDrink0.setId("sin DNI");
         productsDrink0.setName("Zarza");
@@ -1964,6 +1929,49 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsDesserts5.setTypeProduct(1 + "");
         productsDesserts5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre5.jpg")));
         dessertsProductsList.insert(productsDesserts5);
+
+        ////////////////////////////////////////////////////varios/////////////////////////////////////////
+        productsVarious0.setId("sin DNI");
+        productsVarious0.setName("Postre de Fresa");
+        productsVarious0.setPrice(1000 + "");
+        productsVarious0.setTypeProduct(0 + "");
+        productsVarious0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre0.jpg")));
+        variousProductsList.insert(productsVarious0);
+
+        productsVarious1.setId("sin DNI 1");
+        productsVarious1.setName("Chocolate");
+        productsVarious1.setPrice(900 + "");
+        productsVarious1.setTypeProduct(1 + "");
+        productsVarious1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre1.jpg")));
+        variousProductsList.insert(productsVarious1);
+
+        productsVarious2.setId("sin DNI 1");
+        productsVarious2.setName("Muffin");
+        productsVarious2.setPrice(1200 + "");
+        productsVarious2.setTypeProduct(2 + "");
+        productsVarious2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre2.jpg")));
+        variousProductsList.insert(productsVarious2);
+
+        productsVarious3.setId("sin DNI 1");
+        productsVarious3.setName("Flan");
+        productsVarious3.setPrice(900 + "");
+        productsVarious3.setTypeProduct(3 + "");
+        productsVarious3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre3.jpg")));
+        variousProductsList.insert(productsVarious3);
+
+        productsVarious4.setId("sin DNI 1");
+        productsDesserts4.setName("Arroz con leche");
+        productsDesserts4.setPrice(900 + "");
+        productsDesserts4.setTypeProduct(4 + "");
+        productsDesserts4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre4.jpg")));
+        variousProductsList.insert(productsDesserts4);
+
+        productsVarious5.setId("sin DNI 1");
+        productsVarious5.setName("Helado");
+        productsVarious5.setPrice(900 + "");
+        productsVarious5.setTypeProduct(1 + "");
+        productsVarious5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre5.jpg")));
+        variousProductsList.insert(productsVarious5);
     }
 
     private void addLabelDrinks(Node newNode) throws ListException {
@@ -1980,11 +1988,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabelDrinks3.setIcon(resize.resizeImage(productsDrink3.getImageIcon()));
         jLabelDrinks4.setIcon(resize.resizeImage(productsDrink4.getImageIcon()));
 
-        jLVarious0.setIcon(resize.resizeImage(productsDrink0.getImageIcon()));
-        jLVarious1.setIcon(resize.resizeImage(productsDrink1.getImageIcon()));
-        jLVarious2.setIcon(resize.resizeImage(productsDrink2.getImageIcon()));
-        jLVarious3.setIcon(resize.resizeImage(productsDrink3.getImageIcon()));
-        jLVarious4.setIcon(resize.resizeImage(productsDrink4.getImageIcon()));
     }
 
     private void addLabelFood(Node newNodeFood) {
@@ -2015,6 +2018,21 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLDesserts2.setIcon(resize.resizeImage(productsDesserts2.getImageIcon()));
         jLDesserts3.setIcon(resize.resizeImage(productsDesserts3.getImageIcon()));
         jLDesserts4.setIcon(resize.resizeImage(productsDesserts4.getImageIcon()));
+    }
+
+    private void addLabelVarious(Node newNodeVarious) {
+        productsVarious0 = (Products) newNodeVarious.element;
+        productsVarious1 = (Products) newNodeVarious.next.element;
+        productsVarious2 = (Products) newNodeVarious.next.next.element;
+        productsVarious3 = (Products) newNodeVarious.next.next.next.element;
+        productsVarious4 = (Products) newNodeVarious.next.next.next.next.element;
+        productsVarious5 = (Products) newNodeVarious.next.next.next.next.next.element;
+
+        jLVarious0.setIcon(resize.resizeImage(productsVarious0.getImageIcon()));
+        jLVarious1.setIcon(resize.resizeImage(productsVarious1.getImageIcon()));
+        jLVarious2.setIcon(resize.resizeImage(productsVarious2.getImageIcon()));
+        jLVarious3.setIcon(resize.resizeImage(productsVarious3.getImageIcon()));
+        jLVarious4.setIcon(resize.resizeImage(productsVarious4.getImageIcon()));
     }
 
     /*Recordar que de moemento se esta utilizando una lista enlazada para pruebas de musytras de ordenes, pero se debe usar una pila
