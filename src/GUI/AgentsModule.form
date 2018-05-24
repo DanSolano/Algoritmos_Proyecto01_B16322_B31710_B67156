@@ -282,23 +282,32 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jScrollPane1" min="-2" pref="450" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                                       <Component id="jLDriver0" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jLDriver1" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jLDriver2" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="jLDriver3" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jLDriver4" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                              <Component id="jLDriver1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                              <Component id="jLDriver2" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <EmptySpace max="32767" attributes="0"/>
+                                                              <Component id="jLDriver3" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                              <Component id="jLDriver4" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                              <Component id="jBMoveDrivers" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                                              <Component id="jLDriverSelect" min="-2" pref="123" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                                                      <Component id="jScrollPane1" min="-2" pref="450" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -386,10 +395,7 @@
                                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jButton10" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                                                  <Component id="jButton9" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jBMoveDrivers" min="-2" pref="48" max="-2" attributes="0"/>
                                               <Component id="jLDriver0" min="-2" pref="50" max="-2" attributes="0"/>
                                               <Component id="jLDriver2" min="-2" pref="50" max="-2" attributes="0"/>
                                           </Group>
@@ -407,7 +413,9 @@
                                       <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jLDriverSelect" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               <Component id="jButton11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -879,20 +887,18 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;="/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conductores:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="jBMoveDrivers">
               <Properties>
                 <Property name="text" type="java.lang.String" value="=&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBMoveDriversActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton11">
               <Properties>
@@ -1226,6 +1232,11 @@
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDriver4MouseReleased"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLDriverSelect">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Conductor"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
