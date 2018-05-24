@@ -71,7 +71,7 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLDessert" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace pref="433" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="1" attributes="0">
@@ -97,21 +97,21 @@
                                                           </Group>
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Component id="jLDrink0" min="-2" pref="50" max="-2" attributes="0"/>
-                                                                  <Component id="jLDesserts6" min="-2" pref="50" max="-2" attributes="0"/>
-                                                                  <Component id="jLVarios4" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                  <Component id="jLFood0" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                  <Component id="jLDessert0" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                  <Component id="jLVarious0" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                                               </Group>
                                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" attributes="0">
                                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                                           <Group type="102" attributes="0">
-                                                                              <Component id="jLabelFoods1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                              <Component id="jLFood1" min="-2" pref="50" max="-2" attributes="0"/>
                                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                                              <Component id="jLabelFoods2" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                              <Component id="jLFood2" min="-2" pref="50" max="-2" attributes="0"/>
                                                                           </Group>
                                                                           <Group type="102" attributes="0">
-                                                                              <Component id="jLDesserts1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                              <Component id="jLDessert1" min="-2" pref="50" max="-2" attributes="0"/>
                                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                                                               <Component id="jLDesserts2" min="-2" pref="50" max="-2" attributes="0"/>
                                                                           </Group>
@@ -119,9 +119,9 @@
                                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                                           <Group type="102" attributes="0">
-                                                                              <Component id="jLabelFoods3" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                              <Component id="jLFood3" min="-2" pref="50" max="-2" attributes="0"/>
                                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                                              <Component id="jLabelFoods4" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                              <Component id="jLFood4" min="-2" pref="50" max="-2" attributes="0"/>
                                                                           </Group>
                                                                           <Group type="102" alignment="1" attributes="0">
                                                                               <Component id="jLDesserts3" min="-2" pref="50" max="-2" attributes="0"/>
@@ -131,9 +131,9 @@
                                                                       </Group>
                                                                   </Group>
                                                                   <Group type="102" attributes="0">
-                                                                      <Component id="jLVarios0" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                      <Component id="jLVarious1" min="-2" pref="50" max="-2" attributes="0"/>
                                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                                      <Component id="jLVarios1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                                      <Component id="jLVarious2" min="-2" pref="50" max="-2" attributes="0"/>
                                                                   </Group>
                                                               </Group>
                                                           </Group>
@@ -159,14 +159,14 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" attributes="0">
-                                                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="jLVarios" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                           </Group>
                                                           <Group type="102" alignment="1" attributes="0">
                                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                              <Component id="jLVarios2" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <Component id="jLVarious3" min="-2" pref="50" max="-2" attributes="0"/>
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="jLVarios3" min="-2" pref="50" max="-2" attributes="0"/>
+                                                              <Component id="jLVarious4" min="-2" pref="50" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -472,38 +472,38 @@
                                       <Component id="jButton3" min="-2" pref="48" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jButton4" min="-2" pref="48" max="-2" attributes="0"/>
-                                  <Component id="jLDrink0" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabelFoods1" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabelFoods2" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabelFoods3" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabelFoods4" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jLFood0" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jLFood1" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jLFood2" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jLFood3" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jLFood4" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLVarios" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton7" min="-2" pref="48" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLVarios3" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="jLVarious4" min="-2" pref="50" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="jButton6" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Group type="103" groupAlignment="1" attributes="0">
                                                           <Group type="102" attributes="0">
-                                                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="jLDessert" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
                                                               <Component id="jButton5" min="-2" pref="48" max="-2" attributes="0"/>
                                                           </Group>
-                                                          <Component id="jLDesserts1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLDessert1" min="-2" pref="50" max="-2" attributes="0"/>
                                                           <Component id="jLDesserts2" min="-2" pref="50" max="-2" attributes="0"/>
                                                           <Component id="jLDesserts3" min="-2" pref="50" max="-2" attributes="0"/>
                                                           <Component id="jLDesserts4" min="-2" pref="50" max="-2" attributes="0"/>
-                                                          <Component id="jLDesserts6" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLDessert0" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                                   </Group>
@@ -516,10 +516,10 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="1" attributes="0">
-                                                          <Component id="jLVarios0" min="-2" pref="50" max="-2" attributes="0"/>
-                                                          <Component id="jLVarios1" min="-2" pref="50" max="-2" attributes="0"/>
-                                                          <Component id="jLVarios2" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                                                          <Component id="jLVarios4" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLVarious1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLVarious2" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLVarious3" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                                          <Component id="jLVarious0" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -672,11 +672,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;="/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="=&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -687,13 +693,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;="/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="=&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel11">
+            <Component class="javax.swing.JLabel" name="jLDessert">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Postres"/>
               </Properties>
@@ -702,13 +714,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;="/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="=&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel12">
+            <Component class="javax.swing.JLabel" name="jLVarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Varios"/>
               </Properties>
@@ -1085,7 +1103,7 @@
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelDrinks0MouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLDrink0">
+            <Component class="javax.swing.JLabel" name="jLFood0">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1093,8 +1111,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLFood0MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelFoods1">
+            <Component class="javax.swing.JLabel" name="jLFood1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1102,8 +1123,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLFood1MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelFoods2">
+            <Component class="javax.swing.JLabel" name="jLFood2">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1111,8 +1135,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLFood2MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelFoods3">
+            <Component class="javax.swing.JLabel" name="jLFood3">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1120,8 +1147,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLFood3MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelFoods4">
+            <Component class="javax.swing.JLabel" name="jLFood4">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1129,8 +1159,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLFood4MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLDesserts1">
+            <Component class="javax.swing.JLabel" name="jLDessert1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1138,6 +1171,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDessert1MouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLDesserts2">
               <Properties>
@@ -1147,8 +1183,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDesserts2MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLVarios0">
+            <Component class="javax.swing.JLabel" name="jLVarious1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1156,6 +1195,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLVarious1MouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLDesserts4">
               <Properties>
@@ -1165,6 +1207,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDesserts4MouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLDesserts3">
               <Properties>
@@ -1174,6 +1219,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDesserts3MouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -1185,7 +1233,7 @@
                 <Property name="text" type="java.lang.String" value=" "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLDesserts6">
+            <Component class="javax.swing.JLabel" name="jLDessert0">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1193,8 +1241,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLDessert0MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLVarios1">
+            <Component class="javax.swing.JLabel" name="jLVarious2">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1202,8 +1253,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLVarious2MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLVarios2">
+            <Component class="javax.swing.JLabel" name="jLVarious3">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1211,8 +1265,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLVarious3MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLVarios3">
+            <Component class="javax.swing.JLabel" name="jLVarious4">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1220,8 +1277,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLVarious4MouseReleased"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLVarios4">
+            <Component class="javax.swing.JLabel" name="jLVarious0">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -1229,10 +1289,14 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLVarious0MouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbAumentar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Aumentar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAumentarActionPerformed"/>
@@ -1241,6 +1305,7 @@
             <Component class="javax.swing.JButton" name="jbDisminuir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Disminuir"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbDisminuirActionPerformed"/>

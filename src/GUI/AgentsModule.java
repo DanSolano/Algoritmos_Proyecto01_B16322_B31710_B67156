@@ -38,8 +38,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private ArrayList<User> agents;
     private ArrayList<User> admin;
     private ArrayList<Restaurant> restaurants;
-    private DoubleLinkedCircularList drinksProducts;
-    private DoubleLinkedCircularList drinks;//foods desserts others
+    private DoubleLinkedCircularList drinksProductsList;
+    private DoubleLinkedCircularList foodsProductsList;//foods desserts others
+    private DoubleLinkedCircularList dessertsProductsList;
     private String hour;
     private String minutes;
     private String seconds;
@@ -49,15 +50,29 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private Order order;
     private ImageManage resize = new ImageManage();
     private Products productsShow = new Products();
-    private Products products0 = new Products();
-    private Products products1 = new Products();
-    private Products products2 = new Products();
-    private Products products3 = new Products();
-    private Products products4 = new Products();
-    private Products products5 = new Products();
+    private Products productsDrink0 = new Products();
+    private Products productsDrink1 = new Products();
+    private Products productsDrink2 = new Products();
+    private Products productsDrink3 = new Products();
+    private Products productsDrink4 = new Products();
+    private Products productsDrink5 = new Products();
+    private Products productsFood0 = new Products();
+    private Products productsFood1 = new Products();
+    private Products productsFood2 = new Products();
+    private Products productsFood3 = new Products();
+    private Products productsFood4 = new Products();
+    private Products productsFood5 = new Products();
+    private Products productsDesserts0 = new Products();
+    private Products productsDesserts1 = new Products();
+    private Products productsDesserts2 = new Products();
+    private Products productsDesserts3 = new Products();
+    private Products productsDesserts4 = new Products();
+    private Products productsDesserts5 = new Products();
     private DefaultTableModel tableModel;
     private LinkedStack stackOrder = new LinkedStack();
-    Node newNode;
+    Node newNodeDrink;
+    Node newNodeFood;
+    Node newNodeDessert;
 
     /**
      * Creates new form AgentsModule
@@ -67,12 +82,15 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
-        this.drinks = new DoubleLinkedCircularList();
         loadImage();
 
         try {
-            newNode = drinksProducts.getNode(0);
-            addJlabel(newNode);
+            newNodeDrink = drinksProductsList.getNode(0);
+            newNodeFood = foodsProductsList.getNode(0);
+            newNodeDessert = dessertsProductsList.getNode(0);
+            addLabelDrinks(newNodeDrink);
+            addLabelFood(newNodeFood);
+            addLabelDesserts(newNodeDessert);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,10 +133,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        jLDessert = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
+        jLVarios = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -150,23 +168,23 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabelDrinks3 = new javax.swing.JLabel();
         jLabelDrinks4 = new javax.swing.JLabel();
         jLabelDrinks0 = new javax.swing.JLabel();
-        jLDrink0 = new javax.swing.JLabel();
-        jLabelFoods1 = new javax.swing.JLabel();
-        jLabelFoods2 = new javax.swing.JLabel();
-        jLabelFoods3 = new javax.swing.JLabel();
-        jLabelFoods4 = new javax.swing.JLabel();
-        jLDesserts1 = new javax.swing.JLabel();
+        jLFood0 = new javax.swing.JLabel();
+        jLFood1 = new javax.swing.JLabel();
+        jLFood2 = new javax.swing.JLabel();
+        jLFood3 = new javax.swing.JLabel();
+        jLFood4 = new javax.swing.JLabel();
+        jLDessert1 = new javax.swing.JLabel();
         jLDesserts2 = new javax.swing.JLabel();
-        jLVarios0 = new javax.swing.JLabel();
+        jLVarious1 = new javax.swing.JLabel();
         jLDesserts4 = new javax.swing.JLabel();
         jLDesserts3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jLDesserts6 = new javax.swing.JLabel();
-        jLVarios1 = new javax.swing.JLabel();
-        jLVarios2 = new javax.swing.JLabel();
-        jLVarios3 = new javax.swing.JLabel();
-        jLVarios4 = new javax.swing.JLabel();
+        jLDessert0 = new javax.swing.JLabel();
+        jLVarious2 = new javax.swing.JLabel();
+        jLVarious3 = new javax.swing.JLabel();
+        jLVarious4 = new javax.swing.JLabel();
+        jLVarious0 = new javax.swing.JLabel();
         jbAumentar = new javax.swing.JButton();
         jbDisminuir = new javax.swing.JButton();
 
@@ -221,22 +239,52 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         });
 
         jButton3.setText("<=");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("=>");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Comidas");
 
         jButton5.setText("<=");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("=>");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jLabel11.setText("Postres");
+        jLDessert.setText("Postres");
 
         jButton7.setText("<=");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("=>");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jLabel12.setText("Varios");
+        jLVarios.setText("Varios");
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -423,41 +471,117 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLDrink0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLFood0MouseReleased(evt);
+            }
+        });
 
-        jLabelFoods1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLFood1MouseReleased(evt);
+            }
+        });
 
-        jLabelFoods2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLFood2MouseReleased(evt);
+            }
+        });
 
-        jLabelFoods3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLFood3MouseReleased(evt);
+            }
+        });
 
-        jLabelFoods4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLFood4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLFood4MouseReleased(evt);
+            }
+        });
 
-        jLDesserts1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDessert1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDessert1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDessert1MouseReleased(evt);
+            }
+        });
 
         jLDesserts2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDesserts2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDesserts2MouseReleased(evt);
+            }
+        });
 
-        jLVarios0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLVarious1MouseReleased(evt);
+            }
+        });
 
         jLDesserts4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDesserts4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDesserts4MouseReleased(evt);
+            }
+        });
 
         jLDesserts3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDesserts3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDesserts3MouseReleased(evt);
+            }
+        });
 
         jLabel5.setText("Dirección Exacta:");
 
         jTextField4.setText(" ");
 
-        jLDesserts6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDessert0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLDessert0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLDessert0MouseReleased(evt);
+            }
+        });
 
-        jLVarios1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLVarious2MouseReleased(evt);
+            }
+        });
 
-        jLVarios2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLVarious3MouseReleased(evt);
+            }
+        });
 
-        jLVarios3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLVarious4MouseReleased(evt);
+            }
+        });
 
-        jLVarios4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jLVarious0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLVarious0MouseReleased(evt);
+            }
+        });
 
         jbAumentar.setText("Aumentar");
+        jbAumentar.setEnabled(false);
         jbAumentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAumentarActionPerformed(evt);
@@ -465,6 +589,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         });
 
         jbDisminuir.setText("Disminuir");
+        jbDisminuir.setEnabled(false);
         jbDisminuir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbDisminuirActionPerformed(evt);
@@ -493,10 +618,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDessert, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -527,23 +652,23 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLabelDrinks3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks0, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLDrink0, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabelFoods1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabelFoods2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabelFoods3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabelFoods4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLDesserts1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLFood0, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLFood1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLFood2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLFood3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLFood4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDessert1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLDesserts2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLVarios0, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarious1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLDesserts4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLDesserts3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextField4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLDesserts6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLVarios1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLVarios2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLVarios3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLVarios4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLDessert0, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarious2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarious3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarious4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLVarious0, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbAumentar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbDisminuir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -562,7 +687,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGap(6, 6, 6)
-                                                .addComponent(jLabel11)
+                                                .addComponent(jLDessert)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -585,35 +710,35 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                                         .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLDrink0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jLDesserts6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jLVarios4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLabelFoods1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGap(18, 18, 18)
-                                                                        .addComponent(jLabelFoods2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLDesserts1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGap(18, 18, 18)
                                                                         .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLabelFoods3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGap(18, 18, 18)
-                                                                        .addComponent(jLabelFoods4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                                                         .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGap(18, 18, 18)
                                                                         .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                .addComponent(jLVarios0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(jLVarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                                .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                         .addComponent(jButton6))
                                     .addComponent(jSeparator1)
@@ -630,13 +755,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLabel12)
+                                                        .addComponent(jLVarios)
                                                         .addGap(0, 0, Short.MAX_VALUE))
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                                         .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addComponent(jLVarios2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jLVarios3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jButton8))))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -867,35 +992,35 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGap(7, 7, 7)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLDrink0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFoods1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFoods2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFoods3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFoods4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
+                                .addComponent(jLVarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLVarios3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLabel11)
+                                                        .addComponent(jLDessert)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jLDesserts1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLDesserts6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(3, 3, 3)))
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -904,10 +1029,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLVarios0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarios2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLVarios4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                    .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addGap(2, 2, 2)))))
                 .addContainerGap())
         );
@@ -941,8 +1066,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            newNode = newNode.next;
-            addJlabel(newNode);
+            newNodeDrink = newNodeDrink.next;
+            addLabelDrinks(newNodeDrink);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -950,15 +1075,15 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            newNode = newNode.previoius;
-            addJlabel(newNode);
+            newNodeDrink = newNodeDrink.previoius;
+            addLabelDrinks(newNodeDrink);
         } catch (ListException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
-         productsShow = products0;
+        productsShow = productsDrink0;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -986,7 +1111,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks0MouseReleased
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
-          productsShow = products1;
+        productsShow = productsDrink1;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1013,7 +1138,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks1MouseReleased
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
-          productsShow = products2;
+        productsShow = productsDrink2;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1040,7 +1165,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks2MouseReleased
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
-        productsShow = products3;
+        productsShow = productsDrink3;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1067,7 +1192,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks3MouseReleased
 
     private void jLabelDrinks4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks4MouseReleased
-        productsShow = products4;
+        productsShow = productsDrink4;
         order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
         try {
             Order ordertemp = orderExist(order.getProductoId());
@@ -1094,7 +1219,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelDrinks4MouseReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         //eventos de tabla
+        //eventos de tabla
         int selection = jTable1.rowAtPoint(evt.getPoint());
         selectionString = "" + jTable1.getValueAt(selection, 1);
         if (selectionString != "") {
@@ -1105,7 +1230,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jbAumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAumentarActionPerformed
         // TODO add your handling code here:
-         Order ordertemp;
+        Order ordertemp;
         try {
             ordertemp = orderExist(selectionString);
             if (ordertemp != null) {
@@ -1121,7 +1246,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jbAumentarActionPerformed
 
     private void jbDisminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDisminuirActionPerformed
-  
+
         //diminuye la cantidad de productos
         Order ordertemp;
         try {
@@ -1143,6 +1268,450 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jbDisminuirActionPerformed
 
+    private void jLFood0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood0MouseReleased
+        // TODO add your handling code here:
+        productsShow = productsFood0;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLFood0MouseReleased
+
+    private void jLFood1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood1MouseReleased
+        productsShow = productsFood1;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLFood1MouseReleased
+
+    private void jLFood2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood2MouseReleased
+        productsShow = productsFood2;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLFood2MouseReleased
+
+    private void jLFood3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood3MouseReleased
+        productsShow = productsFood3;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLFood3MouseReleased
+
+    private void jLFood4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood4MouseReleased
+        productsShow = productsFood4;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLFood4MouseReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        newNodeFood = newNodeFood.next;
+        addLabelFood(newNodeFood);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        newNodeFood = newNodeFood.previoius;
+        addLabelFood(newNodeFood);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jLDessert0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert0MouseReleased
+        productsShow = productsDesserts0;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLDessert0MouseReleased
+
+    private void jLDessert1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert1MouseReleased
+        productsShow = productsDesserts1;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLDessert1MouseReleased
+
+    private void jLDesserts2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts2MouseReleased
+        productsShow = productsDesserts2;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLDesserts2MouseReleased
+
+    private void jLDesserts3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts3MouseReleased
+        productsShow = productsDesserts3;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLDesserts3MouseReleased
+
+    private void jLDesserts4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts4MouseReleased
+        productsShow = productsDesserts4;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLDesserts4MouseReleased
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        newNodeDessert = newNodeDessert.next;
+        addLabelDesserts(newNodeDessert);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        newNodeDessert = newNodeDessert.previoius;
+        addLabelDesserts(newNodeDessert);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            newNodeDrink = newNodeDrink.next;
+            addLabelDrinks(newNodeDrink);
+        } catch (ListException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            newNodeDrink = newNodeDrink.previoius;
+            addLabelDrinks(newNodeDrink);
+        } catch (ListException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jLVarious0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious0MouseReleased
+        productsShow = productsDrink1;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLVarious0MouseReleased
+
+    private void jLVarious1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious1MouseReleased
+        productsShow = productsDrink2;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLVarious1MouseReleased
+
+    private void jLVarious2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious2MouseReleased
+        productsShow = productsDrink2;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLVarious2MouseReleased
+
+    private void jLVarious3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious3MouseReleased
+        productsShow = productsDrink3;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLVarious3MouseReleased
+
+    private void jLVarious4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious4MouseReleased
+        productsShow = productsDrink4;
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        try {
+            Order ordertemp = orderExist(order.getProductoId());
+            if (ordertemp != null) {
+                int cantidad = 1 + Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setQuantity("" + cantidad);
+                int totalPrice = Integer.parseInt(productsShow.getPrice()) * Integer.parseInt(ordertemp.getQuantity());
+                ordertemp.setTotal("" + totalPrice);
+            } else {
+                try {
+                    stackOrder.push(order);
+                } catch (StackException ex) {
+                    Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showTable();
+        } catch (StackException ex) {
+            Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLVarious4MouseReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1159,21 +1728,25 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLDesserts1;
+    private javax.swing.JLabel jLDessert;
+    private javax.swing.JLabel jLDessert0;
+    private javax.swing.JLabel jLDessert1;
     private javax.swing.JLabel jLDesserts2;
     private javax.swing.JLabel jLDesserts3;
     private javax.swing.JLabel jLDesserts4;
-    private javax.swing.JLabel jLDesserts6;
-    private javax.swing.JLabel jLDrink0;
-    private javax.swing.JLabel jLVarios0;
-    private javax.swing.JLabel jLVarios1;
-    private javax.swing.JLabel jLVarios2;
-    private javax.swing.JLabel jLVarios3;
-    private javax.swing.JLabel jLVarios4;
+    private javax.swing.JLabel jLFood0;
+    private javax.swing.JLabel jLFood1;
+    private javax.swing.JLabel jLFood2;
+    private javax.swing.JLabel jLFood3;
+    private javax.swing.JLabel jLFood4;
+    private javax.swing.JLabel jLVarios;
+    private javax.swing.JLabel jLVarious0;
+    private javax.swing.JLabel jLVarious1;
+    private javax.swing.JLabel jLVarious2;
+    private javax.swing.JLabel jLVarious3;
+    private javax.swing.JLabel jLVarious4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1196,10 +1769,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabelDrinks2;
     private javax.swing.JLabel jLabelDrinks3;
     private javax.swing.JLabel jLabelDrinks4;
-    private javax.swing.JLabel jLabelFoods1;
-    private javax.swing.JLabel jLabelFoods2;
-    private javax.swing.JLabel jLabelFoods3;
-    private javax.swing.JLabel jLabelFoods4;
     private javax.swing.JLabel jLabelProvincia;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel30;
@@ -1265,66 +1834,190 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }
 
     private void loadImage() {
-        drinksProducts = new DoubleLinkedCircularList();
-        products0.setId("sin DNI");
-        products0.setName("Hamburquesa");
-        products0.setPrice(1000 + "");
-        products0.setTypeProduct(0 + "");
-        products0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
-        drinksProducts.insert(products0);
+        drinksProductsList = new DoubleLinkedCircularList();
+        foodsProductsList = new DoubleLinkedCircularList();
+        dessertsProductsList = new DoubleLinkedCircularList();
 
-        products1.setId("sin DNI 1");
-        products1.setName("Papas Fritas");
-        products1.setPrice(900 + "");
-        products1.setTypeProduct(1 + "");
-        products1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
-        drinksProducts.insert(products1);
+        productsDrink0.setId("sin DNI");
+        productsDrink0.setName("Zarza");
+        productsDrink0.setPrice(1000 + "");
+        productsDrink0.setTypeProduct(0 + "");
+        productsDrink0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida0.jpg")));
+        drinksProductsList.insert(productsDrink0);
 
-        products2.setId("sin DNI 1");
-        products2.setName("Pizza");
-        products2.setPrice(1200 + "");
-        products2.setTypeProduct(2 + "");
-        products2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
-        drinksProducts.insert(products2);
+        productsDrink1.setId("sin DNI 1");
+        productsDrink1.setName("Fanta Colita");
+        productsDrink1.setPrice(100 + "");
+        productsDrink1.setTypeProduct(1 + "");
+        productsDrink1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida1.jpg")));
+        drinksProductsList.insert(productsDrink1);
 
-        products3.setId("sin DNI 1");
-        products3.setName("Pollo");
-        products3.setPrice(900 + "");
-        products3.setTypeProduct(3 + "");
-        products3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
-        drinksProducts.insert(products3);
+        productsDrink2.setId("sin DNI 1");
+        productsDrink2.setName("Cerveza");
+        productsDrink2.setPrice(800 + "");
+        productsDrink2.setTypeProduct(2 + "");
+        productsDrink2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida2.jpg")));
+        drinksProductsList.insert(productsDrink2);
 
-        products4.setId("sin DNI 1");
-        products4.setName("Pure");
-        products4.setPrice(900 + "");
-        products4.setTypeProduct(4 + "");
-        products4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
-        drinksProducts.insert(products4);
+        productsDrink3.setId("sin DNI 1");
+        productsDrink3.setName("Sprite");
+        productsDrink3.setPrice(900 + "");
+        productsDrink3.setTypeProduct(3 + "");
+        productsDrink3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida3.jpg")));
+        drinksProductsList.insert(productsDrink3);
 
-        products5.setId("sin DNI 1");
-        products5.setName("Sandwich");
-        products5.setPrice(900 + "");
-        products5.setTypeProduct(1 + "");
-        products5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida5.jpg")));
-        drinksProducts.insert(products5);
+        productsDrink4.setId("sin DNI 1");
+        productsDrink4.setName("Fanta");
+        productsDrink4.setPrice(900 + "");
+        productsDrink4.setTypeProduct(4 + "");
+        productsDrink4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida4.jpg")));
+        drinksProductsList.insert(productsDrink4);
+
+        productsDrink5.setId("sin DNI 1");
+        productsDrink5.setName("Coca Cola");
+        productsDrink5.setPrice(900 + "");
+        productsDrink5.setTypeProduct(1 + "");
+        productsDrink5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida5.jpg")));
+        drinksProductsList.insert(productsDrink5);
+        /////////////////////////////////////////////lista de comidas///////////////////////////////////////////////77
+        productsFood0.setId("sin DNI");
+        productsFood0.setName("Hamburquesa");
+        productsFood0.setPrice(1000 + "");
+        productsFood0.setTypeProduct(0 + "");
+        productsFood0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
+        foodsProductsList.insert(productsFood0);
+
+        productsFood1.setId("sin DNI 1");
+        productsFood1.setName("Papas Fritas");
+        productsFood1.setPrice(900 + "");
+        productsFood1.setTypeProduct(1 + "");
+        productsFood1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
+        foodsProductsList.insert(productsFood1);
+
+        productsFood2.setId("sin DNI 1");
+        productsFood2.setName("Pizza");
+        productsFood2.setPrice(1200 + "");
+        productsFood2.setTypeProduct(2 + "");
+        productsFood2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
+        foodsProductsList.insert(productsFood2);
+
+        productsFood3.setId("sin DNI 1");
+        productsFood3.setName("Pollo");
+        productsFood3.setPrice(900 + "");
+        productsFood3.setTypeProduct(3 + "");
+        productsFood3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
+        foodsProductsList.insert(productsFood3);
+
+        productsFood4.setId("sin DNI 1");
+        productsFood4.setName("Pure");
+        productsFood4.setPrice(900 + "");
+        productsFood4.setTypeProduct(4 + "");
+        productsFood4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
+        foodsProductsList.insert(productsFood4);
+
+        productsFood5.setId("sin DNI 1");
+        productsFood5.setName("Sandwich");
+        productsFood5.setPrice(900 + "");
+        productsFood5.setTypeProduct(1 + "");
+        productsFood5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida5.jpg")));
+        foodsProductsList.insert(productsFood5);
+
+        ////////////////////////////////////////////////postres /////////////////////////////////////////////
+        productsDesserts0.setId("sin DNI");
+        productsDesserts0.setName("Postre de Fresa");
+        productsDesserts0.setPrice(1000 + "");
+        productsDesserts0.setTypeProduct(0 + "");
+        productsDesserts0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre0.jpg")));
+        dessertsProductsList.insert(productsDesserts0);
+
+        productsDesserts1.setId("sin DNI 1");
+        productsDesserts1.setName("Chocolate");
+        productsDesserts1.setPrice(900 + "");
+        productsDesserts1.setTypeProduct(1 + "");
+        productsDesserts1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre1.jpg")));
+        dessertsProductsList.insert(productsDesserts1);
+
+        productsDesserts2.setId("sin DNI 1");
+        productsDesserts2.setName("Muffin");
+        productsDesserts2.setPrice(1200 + "");
+        productsDesserts2.setTypeProduct(2 + "");
+        productsDesserts2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre2.jpg")));
+        dessertsProductsList.insert(productsDesserts2);
+
+        productsDesserts3.setId("sin DNI 1");
+        productsDesserts3.setName("Flan");
+        productsDesserts3.setPrice(900 + "");
+        productsDesserts3.setTypeProduct(3 + "");
+        productsDesserts3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre3.jpg")));
+        dessertsProductsList.insert(productsDesserts3);
+
+        productsDesserts4.setId("sin DNI 1");
+        productsDesserts4.setName("Arroz con leche");
+        productsDesserts4.setPrice(900 + "");
+        productsDesserts4.setTypeProduct(4 + "");
+        productsDesserts4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre4.jpg")));
+        dessertsProductsList.insert(productsDesserts4);
+
+        productsDesserts5.setId("sin DNI 1");
+        productsDesserts5.setName("Helado");
+        productsDesserts5.setPrice(900 + "");
+        productsDesserts5.setTypeProduct(1 + "");
+        productsDesserts5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre5.jpg")));
+        dessertsProductsList.insert(productsDesserts5);
     }
 
-    private void addJlabel(Node newNode) throws ListException {
-        products0 = (Products) newNode.element;
-        products1 = (Products) newNode.next.element;
-        products2 = (Products) newNode.next.next.element;
-        products3 = (Products) newNode.next.next.next.element;
-        products4 = (Products) newNode.next.next.next.next.element;
-        products5 = (Products) newNode.next.next.next.next.next.element;
+    private void addLabelDrinks(Node newNode) throws ListException {
+        productsDrink0 = (Products) newNode.element;
+        productsDrink1 = (Products) newNode.next.element;
+        productsDrink2 = (Products) newNode.next.next.element;
+        productsDrink3 = (Products) newNode.next.next.next.element;
+        productsDrink4 = (Products) newNode.next.next.next.next.element;
+        productsDrink5 = (Products) newNode.next.next.next.next.next.element;
 
-        jLabelDrinks0.setIcon(resize.resizeImage(products0.getImageIcon()));
-        jLabelDrinks1.setIcon(resize.resizeImage(products1.getImageIcon()));
-        jLabelDrinks2.setIcon(resize.resizeImage(products2.getImageIcon()));
-        jLabelDrinks3.setIcon(resize.resizeImage(products3.getImageIcon()));
-        jLabelDrinks4.setIcon(resize.resizeImage(products4.getImageIcon()));
+        jLabelDrinks0.setIcon(resize.resizeImage(productsDrink0.getImageIcon()));
+        jLabelDrinks1.setIcon(resize.resizeImage(productsDrink1.getImageIcon()));
+        jLabelDrinks2.setIcon(resize.resizeImage(productsDrink2.getImageIcon()));
+        jLabelDrinks3.setIcon(resize.resizeImage(productsDrink3.getImageIcon()));
+        jLabelDrinks4.setIcon(resize.resizeImage(productsDrink4.getImageIcon()));
+
+        jLVarious0.setIcon(resize.resizeImage(productsDrink0.getImageIcon()));
+        jLVarious1.setIcon(resize.resizeImage(productsDrink1.getImageIcon()));
+        jLVarious2.setIcon(resize.resizeImage(productsDrink2.getImageIcon()));
+        jLVarious3.setIcon(resize.resizeImage(productsDrink3.getImageIcon()));
+        jLVarious4.setIcon(resize.resizeImage(productsDrink4.getImageIcon()));
     }
 
-  /*Recordar que de moemento se esta utilizando una lista enlazada para pruebas de musytras de ordenes, pero se debe usar una pila
+    private void addLabelFood(Node newNodeFood) {
+        productsFood0 = (Products) newNodeFood.element;
+        productsFood1 = (Products) newNodeFood.next.element;
+        productsFood2 = (Products) newNodeFood.next.next.element;
+        productsFood3 = (Products) newNodeFood.next.next.next.element;
+        productsFood4 = (Products) newNodeFood.next.next.next.next.element;
+        productsFood5 = (Products) newNodeFood.next.next.next.next.next.element;
+
+        jLFood0.setIcon(resize.resizeImage(productsFood0.getImageIcon()));
+        jLFood1.setIcon(resize.resizeImage(productsFood1.getImageIcon()));
+        jLFood2.setIcon(resize.resizeImage(productsFood2.getImageIcon()));
+        jLFood3.setIcon(resize.resizeImage(productsFood3.getImageIcon()));
+        jLFood4.setIcon(resize.resizeImage(productsFood4.getImageIcon()));
+    }
+
+    private void addLabelDesserts(Node newNodeDeserts) {
+        productsDesserts0 = (Products) newNodeDeserts.element;
+        productsDesserts1 = (Products) newNodeDeserts.next.element;
+        productsDesserts2 = (Products) newNodeDeserts.next.next.element;
+        productsDesserts3 = (Products) newNodeDeserts.next.next.next.element;
+        productsDesserts4 = (Products) newNodeDeserts.next.next.next.next.element;
+        productsDesserts5 = (Products) newNodeDeserts.next.next.next.next.next.element;
+
+        jLDessert0.setIcon(resize.resizeImage(productsDesserts0.getImageIcon()));
+        jLDessert1.setIcon(resize.resizeImage(productsDesserts1.getImageIcon()));
+        jLDesserts2.setIcon(resize.resizeImage(productsDesserts2.getImageIcon()));
+        jLDesserts3.setIcon(resize.resizeImage(productsDesserts3.getImageIcon()));
+        jLDesserts4.setIcon(resize.resizeImage(productsDesserts4.getImageIcon()));
+    }
+
+    /*Recordar que de moemento se esta utilizando una lista enlazada para pruebas de musytras de ordenes, pero se debe usar una pila
     por eso el nombre de la variable 
      */
     private void showTable() throws StackException {
@@ -1348,8 +2041,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             stackOrder.push(orderTempStack.pop());
         }
     }
-    
-    
+
     private Order orderExist(String order) throws StackException {
         Order exist = null;
         LinkedStack stackTemp = new LinkedStack();
