@@ -11,11 +11,13 @@ import Domain.Client;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
+import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.StackException;
 import Utilities.StringPath;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.xml.soap.Detail;
@@ -91,4 +93,19 @@ public class LoadData {
         return ordersDetails;
     }
 
+    public ArrayList<Report> getReports() {
+         DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER);
+        ArrayList<Order> ordersDetail = new ArrayList<Order>();
+        ArrayList<Report>  reportsDetail= new ArrayList<Report>();
+        ordersDetail = (ArrayList<Order>) orderDetailCSV.readOrderDetails();
+        for (Order order : ordersDetail) {
+            String idRestaurant = order.getRestaurantId();
+            String total = order.getTotal();
+            Date   date=order.getCurrentDate();
+            
+            reportsDetail.add(new Report(idRestaurant, Double.parseDouble(total), date));
+            
+        }
+        return reportsDetail;
+    }
 }
