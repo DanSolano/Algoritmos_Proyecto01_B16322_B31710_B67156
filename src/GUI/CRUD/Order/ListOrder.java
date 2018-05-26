@@ -167,7 +167,7 @@ public class ListOrder extends javax.swing.JFrame {
                     String nameProduct = getDataById.getproductName(order.getProductoId());
                     model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
                     Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                             order.getQuantity(), order.getTotal());
+                            order.getQuantity(), order.getTotal());
                     auxStack.push(auxOrder);
                 }
                 Order order = (Order) orders.pop();
@@ -176,7 +176,7 @@ public class ListOrder extends javax.swing.JFrame {
                 String nameProduct = getDataById.getproductName(order.getProductoId());
                 model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
                 Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                         order.getQuantity(), order.getTotal());
+                        order.getQuantity(), order.getTotal());
                 auxStack.push(auxOrder);
                 Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = auxStack;
             } catch (StackException ex) {
