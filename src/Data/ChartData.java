@@ -37,24 +37,24 @@ public class ChartData {
     public JFreeChart lineChart;
     ArrayList<Restaurant> rest;
     LinkedStack stackOrder;
-
-   
+    ArrayList<Report> reportOrder;
 
     public ChartData() {
-        stackOrder = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
-        rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        this.stackOrder = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+        this.rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        this.reportOrder = Algoritmos_Proyecto01_B16322_B31710_B67156.REPORT_FROM_ORDER_DETAIL;
         areaChart();
         barChart();
         lineChart();
         pieChart();
-     
+
     }
 
     public void areaChart() {
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-//        LinkedStack drawStack = reportList();
-         
+        ArrayList<Report> reportTootal = reportTotal();
+
         datos.addValue(23, "Restaurante 1", "Enero");
         datos.addValue(24, "Restaurante 1", "Febrero");
         datos.addValue(21, "Restaurante 1", "Marzo");
@@ -106,6 +106,50 @@ public class ChartData {
 
         pieChart = ChartFactory.createPieChart("Ganancias de los Restaurantes", dataset);
 
+    }
+
+    private ArrayList<Report> reportTotal() {
+        Double total=0.0;
+        ArrayList<Report> reportListAux = new ArrayList<>();
+        for (Report report : reportOrder) {
+            if (reportListAux.isEmpty()) {
+                reportListAux.add(report);
+            } else if (reportExitsById(report, reportListAux)) {
+                Report reportSearched = reportById(report, reportListAux);
+                total+= reportSearched.getTotal()+report.getTotal();
+                System.out.println("total: "+total);
+                System.out.println("reportsearched: " +reportSearched.getTotal());
+                System.out.println("report: "+report.getTotal());
+               report.setTotal(total);
+//                reportListAux.remove(report);
+//                report.setTotal(total);
+//                reportListAux.add(report);
+                System.out.println("Lista reporte"+report.toString());
+break;
+            }
+
+        }
+        return reportListAux;
+    }
+
+    private boolean reportExitsById(Report report, ArrayList<Report> reportAux) {
+        String id = report.getIdRestaurant();
+        for (Report report1 : reportAux) {
+            if (id.equals(report1.getIdRestaurant())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Report reportById(Report report, ArrayList<Report> reportAux) {
+        String id = report.getIdRestaurant();
+        for (Report report1 : reportAux) {
+            if (id.equals(report1.getIdRestaurant())) {
+                return report1;
+            }
+        }
+        return null;
     }
 
 //    public LinkedStack reportList() {
@@ -197,5 +241,4 @@ public class ChartData {
 //        return linkedList;
 //                
 //    }
-
 }

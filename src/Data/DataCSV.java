@@ -94,15 +94,7 @@ public class DataCSV {
 
     }
 
-    public ArrayList<Report> readReportFromOrderDetail() {
-        ArrayList<Object> list = readCSV();
-        ArrayList<Report> users = new ArrayList<Report>();
-        for (Object object : list) {
-            users.add((Report) object);
-        }
-        return users;
-
-    }
+ 
 
     public ArrayList<Restaurant> readRestaurants() {
         ArrayList<Object> list = readCSV();

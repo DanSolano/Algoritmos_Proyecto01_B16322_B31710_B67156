@@ -15,6 +15,7 @@ import Data.LoadData;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
+import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.StackException;
@@ -40,7 +41,9 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
     public static ArrayList<User> AGENT_LIST;
     public static ArrayList<User> ADMIN_LIST;
     public static ArrayList<Products> ALL_PRODUCTS_LIST;
-
+    public static ArrayList<Report> REPORT_FROM_ORDER_DETAIL;
+    
+    
     public static void main(String[] args) throws ListException, StackException {
         LoadData ld = new LoadData();
 
@@ -51,8 +54,8 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
         RESTAURANT_LIST = ld.getRestaurants();
         AGENT_LIST = ld.getAgents();
         ADMIN_LIST = ld.getAdministrators();
-//         ChartData chart = new ChartData();
-//         chart.reportList();
+        REPORT_FROM_ORDER_DETAIL=ld.getReports();
+        
          try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
