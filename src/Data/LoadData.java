@@ -11,6 +11,7 @@ import Domain.Client;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
+import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.StackException;
@@ -91,4 +92,10 @@ public class LoadData {
         return ordersDetails;
     }
 
+    public ArrayList<Report> getReports() {
+        DataCSV reportDetails = new DataCSV(StringPath.PATH_ORDER);
+        ArrayList<Report> reportsDetail = new ArrayList<Report>();
+        reportsDetail = (ArrayList<Report>) reportDetails.readReportFromOrderDetail();
+        return reportsDetail;
+    }
 }

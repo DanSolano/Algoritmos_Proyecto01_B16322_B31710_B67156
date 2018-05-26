@@ -7,11 +7,16 @@ package Data;
 
 import ADT.Stack.LinkedStack;
 import Domain.Order;
+import Domain.Report;
 import Domain.Restaurant;
 import Exceptions.StackException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.GetDataById;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -25,44 +30,31 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class ChartData {
 
-    public int montoTotal;
+    public double montoTotal;
     public JFreeChart areaChart;
     public JFreeChart pieChart;
     public JFreeChart barChart;
     public JFreeChart lineChart;
-    ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
-    LinkedStack orders = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+    ArrayList<Restaurant> rest;
+    LinkedStack stackOrder;
 
-    ;
+   
 
     public ChartData() {
+        stackOrder = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+        rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         areaChart();
         barChart();
         lineChart();
         pieChart();
-
+     
     }
 
     public void areaChart() {
 
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-
-//        if (!orders.isEmpty()) {
-//            GetDataById getDataById = new GetDataById();
-//            try {
-//                for (int i = 0; i <= orders.getSize(); i++) {
-//                    Order order = (Order) orders.pop();
-//                    if (order.getRestaurantId().equals(i)) {
-//                        String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
-//                        datos.addValue(Integer.parseInt(order.getId()), nameRestaurant, "Enero");
-//                    }
-//                    areaChart = ChartFactory.createAreaChart("Ganacias de los Restaurantes", "Meses", "Cantidad", datos);
-//                }
-//
-//            } catch (StackException ex) {
-//                System.err.println("Error de lectura de las ordenes!!!");
-//            }
-//        }
+//        LinkedStack drawStack = reportList();
+         
         datos.addValue(23, "Restaurante 1", "Enero");
         datos.addValue(24, "Restaurante 1", "Febrero");
         datos.addValue(21, "Restaurante 1", "Marzo");
@@ -81,10 +73,10 @@ public class ChartData {
 
     public void barChart() {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        datos.addValue(23, "Restaurante 1", "Enero");
-        datos.addValue(23, "Restaurante 1", "Marzo");
-        datos.addValue(23, "Restaurante 1", "Abril");
-        datos.addValue(23, "Restaurante 1", "Febrero");
+        datos.addValue(17, "Restaurante 1", "Enero");
+        datos.addValue(12, "Restaurante 2", "Marzo");
+        datos.addValue(13, "Restaurante 3", "Abril");
+        datos.addValue(15, "Restaurante 1", "Febrero");
 
         barChart = ChartFactory.createBarChart3D("Ganancias de los Restaurantes ", null, null, datos);
 
@@ -115,5 +107,95 @@ public class ChartData {
         pieChart = ChartFactory.createPieChart("Ganancias de los Restaurantes", dataset);
 
     }
+
+//    public LinkedStack reportList() {
+//        LinkedStack reportRest = new LinkedStack();
+//        LinkedStack stackTemp = new LinkedStack();
+//        Order orderTemp = new Order();
+//        System.out.println("Entro a reportList()");
+//        try {
+//            orderTemp = (Order) stackOrder.pop();
+//           
+//            System.out.println("---------------"+orderTemp.getId());
+//        } catch (StackException ex) {
+//            System.out.println("asfhskjnskdflkshdflk");
+//        }
+//        try {
+//            while (!stackOrder.isEmpty()) {
+//                orderTemp = (Order) stackOrder.pop();
+//                GetDataById getid = new GetDataById();
+//                String idRest = orderTemp.getRestaurantId();
+//                String restName = getid.getRestaurantName(idRest);
+//                if (reportRest.isEmpty()) {
+//                    reportRest.push(new Report(idRest, restName, Double.parseDouble(orderTemp.getTotal()), orderTemp.getCurrentDate()));
+//                    System.out.println("reportRest.isEmpty()");
+//                } else if (!reportRestExistByRestId(idRest, reportRest)) {
+//                    reportRest.push(new Report(idRest, restName, Double.parseDouble(orderTemp.getTotal()), orderTemp.getCurrentDate()));
+//                    System.out.println("reportRestExistByRestId(idRest, reportRest");
+//                }else{
+//                Report report=reportRestByRestId(idRest, reportRest);
+//                    System.out.println("reportRestByRestId(idRest, reportRest)");
+//                report.setTotal(report.getTotal()+Double.parseDouble(orderTemp.getTotal()));
+//                    System.out.println(""+report.toString());
+//                
+//                }
+////                stackTemp.push(orderTemp);
+//            }
+//            //Reordenamiento de la pila temporar a la Principal
+////            while (!stackTemp.isEmpty()) {
+////                stackOrder.push(stackTemp.pop());
+////            }
+//        } catch (Exception e) {
+//            
+//            System.err.println(e + "Error al recorrer las ordenes reportList()");
+//        }
+//        return reportRest;
+//    }
+//
+//    private boolean reportRestExistByRestId(String idRest, LinkedStack lS) throws StackException {
+//        Report  report = new Report();
+//        LinkedStack reportRest = new LinkedStack();
+//        LinkedList<Report> reportLinkedList =cloneLinkedStack(lS);
+//        for (Report report1 : reportLinkedList) {
+//            reportRest.push(report); 
+//        }
+//        
+//        while (!reportRest.isEmpty()) {            
+//            report= (Report) reportRest.pop();
+//            lS.push(report);
+//            if (report.getIdRestaurant().equals(idRest)) {
+//                return true;
+//            }
+//        }
+//       
+//        return false;
+//    }
+//
+//    private Report reportRestByRestId(String idRest, LinkedStack lS) throws StackException {
+//    Report  report = new Report();
+//        LinkedStack reportRest = new LinkedStack();
+//        LinkedList<Report> reportLinkedList =cloneLinkedStack(lS);
+//        for (Report report1 : reportLinkedList) {
+//            reportRest.push(report); 
+//        }
+//        while (!reportRest.isEmpty()) {            
+//            report= (Report) reportRest.pop();
+//             lS.push(report);
+//            if (report.getIdRestaurant().equals(idRest)) {
+//                return report;
+//            }
+//        }
+//    return null;
+//    }
+//
+//    private LinkedList<Report> cloneLinkedStack(LinkedStack lS) throws StackException {
+//        LinkedList<Report> linkedList = new LinkedList<>();
+//        while (!linkedList.isEmpty()) {            
+//           Report report= (Report) lS.pop();
+//           linkedList.add(report);
+//        }
+//        return linkedList;
+//                
+//    }
 
 }

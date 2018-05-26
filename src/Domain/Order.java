@@ -22,17 +22,19 @@ public class Order {
     private String productoId;
     private String quantity;
     private String total;
+    private Date currentDate;
 
     public Order() {
     }
 
-    public Order(String id, String clientId, String restaurantId, String productoId, String quantity, String total) {
+    public Order(String id, String clientId, String restaurantId, String productoId, String quantity, String total, Date currentDate) {
         this.id = id;
         this.clientId = clientId;
         this.restaurantId = restaurantId;
         this.productoId = productoId;
         this.quantity = quantity;
         this.total = total;
+        this.currentDate = currentDate;
     }
 
     public String getId() {
@@ -81,6 +83,14 @@ public class Order {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
     }
 
 }

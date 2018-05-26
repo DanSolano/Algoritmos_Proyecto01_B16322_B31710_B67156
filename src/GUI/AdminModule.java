@@ -678,7 +678,7 @@ public class AdminModule extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showSaveDialog(this);
         kindChart().draw(graphic, new Rectangle(0, 0, 612, 468));
-        //chart.areaChart.draw(graphic, new Rectangle(0, 0, 612, 468));
+       
         pdfDoc.writeToFile(new File(chooser.getSelectedFile() + ".pdf"));
         JOptionPane.showMessageDialog(null, "El archivo se a guardado Exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 

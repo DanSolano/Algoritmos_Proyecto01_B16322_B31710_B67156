@@ -6,6 +6,7 @@
 package Main;
 
 import ADT.Stack.LinkedStack;
+import Data.ChartData;
 import Domain.Client;
 import Exceptions.ListException;
 import GUI.Login;
@@ -50,8 +51,9 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
         RESTAURANT_LIST = ld.getRestaurants();
         AGENT_LIST = ld.getAgents();
         ADMIN_LIST = ld.getAdministrators();
-
-        try {
+//         ChartData chart = new ChartData();
+//         chart.reportList();
+         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
         } catch (Exception ex) {
