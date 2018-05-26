@@ -37,6 +37,7 @@ public class ListOrder extends javax.swing.JFrame {
         initComponents();
         this.orders = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
         fillJtClient(this.orders);
+        
     }
 
     /**
@@ -153,6 +154,7 @@ public class ListOrder extends javax.swing.JFrame {
         model.addColumn("Producto");
         model.addColumn("Cantidad");
         model.addColumn("Total");
+        model.addColumn("Fecha");
 
         this.jtAgents.setModel(model);
 
@@ -165,18 +167,18 @@ public class ListOrder extends javax.swing.JFrame {
                     String nameClient = getDataById.getClientName(order.getClientId());
                     String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
                     String nameProduct = getDataById.getproductName(order.getProductoId());
-                    model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
+                    model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal(),order.getCurrentDate()});
                     Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                            order.getQuantity(), order.getTotal(),order.getCurrentDate());
+                             order.getQuantity(), order.getTotal(),order.getCurrentDate());
                     auxStack.push(auxOrder);
                 }
                 Order order = (Order) orders.pop();
                 String nameClient = getDataById.getClientName(order.getClientId());
                 String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
                 String nameProduct = getDataById.getproductName(order.getProductoId());
-                model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal()});
+                model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal(),order.getCurrentDate()});
                 Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                        order.getQuantity(), order.getTotal(),order.getCurrentDate());
+                         order.getQuantity(), order.getTotal(),order.getCurrentDate());
                 auxStack.push(auxOrder);
                 Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = auxStack;
             } catch (StackException ex) {
