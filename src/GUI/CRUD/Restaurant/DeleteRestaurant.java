@@ -5,6 +5,8 @@
  */
 package GUI.CRUD.Restaurant;
 
+import ADT.LinkedList.DoubleLinkedCircularList;
+import Domain.Products;
 import Domain.Restaurant;
 import Domain.Restaurant;
 import GUI.AdminModule;
@@ -27,6 +29,7 @@ public class DeleteRestaurant extends javax.swing.JFrame {
     private TextAutoCompleter textAutocompleter;
     private int indexUser;
     private Restaurant restaurantSearch;
+    private ArrayList<Products> allProducts;
 
     /**
      * Creates new form CreateRestaurant
@@ -35,6 +38,7 @@ public class DeleteRestaurant extends javax.swing.JFrame {
         initComponents();
         this.indexUser = -1;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
         jbDelete.setEnabled(false);
         autoCompleter();
 
@@ -203,36 +207,13 @@ public class DeleteRestaurant extends javax.swing.JFrame {
      * @return true if the String is a email and false if the String is not an
      * email
      */
-    private boolean isMail(String email) {
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
-        Matcher mather = pattern.matcher(email);
-
-        if (mather.find() == true) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
     private void back() {
+        Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST = this.restaurants;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST = this.allProducts;
+
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
-    }
-
-    private boolean exist(String user) {
-        boolean exist = false;
-        for (Restaurant restaurant : restaurants) {
-            if (restaurant.getId().equals(user)) {
-                exist = true;
-            }
-        }
-        return exist;
     }
 
     private void uploadSearchByUser() {
@@ -260,48 +241,53 @@ public class DeleteRestaurant extends javax.swing.JFrame {
 
     private void clearFields() {
         jtfUser.setText("");
-        jlInformation.setText("Rest Eliminado");
+        jlInformation.setText("Restaurante Eliminado");
     }
 
     private void delete() {
         this.restaurants.remove(this.indexUser);
+        if (!this.restaurants.contains(this.restaurantSearch)) {
 
-        File folder = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId() + "/");
-        System.out.println(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId());
+            File folder = new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId() + "/");
+            System.out.println(folder);//StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId());
 
-        funcionEliminarCarpeta1(new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId()));
+            functionDeleteFolder(new File(StringPath.PATH_REST_PHOTO + restaurantSearch.getName() + restaurantSearch.getId()));
 
-//        String[] f = folder.list();
-//        for (int i = 0; i <= f.length; i++) {
-//            File folde = f[i];
-//            if (folder.delete()) {
-//                jlInformation.setText("Restaurante Eliminado con exito.");
-//            } else {
-//                jlInformation.setText("Restaurante NO Eliminado.");
-//            }
-//        }
-        jbDelete.setEnabled(false);
-        clearFields();
+            jbDelete.setEnabled(false);
+            clearFields();
+            deleteMenuRestaurant(this.restaurantSearch);
+            jlInformation.setText("El restaurante fue eliminado exitosamente");
+        }
     }
 
-    private void funcionEliminarCarpeta1(File pArchivo) {
-        if (!pArchivo.exists()) {
+    private void functionDeleteFolder(File folderToDelete) {
+        if (!folderToDelete.exists()) {
             return;
         }
 
-        if (pArchivo.isDirectory()) {
-            for (File f : pArchivo.listFiles()) {
-                funcionEliminarCarpeta1(f);
+        if (folderToDelete.isDirectory()) {
+            for (File f : folderToDelete.listFiles()) {
+                functionDeleteFolder(f);
             }
         }
-        pArchivo.delete();
-    } // Cerramos funcio
+        folderToDelete.delete();
+    }
 
     private void autoCompleter() {
         textAutocompleter = new TextAutoCompleter(jtfUser);
         textAutocompleter.setCaseSensitive(false);
         textAutocompleter.setMode(0);//para que el autocompletar busque el fragmento escrito este contenido en alguna parte de la busqueda
         uploadSearchByUser();
+    }
+
+    private void deleteMenuRestaurant(Restaurant restaurantSearch) {
+
+        for (Products aProduct : this.allProducts) {
+            if (aProduct.getIdRestaurant().equals(restaurantSearch.getId())) {
+                this.allProducts.remove(aProduct);
+
+            }//if
+        }//for
     }
 
 }
