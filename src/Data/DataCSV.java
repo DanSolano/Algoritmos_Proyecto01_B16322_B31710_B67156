@@ -5,6 +5,7 @@ import Domain.Client;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
+import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
@@ -17,6 +18,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -90,6 +93,8 @@ public class DataCSV {
         return users;
 
     }
+
+ 
 
     public ArrayList<Restaurant> readRestaurants() {
         ArrayList<Object> list = readCSV();
@@ -186,15 +191,24 @@ public class DataCSV {
                         objeclArrList.add(new Driver(id, name, lastNameA, lastNameB, age, kindVehicle, phoneNumber, vehiclePlate, dni));
                     } else if (path.equals(StringPath.PATH_ORDER)) {
 
-                        //ID,Nombre,Apellido1,Apellido 2,Edad,tipo,Telefono,Placa vehículo,Cédula
+                        //ID,Nombre,Apellido1,Apellido 2,Edad,tipo,Telefono,Placa vehículo,Cédula, Fecha
                         String id = dataImport.get(0);
                         String clientId = dataImport.get(1);
                         String restaurantId = dataImport.get(2);
                         String productId = dataImport.get(3);
                         String quantity = dataImport.get(4);
                         String totalItems = dataImport.get(5);
+                        String orderDate = dataImport.get(6);
 
-                        objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems));
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        try {
+                            Date date = format.parse(orderDate);
+                            objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems, date));
+                        } catch (ParseException ex) {
+                            Logger.getLogger(DataCSV.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
                     }
 
                 }

@@ -7,6 +7,7 @@ package GUI.CRUD.Restaurant;
 
 import Domain.Restaurant;
 import GUI.AdminModule;
+import GUI.CRUD.Restaurant.Products.CreateProduct;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.ImageManage;
 import Utilities.StringPath;
@@ -33,14 +34,17 @@ public class CreateRestaurant extends javax.swing.JFrame {
     BufferedImage bi;
     File archivoelegido;
     private boolean flag;
+    private Restaurant restaurantCreated;
 
     /**
      * Creates new form CreateClient
      */
     public CreateRestaurant() {
+        restaurantCreated = new Restaurant();
         initComponents();
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         this.idCountRest = 1;
+
 //        jbSave.setEnabled(false);
     }
 
@@ -65,6 +69,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Crear Nuevo Agente");
@@ -102,10 +107,17 @@ public class CreateRestaurant extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Crear");
+        jButton4.setText("Crear Restaurante");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Agregar Productos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -120,6 +132,7 @@ public class CreateRestaurant extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -131,31 +144,30 @@ public class CreateRestaurant extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(49, 49, 49)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel1))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtfName)
-                                            .addComponent(jtfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jbChargeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(26, 26, 26)
-                                            .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(26, 26, 26)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfName)
+                                    .addComponent(jtfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jbChargeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jButton3)
-                                .addGap(96, 96, 96)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(48, 48, 48)
                                 .addComponent(jButton4)))
                         .addGap(0, 298, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -179,14 +191,12 @@ public class CreateRestaurant extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbChargeImage))
-                .addGap(35, 35, 35)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(38, 38, 38)))
+                .addGap(44, 44, 44)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1))
+                .addGap(38, 38, 38)
                 .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
@@ -272,7 +282,12 @@ public class CreateRestaurant extends javax.swing.JFrame {
                             File directorio = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/");
                             directorio.mkdirs();
                         }
-                        restaurants.add(new Restaurant(this.idCountRest + "", name, location, province));
+                        this.restaurantCreated.setId(this.idCountRest + "");
+                        this.restaurantCreated.setName(name);
+                        this.restaurantCreated.setLocation(location);
+                        this.restaurantCreated.setProvince(province);
+                        this.restaurants.add(this.restaurantCreated);
+
                         jtfName.setText("");
                         jtfLocation.setText("");
                         jcbProvince.setSelectedIndex(0);
@@ -302,8 +317,16 @@ public class CreateRestaurant extends javax.swing.JFrame {
         back();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST = this.restaurants;
+        CreateProduct createProduct = new CreateProduct(this.restaurantCreated);
+        this.dispose();
+        createProduct.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;

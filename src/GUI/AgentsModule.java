@@ -1055,7 +1055,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
         productsShow = productsDrink0;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1083,7 +1083,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
         productsShow = productsDrink1;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1110,7 +1110,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
         productsShow = productsDrink2;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1137,7 +1137,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
         productsShow = productsDrink3;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1164,7 +1164,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks4MouseReleased
         productsShow = productsDrink4;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1242,7 +1242,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private void jLFood0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood0MouseReleased
         // TODO add your handling code here:
         productsShow = productsFood0;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1269,7 +1269,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood1MouseReleased
         productsShow = productsFood1;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1296,7 +1296,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood2MouseReleased
         productsShow = productsFood2;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1323,7 +1323,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood3MouseReleased
         productsShow = productsFood3;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1350,7 +1350,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood4MouseReleased
         productsShow = productsFood4;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1387,7 +1387,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert0MouseReleased
         productsShow = productsDesserts0;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1414,7 +1414,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert1MouseReleased
         productsShow = productsDesserts1;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1441,7 +1441,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts2MouseReleased
         productsShow = productsDesserts2;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1468,7 +1468,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts3MouseReleased
         productsShow = productsDesserts3;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1495,7 +1495,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts4MouseReleased
         productsShow = productsDesserts4;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1542,7 +1542,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious0MouseReleased
         productsShow = productsVarious0;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1569,7 +1569,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious1MouseReleased
         productsShow = productsVarious1;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1596,7 +1596,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious2MouseReleased
         productsShow = productsVarious2;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1623,7 +1623,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious3MouseReleased
         productsShow = productsVarious3;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1650,7 +1650,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious4MouseReleased
         productsShow = productsVarious4;
-        order = new Order(IdOrder + "", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice());
+        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
