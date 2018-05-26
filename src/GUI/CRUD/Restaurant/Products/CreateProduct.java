@@ -38,7 +38,10 @@ public class CreateProduct extends javax.swing.JFrame {
     private boolean flag;
     private String selectedProvince;
     private String selectedLocation;
+    private ArrayList<String> arrayLocations;
     private String selectedRestaurantName;
+    private ArrayList<String> arrayRestaurantsNames;
+
     private Restaurant selectedRestaurant;
 
     /**
@@ -49,6 +52,9 @@ public class CreateProduct extends javax.swing.JFrame {
         this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         this.idCountRest = 1;
+        this.selectedLocation = new String();
+        this.arrayRestaurantsNames = new ArrayList<String>();
+        this.arrayLocations = new ArrayList<String>();
         this.selectedRestaurant = new Restaurant("", "", "", "");
         jcbLocation.addItem("Seleccione la Ubicacion");
         jcbLocation.setSelectedItem(0);
@@ -63,9 +69,8 @@ public class CreateProduct extends javax.swing.JFrame {
         jcbProvince.setSelectedItem(this.selectedRestaurant.getProvince());
         fillJCBLocation();
         jcbLocation.addItem("Seleccione la Ubicacion");
-        jcbLocation.setSelectedItem(this.selectedRestaurant.getLocation());
-        filJCBRestaurants();
-        jCBRestaurant.setSelectedItem(this.selectedRestaurant.getName());
+        jcbLocation.setSelectedItem(this.selectedRestaurant.getLocation() + "-" + this.selectedRestaurant.getName());
+
 //        jbSave.setEnabled(false);
     }
 
@@ -90,12 +95,10 @@ public class CreateProduct extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jcbProvince = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jcbLocation = new javax.swing.JComboBox<>();
-        jCBRestaurant = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Crear Nuevo Agente");
@@ -141,8 +144,6 @@ public class CreateProduct extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Restaurante:");
-
         jcbProvince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la Provincia", "San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón" }));
         jcbProvince.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,15 +153,14 @@ public class CreateProduct extends javax.swing.JFrame {
 
         jLabel10.setText("Provincia:");
 
-        jLabel11.setText("Ubicacion:");
+        jLabel11.setText("Restaurante:");
 
+        jcbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Restaurante" }));
         jcbLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbLocationActionPerformed(evt);
             }
         });
-
-        jCBRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jDesktopPane1.setLayer(jlInformation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbChargeImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -173,12 +173,10 @@ public class CreateProduct extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jcbProvince, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jcbLocation, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jCBRestaurant, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -187,45 +185,43 @@ public class CreateProduct extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
                                 .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(26, 26, 26)
-                                .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(26, 26, 26)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbChargeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jcbTypeProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(26, 26, 26)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCBRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(jButton3)
-                                .addGap(100, 100, 100)
-                                .addComponent(jButton4))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                    .addGap(38, 38, 38)
+                                    .addComponent(jButton3)
+                                    .addGap(100, 100, 100)
+                                    .addComponent(jButton4))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(jtfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(26, 26, 26)
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                            .addComponent(jlDriverImage, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jbChargeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jcbTypeProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)))
+                        .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -240,10 +236,6 @@ public class CreateProduct extends javax.swing.JFrame {
                     .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jCBRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,7 +255,7 @@ public class CreateProduct extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -272,14 +264,11 @@ public class CreateProduct extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -334,6 +323,9 @@ public class CreateProduct extends javax.swing.JFrame {
         } else {
             if (isDirectory()) {
 
+                String[] p = this.selectedLocation.split("-");
+                System.out.println("Loacation " + p[0] + "   Name   " + p[1]);
+
                 String name = jtfName.getText().trim();
                 String idRest = jtfPrice.getText().trim();
                 String province = jcbTypeProduct.getSelectedItem().toString();
@@ -349,7 +341,7 @@ public class CreateProduct extends javax.swing.JFrame {
                             File directorio = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/");
                             directorio.mkdirs();
                         }
-//                        allProducts.add(new Products(this.idCountRest + "", name, idRest, province));
+                        //allProducts.add(new Products(this.idCountRest + "", name, idRest, province));
                         jtfName.setText("");
                         jtfPrice.setText("");
                         jcbTypeProduct.setSelectedIndex(0);
@@ -381,27 +373,25 @@ public class CreateProduct extends javax.swing.JFrame {
 
     private void jcbProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProvinceActionPerformed
         this.selectedProvince = jcbProvince.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, this.selectedProvince);
         fillJCBLocation();
+        JOptionPane.showMessageDialog(null, this.selectedProvince);
     }//GEN-LAST:event_jcbProvinceActionPerformed
 
     private void jcbLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLocationActionPerformed
-        this.selectedLocation = jcbLocation.getSelectedIndex() + "";
-        JOptionPane.showMessageDialog(null, this.selectedLocation);
-        filJCBRestaurants();
+        this.selectedLocation = (String) jcbLocation.getSelectedItem();
+        System.out.println(this.selectedLocation);
+//        filJCBRestaurants(this.selectedLocation);
     }//GEN-LAST:event_jcbLocationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jCBRestaurant;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbChargeImage;
     private javax.swing.JComboBox<String> jcbLocation;
@@ -465,56 +455,61 @@ public class CreateProduct extends javax.swing.JFrame {
         ArrayList<String> locations = new ArrayList<>();
         for (Restaurant restaurant : restaurants) {
             String location = restaurant.getLocation();
+            String restName = restaurant.getName();
             System.out.println("LOCATIONS: " + location);
 //            this.selectedProvince = jcbProvince.getSelectedItem().toString();
             if (locations.isEmpty() && (!locations.contains(location) && this.selectedProvince.equals(restaurant.getProvince()))) {
-                locations.add(location);
+//                locations.add(location);
+                locations.add(location + "-" + restName);
                 System.out.println("LOCATIONS IF ELSE");
 
             } else if (!locations.contains(location) && this.selectedProvince.equals(restaurant.getProvince())) {
-                locations.add(location);
+//                locations.add(location);
+                locations.add(location + "-" + restName);
                 System.out.println("LOCATIONS ELSE IF");
             }
         }
         for (String location : locations) {
             jcbLocation.addItem(location);
+            this.arrayLocations.add(location);
         }
     }
 
-    private void filJCBRestaurants() {
-        System.out.println("\n---------------------------------------------" + "jcbLocation:" + jcbLocation.getSelectedItem());
-        jCBRestaurant.removeAllItems();
-        jCBRestaurant.addItem("Seleccione el Restaurante");
-        jCBRestaurant.setSelectedItem(0);
-        ArrayList<String> restaurantsNames = new ArrayList<>();
-
-        for (Restaurant restaurant : restaurants) {
-            if (this.selectedProvince == null) {
-                JOptionPane.showMessageDialog(null, restaurant.getProvince() + selectedProvince);
-                break;
-            }
-            String restaurantName = restaurant.getName();
-            System.out.println("Restaurants: " + restaurantName);
-//            if (jcbLocation.getSelectedIndex() == 0 || jcbLocation.getSelectedItem().toString() == null) {
-            if (restaurantsNames.isEmpty()) {
-//                JOptionPane.showMessageDialog(null, restaurant.getProvince() + "---selectedProvince: " + this.selectedProvince);
-                if ((!restaurantsNames.contains(restaurantName)
-                        && this.selectedProvince.equals(restaurant.getProvince())
-                        && this.selectedLocation.equals(restaurant.getLocation()))) {
-                    restaurantsNames.add(restaurantName);
-                    System.out.println("RESTAURANTS IF ELSE");
-                }
-            } else if (!restaurantsNames.contains(restaurantName)
-                    && this.selectedProvince.equals(restaurant.getProvince())
-                    && this.selectedLocation.equals(restaurant.getLocation())) {
-                restaurantsNames.add(restaurantName);
-                System.out.println("RESTAURANTS ELSE IF");
-            }
+//    private void filJCBRestaurants(String e) {
+//        this.selectedLocation = e;
+//        System.out.println("\n---------------------------------------------" + "jcbLocation:" + this.selectedLocation);
+//        jCBRestaurant.removeAllItems();
+//        jCBRestaurant.addItem("Seleccione el Restaurante");
+//        jCBRestaurant.setSelectedItem(0);
+//        ArrayList<String> restaurantsNames = new ArrayList<>();
+//
+//        for (Restaurant restaurant : restaurants) {
+//            if (this.selectedProvince == null) {
+//                JOptionPane.showMessageDialog(null, restaurant.getProvince() + selectedProvince);
+//                break;
 //            }
-        }
-        for (String restaurant : restaurantsNames) {
-            jCBRestaurant.addItem(restaurant);
-        }
-    }
-
+//            String restaurantName = restaurant.getName();
+//            System.out.println("Restaurants: " + restaurantName);
+////            if (jcbLocation.getSelectedIndex() == 0 || jcbLocation.getSelectedItem().toString() == null) {
+//            if (restaurantsNames.isEmpty()) {
+////                JOptionPane.showMessageDialog(null, restaurant.getProvince() + "---selectedProvince: " + this.selectedProvince);
+//                if ((!restaurantsNames.contains(restaurantName)
+//                        && this.selectedProvince.equals(restaurant.getProvince())
+//                        && this.selectedLocation.equals(restaurant.getLocation()))) {
+//                    restaurantsNames
+//                            .add(restaurantName);
+//                    System.out.println("RESTAURANTS IF ELSE");
+//                }
+//            } else if (!restaurantsNames.contains(restaurantName)
+//                    && this.selectedProvince.equals(restaurant.getProvince())
+//                    && this.selectedLocation.equals(restaurant.getLocation())) {
+//                restaurantsNames.add(restaurantName);
+//                System.out.println("RESTAURANTS ELSE IF");
+//            }
+////            }
+//        }
+//        for (String restaurant : restaurantsNames) {
+//            jCBRestaurant.addItem(restaurant);
+//        }
+//    }
 }
