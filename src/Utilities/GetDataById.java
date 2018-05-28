@@ -35,6 +35,32 @@ public class GetDataById {
         return name;
     }
 
+    public Restaurant getRestaurantById(String idRestaurant) {
+        ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        Restaurant restSearch = new Restaurant();
+        for (Restaurant restaurant : rest) {
+            if (restaurant.getId().equals(idRestaurant)) {
+                restSearch = restaurant;
+                break;
+
+            }
+        }
+        return restSearch;
+    }
+
+    public String getRestaurantIdByNameAndLocation(String nameRestaurant, String address, String Province) {
+        ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        String id = "";
+        for (Restaurant restaurant : rest) {
+            if (restaurant.getName().equals(nameRestaurant) && restaurant.getLocation().equals(address) && restaurant.getProvince().equals(Province)) {
+                id = restaurant.getId();
+                break;
+
+            }
+        }
+        return id;
+    }
+
     public String getClientName(String clientId) {
         LinkedList<Client> clients = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
         String name = "";

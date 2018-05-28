@@ -236,10 +236,10 @@ public class DataCSV {
         if (isDirectory()) {
 
             if (alreadyExists) {
-                File ArchivoEmpleados = new File(outputFile);
-                File directorio = new File(StringPath.PATH_DIR);
-                directorio.mkdir();
-                ArchivoEmpleados.delete();
+                File file = new File(outputFile);
+                File dir = new File(StringPath.PATH_DIR);
+                dir.mkdir();
+                file.delete();
             }
 
             try {

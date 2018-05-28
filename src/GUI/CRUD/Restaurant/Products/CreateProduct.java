@@ -5,10 +5,12 @@
  */
 package GUI.CRUD.Restaurant.Products;
 
+import ADT.LinkedList.DoubleLinkedCircularList;
 import Domain.Products;
 import Domain.Restaurant;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.GetDataById;
 import Utilities.ImageManage;
 import Utilities.StringPath;
 import java.awt.image.BufferedImage;
@@ -32,7 +34,7 @@ public class CreateProduct extends javax.swing.JFrame {
 
     private ArrayList<Products> allProducts = new ArrayList<>();
     private ArrayList<Restaurant> restaurants = new ArrayList<>();
-    private int idCountRest;
+    private int idCountProd;
     private BufferedImage bi;
     private File archivoelegido;
     private boolean flag;
@@ -51,7 +53,7 @@ public class CreateProduct extends javax.swing.JFrame {
         initComponents();
         this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
-        this.idCountRest = 1;
+        this.idCountProd = 1;
         this.selectedLocation = new String();
         this.arrayRestaurantsNames = new ArrayList<String>();
         this.arrayLocations = new ArrayList<String>();
@@ -64,7 +66,7 @@ public class CreateProduct extends javax.swing.JFrame {
     public CreateProduct(Restaurant r) {
         initComponents();
         this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
-        this.idCountRest = 1;
+        this.idCountProd = 1;
         this.selectedRestaurant = r;
         jcbProvince.setSelectedItem(this.selectedRestaurant.getProvince());
         fillJCBLocation();
@@ -123,6 +125,11 @@ public class CreateProduct extends javax.swing.JFrame {
         jlDriverImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jcbTypeProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el tipo de producto", "Bebidas", "Comida", "Postres", "Otros" }));
+        jcbTypeProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTypeProductActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Tipo");
 
@@ -324,32 +331,57 @@ public class CreateProduct extends javax.swing.JFrame {
             if (isDirectory()) {
 
                 String[] p = this.selectedLocation.split("-");
-                System.out.println("Loacation " + p[0] + "   Name   " + p[1]);
+                String location = p[0];
+                String restaurantName = p[1];
 
-                String name = jtfName.getText().trim();
-                String idRest = jtfPrice.getText().trim();
-                String province = jcbTypeProduct.getSelectedItem().toString();
-                if (!existProduct(name, idRest, province)) {
+                String productName = jtfName.getText().trim();
+                String priceProduct = jtfPrice.getText().trim();
+                int productType = jcbTypeProduct.getSelectedIndex() - 1;
+                System.out.println("Loacation " + location + "   Name   " + restaurantName);
+                GetDataById getDataById = new GetDataById();
+                String idRestaurant = getDataById.getRestaurantIdByNameAndLocation(restaurantName, location, this.selectedProvince);
+                Restaurant selectedRestaurant = getDataById.getRestaurantById(idRestaurant);
+
+                if (!existProduct(productName, priceProduct, idRestaurant)) {
                     try {
 
-                        this.idCountRest = 1;
-                        while (existRestId(idCountRest)) {
-                            this.idCountRest++;
+                        this.idCountProd = 1;
+                        while (existRestId(idCountProd)) {
+                            this.idCountProd++;
                         }
-                        boolean alreadyExists = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/").exists();
+                        boolean alreadyExists = new File(StringPath.PATH_REST_PHOTO + restaurantName + idRestaurant + "/" + this.idCountProd + productName + ".jpg").exists();
                         if (!alreadyExists) {
-                            File directorio = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/");
+                            File directorio = new File(StringPath.PATH_REST_PHOTO + restaurantName + idRestaurant + "/" + this.idCountProd + productName + ".jpg");
                             directorio.mkdirs();
                         }
                         //allProducts.add(new Products(this.idCountRest + "", name, idRest, province));
                         jtfName.setText("");
                         jtfPrice.setText("");
                         jcbTypeProduct.setSelectedIndex(0);
-                        File outputfile = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/" + archivoelegido.getName());
-                        File outputfile2 = new File(StringPath.PATH_REST_PHOTO + name + this.idCountRest + "/" + name + ".jpg");//
+                        File outputfile = new File(StringPath.PATH_REST_PHOTO + restaurantName + idRestaurant + "/" + archivoelegido.getName());
+                        File outputfile2 = new File(StringPath.PATH_REST_PHOTO + restaurantName + idRestaurant + "/" + this.idCountProd + productName + ".jpg");//
                         if (outputfile2.exists()) {
                             outputfile2.delete();
                         }
+                        Products prod = new Products(this.idCountProd + "", idRestaurant, productName, priceProduct, productType + "");
+                        if (productType == 0) {
+                            DoubleLinkedCircularList drinkAux = selectedRestaurant.getDrinks();
+                            drinkAux.insert(prod);
+                            this.allProducts.add(prod);
+                        } else if (productType == 1) {
+                            DoubleLinkedCircularList foodsAux = selectedRestaurant.getFoods();
+                            foodsAux.insert(prod);
+                            this.allProducts.add(prod);
+                        } else if (productType == 2) {
+                            DoubleLinkedCircularList dessertsAux = selectedRestaurant.getDesserts();
+                            dessertsAux.insert(prod);
+                            this.allProducts.add(prod);
+                        } else if (productType == 3) {
+                            DoubleLinkedCircularList othersAux = selectedRestaurant.getOthers();
+                            othersAux.insert(prod);
+                            this.allProducts.add(prod);
+                        }
+
                         ImageIO.write(bi, "png", outputfile);
                         boolean correcto = outputfile.renameTo(outputfile2);
                         if (correcto) {
@@ -382,6 +414,10 @@ public class CreateProduct extends javax.swing.JFrame {
         System.out.println(this.selectedLocation);
 //        filJCBRestaurants(this.selectedLocation);
     }//GEN-LAST:event_jcbLocationActionPerformed
+
+    private void jcbTypeProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTypeProductActionPerformed
+        //   JOptionPane.showMessageDialog(null, jcbTypeProduct.getSelectedIndex());
+    }//GEN-LAST:event_jcbTypeProductActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
