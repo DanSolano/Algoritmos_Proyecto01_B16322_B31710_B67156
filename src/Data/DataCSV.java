@@ -5,17 +5,16 @@ import Domain.Client;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
-import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
+import Exceptions.ListException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
 import Utilities.StringPath;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.ParseException;
@@ -23,11 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  * Class to read CSV files on Java. We use javacsv.jar to read it.
@@ -38,14 +35,11 @@ public class DataCSV {
 
     // Propiedades
     private String path;
-    DoubleLinkedCircularList drinks;
-    DoubleLinkedCircularList foods;
-    DoubleLinkedCircularList desserts;
-    DoubleLinkedCircularList others;
-    // Constructor
 
+    // Constructor
     public DataCSV(String path) {
         this.path = path;
+
     }
 
     public LinkedList<Client> readClient() {
@@ -93,8 +87,6 @@ public class DataCSV {
         return users;
 
     }
-
- 
 
     public ArrayList<Restaurant> readRestaurants() {
         ArrayList<Object> list = readCSV();
@@ -144,15 +136,6 @@ public class DataCSV {
 
                         objeclArrList.add(new User(name, userName, mail, password, code, kindUser));
 
-                    } else if (path.equals(StringPath.PATH_RESTAURANT)) {
-                        String dni = dataImport.get(0);
-                        String name = dataImport.get(1);
-                        String location = dataImport.get(2);
-                        String province = dataImport.get(3);
-                        this.distributeProducts(dni);
-
-                        objeclArrList.add(new Restaurant(dni, name, location, province, this.drinks, this.foods, this.desserts, this.others));
-
                     } else if (path.equals(StringPath.PATH_PRODUCTS)) {
                         String id = dataImport.get(0);
                         String idRestaurant = dataImport.get(1);
@@ -161,6 +144,14 @@ public class DataCSV {
                         String typeProduct = dataImport.get(4);
 
                         objeclArrList.add(new Products(id, idRestaurant, name, price, typeProduct));
+
+                    } else if (path.equals(StringPath.PATH_RESTAURANT)) {
+                        String dni = dataImport.get(0);
+                        String name = dataImport.get(1);
+                        String location = dataImport.get(2);
+                        String province = dataImport.get(3);
+
+                        objeclArrList.add(new Restaurant(dni, name, location, province));
 
                     } else if (path.equals(StringPath.PATH_CLIENT)) {
 
@@ -382,31 +373,6 @@ public class DataCSV {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void distributeProducts(String dni) {
-
-        ArrayList<Products> list = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
-        this.drinks = new DoubleLinkedCircularList();//0
-        this.foods = new DoubleLinkedCircularList();//1
-        this.desserts = new DoubleLinkedCircularList();//2
-        this.others = new DoubleLinkedCircularList();//3
-
-        for (Products object : list) {
-            Products product = (Products) object;
-            int typeProd = Integer.parseInt(product.getTypeProduct());
-            if (typeProd == 0 && product.getId().equals(dni)) {
-                this.drinks.insert(product);
-            } else if (typeProd == 1 && product.getId().equals(dni)) {
-                this.foods.insert(product);
-            } else if (typeProd == 2 && product.getId().equals(dni)) {
-                this.desserts.insert(product);
-            } else if (typeProd == 3 && product.getId().equals(dni)) {
-                this.others.insert(product);
-            }
-
-        }
-
     }
 
     private boolean isDirectory() {
