@@ -22,12 +22,12 @@ public class Order {
     private String productoId;
     private String quantity;
     private String total;
-    private Date currentDate;
+    private String currentDate;
 
     public Order() {
     }
 
-    public Order(String id, String clientId, String restaurantId, String productoId, String quantity, String total, Date currentDate) {
+    public Order(String id, String clientId, String restaurantId, String productoId, String quantity, String total, String currentDate) {
         this.id = id;
         this.clientId = clientId;
         this.restaurantId = restaurantId;
@@ -85,12 +85,14 @@ public class Order {
         this.total = total;
     }
 
-    public Date getCurrentDate() {
+    public String getCurrentDate() {
         return currentDate;
     }
 
-    public void setCurrentDate(Date currentDate) {
+    public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
     }
+
+    
 
 }

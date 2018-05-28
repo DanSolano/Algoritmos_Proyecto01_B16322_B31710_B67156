@@ -11,10 +11,20 @@ import Exceptions.StackException;
 import GUI.CRUD.Order.ListOrder;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.GetDataById;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 /**
  *
@@ -27,7 +37,8 @@ public class GeneralControl extends javax.swing.JFrame {
      */
     DefaultTableModel model;
     LinkedStack orders;
-
+    private File file;
+    
     public GeneralControl() {
         initComponents();
         this.orders = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
@@ -184,11 +195,44 @@ public class GeneralControl extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showSaveDialog(this); 
+        this.file = new File(chooser.getSelectedFile()+".xls");
+        try {
+//Nuestro flujo de salida para apuntar a donde vamos a escribir 
+            DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
+
+//Representa nuestro archivo en excel y necesita un OutputStream para saber donde va locoar los datos 
+            WritableWorkbook w = Workbook.createWorkbook(out);
+            WritableSheet s = w.createSheet("Hoja 1", 0);
+            
+            for (int i = 0; i < jTable1.getColumnCount(); i++) {
+                for (int j = 0; j < jTable1.getRowCount(); j++) {
+                    Object objeto = jTable1.getValueAt(j, i);
+                    s.addCell(new Label(i,j,String.valueOf(objeto)));
+                }
+            }
+//Como excel tiene muchas hojas esta crea o toma la hoja 
+//Coloca el nombre del "tab" y el indice del tab 
+
+            w.write();
+//Cerramos el WritableWorkbook y DataOutputStream 
+            w.close();
+            out.close();
+
+//si todo sale bien salimos de aqui con un true  
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (WriteException ex) {
+            Logger.getLogger(GeneralControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//Si llegamos hasta aqui algo salio mal 
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       back();
+        back();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -197,7 +241,7 @@ public class GeneralControl extends javax.swing.JFrame {
     public void fillJtorbders(LinkedStack orders) {
         LinkedStack auxStack = new LinkedStack();
         model = new DefaultTableModel();
-
+        
         model.addColumn("Cliente");
         model.addColumn("Número de Orden");
         model.addColumn("Agente");
@@ -206,9 +250,9 @@ public class GeneralControl extends javax.swing.JFrame {
         model.addColumn("Provincica");
         model.addColumn("Direccion");
         model.addColumn("Conductor");
-
+        
         this.jTable1.setModel(model);
-
+        
         if (!orders.isEmpty()) {
             GetDataById getDataById = new GetDataById();
             ArrayList<Order> tempOrder = new ArrayList<Order>();
@@ -224,9 +268,9 @@ public class GeneralControl extends javax.swing.JFrame {
                 } catch (StackException ex) {
                     Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
             }
-
+            
             for (int i = tempOrder.size() - 1; i >= 0; i--) {
                 Order order1 = tempOrder.get(i);
                 try {
@@ -235,16 +279,16 @@ public class GeneralControl extends javax.swing.JFrame {
                     Logger.getLogger(ListOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            
         }
-}//Fin metodo que llena la tabla
-    
-  private void back() {
+    }//Fin metodo que llena la tabla
+
+    private void back() {
         this.dispose();
         AdminModule adminModule = new AdminModule();
         adminModule.setVisible(true);
-    }  
-    
+    }
+
 //        if (!orders.isEmpty()) {
 //            GetDataById getDataById = new GetDataById();
 //            try {
@@ -270,8 +314,6 @@ public class GeneralControl extends javax.swing.JFrame {
 //                System.err.println("Error de lectura de las ordenes");
 //            }
 //        }
-    
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
