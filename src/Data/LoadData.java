@@ -15,11 +15,22 @@ import Domain.Report;
 import Domain.Restaurant;
 import Domain.User;
 import Exceptions.StackException;
+import GUI.Login;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.REPORT_FROM_ORDER_DETAIL;
+import static Main.Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
 import Utilities.StringPath;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
+import javax.swing.UIManager;
 import javax.xml.soap.Detail;
 
 /**
@@ -28,60 +39,76 @@ import javax.xml.soap.Detail;
  */
 public class LoadData {
 
-    ArrayList<Detail> DETAIL_LIST;
+    public static ThreadSaveAnyNSeconds threadSaveAnyNSeconds;
 
-    ArrayList<Order> ORDER_DETAIL_LIST;
-    DoubleLinkedCircularList DRINK_LIST;
-    DoubleLinkedCircularList FOOD_LIST;
-    DoubleLinkedCircularList DESSERT_LIST;
-    DoubleLinkedCircularList OTHER_LIST;
+    public LoadData() throws StackException {
 
-    public LoadData() {
+        getClients();
+        getDrivers();
+        getRestaurants();
+        getProducts();
+        getAgents();
+        getAdministrators();
+        getOrdersDetails();
+        getReports();
+
+        threadSaveAnyNSeconds = new ThreadSaveAnyNSeconds();
+        threadSaveAnyNSeconds.start();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        } catch (Exception ex) {
+        }
+
+        Login login = new Login();
+        login.setVisible(true);
+
     }
 
-    public LinkedList<Client> getClients() {
+    public void getClients() {
         DataCSV clientCSV = new DataCSV(StringPath.PATH_CLIENT);
         LinkedList<Client> clients = new LinkedList<Client>();
         clients = clientCSV.readClient();
-        return clients;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST = clients;
+        //    return clients;
     }
 
-    public Queue<Driver> getDrivers() {
+    public void getDrivers() {
         DataCSV driverCSV = new DataCSV(StringPath.PATH_DRIVER);
         Queue<Driver> drivers = new LinkedList<Driver>();
         drivers = (Queue<Driver>) driverCSV.readDrivers();
-        return drivers;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE = drivers;
     }
 
-    public ArrayList<Restaurant> getRestaurants() {
+    public void getRestaurants() {
         DataCSV restaurantCSV = new DataCSV(StringPath.PATH_RESTAURANT);
         ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         restaurants = (ArrayList<Restaurant>) restaurantCSV.readRestaurants();
-        return restaurants;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST = restaurants;
     }
 
-    public ArrayList<Products> getProducts() {
+    public void getProducts() {
         DataCSV productsCSV = new DataCSV(StringPath.PATH_PRODUCTS);
         ArrayList<Products> products = new ArrayList<Products>();
         products = (ArrayList<Products>) productsCSV.readProducts();
-        return products;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST = products;
     }
 
-    public ArrayList<User> getAgents() {
+    public void getAgents() {
         DataCSV agentCSV = new DataCSV(StringPath.PATH_AGENT);
         ArrayList<User> agents = new ArrayList<User>();
         agents = (ArrayList<User>) agentCSV.readAgentAdmin();
-        return agents;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST = agents;
     }
 
-    public ArrayList<User> getAdministrators() {
+    public void getAdministrators() {
         DataCSV agentCSV = new DataCSV(StringPath.PATH_ADMIN);
         ArrayList<User> admin = new ArrayList<User>();
         admin = (ArrayList<User>) agentCSV.readAgentAdmin();
-        return admin;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST = admin;
     }
 
-    public LinkedStack getOrdersDetails() throws StackException {
+    public void getOrdersDetails() throws StackException {
         DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER);
         ArrayList<Order> ordersDetail = new ArrayList<Order>();
         ordersDetail = (ArrayList<Order>) orderDetailCSV.readOrderDetails();
@@ -90,22 +117,22 @@ public class LoadData {
             Order oD = orderDetails;
             ordersDetails.push(oD);
         }
-        return ordersDetails;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = ordersDetails;
     }
 
-    public ArrayList<Report> getReports() {
-         DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER);
+    public void getReports() {
+        DataCSV orderDetailCSV = new DataCSV(StringPath.PATH_ORDER);
         ArrayList<Order> ordersDetail = new ArrayList<Order>();
-        ArrayList<Report>  reportsDetail= new ArrayList<Report>();
+        ArrayList<Report> reportsDetail = new ArrayList<Report>();
         ordersDetail = (ArrayList<Order>) orderDetailCSV.readOrderDetails();
         for (Order order : ordersDetail) {
             String idRestaurant = order.getRestaurantId();
             String total = order.getTotal();
-            String   date=order.getCurrentDate();
-            
+            String date = order.getCurrentDate();
+
             reportsDetail.add(new Report(idRestaurant, Double.parseDouble(total), date));
-            
+
         }
-        return reportsDetail;
+        Algoritmos_Proyecto01_B16322_B31710_B67156.REPORT_FROM_ORDER_DETAIL = reportsDetail;
     }
 }
