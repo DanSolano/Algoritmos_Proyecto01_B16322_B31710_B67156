@@ -19,6 +19,7 @@ import Domain.User;
 import Exceptions.ListException;
 import Exceptions.StackException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.GetDataById;
 import Utilities.ImageManage;
 import com.mxrck.autocompleter.AutoCompleterCallback;
 import com.mxrck.autocompleter.TextAutoCompleter;
@@ -54,12 +55,14 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private ArrayList<User> agents;
     private ArrayList<User> admin;
     private ArrayList<Restaurant> restaurants;
+    private ArrayList<Products> allProducts;
     private Queue<Driver> queueDriver;
     private LinkedList<Client> clientList;
     private DoubleLinkedCircularList drinksProductsList;
-    private DoubleLinkedCircularList foodsProductsList;//foods desserts others
+    private DoubleLinkedCircularList variousProductsList;//foods desserts others
     private DoubleLinkedCircularList dessertsProductsList;
-    private DoubleLinkedCircularList variousProductsList;
+    private DoubleLinkedCircularList othersProductsList;
+    private String selectedProvince;
     private String hour;
     private String minutes;
     private String seconds;
@@ -125,6 +128,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
         this.clientList = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
         this.stackOrderPrin = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+        this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
         this.stackOrder = new LinkedStack();
         this.agent = agent;
         restaurant = new String();
@@ -137,7 +141,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         try {
             newNodeDrink = drinksProductsList.getNode(0);
-            newNodeFood = foodsProductsList.getNode(0);
+            newNodeFood = variousProductsList.getNode(0);
             newNodeDessert = dessertsProductsList.getNode(0);
             newNodeVarious = variousProductsList.getNode(0);
             addLabelDrinks(newNodeDrink);
@@ -244,6 +248,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jTFLastName1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -277,7 +282,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabel8.setText("Restaurante");
         jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jcbProvinceRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Provincia", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon" }));
+        jcbProvinceRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la Provincia", "San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón" }));
         jcbProvinceRestaurant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbProvinceRestaurantActionPerformed(evt);
@@ -598,6 +603,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jLabel7.setText("Segundo Apellido:");
 
+        jButton9.setText("Cargar Menu");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -675,6 +687,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jTFLastName1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -683,75 +696,113 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(81, 81, 81)
+                                        .addComponent(jTFLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
+                                .addGap(15, 15, 15)
+                                .addComponent(jTFLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabelProvincia)
+                                    .addGap(410, 410, 410))
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(419, 419, 419))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(118, 118, 118)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLDessert)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(0, 115, Short.MAX_VALUE)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8)
+                                    .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLDessert)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addGap(142, 142, 142)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButton5)
+                                            .addComponent(jButton3)
+                                            .addComponent(jButton2)
+                                            .addComponent(jButton7))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jButton6))
-                    .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4))
+                                            .addComponent(jButton9)
+                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                    .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                                    .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(18, 18, 18)
+                                                                    .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                                    .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(18, 18, 18)
+                                                                    .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                            .addGap(18, 18, 18)
+                                                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                                    .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(18, 18, 18)
+                                                                    .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                                    .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(18, 18, 18)
+                                                                    .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                            .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(18, 18, 18)
+                                                            .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jButton6))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -763,57 +814,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                         .addGap(26, 26, 26)
                                         .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton8))))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton8))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(81, 81, 81)
-                                                .addComponent(jTFLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(jTFLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(11, 11, 11))
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jLabelProvincia)
-                                            .addGap(410, 410, 410))
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addGap(419, 419, 419))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(118, 118, 118)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel9))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -979,32 +989,29 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9)
+                        .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel9))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1072,8 +1079,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1162,7 +1169,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
         productsShow = productsDrink2;
         dateOrder = "" + new Date();
-        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(),dateOrder);
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), dateOrder);
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1766,13 +1773,19 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jBAtrasActionPerformed
 
     private void jcbProvinceRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProvinceRestaurantActionPerformed
-        loadRestaurant();
+        fillJCBLocation();
+        this.selectedProvince = (String) jcbProvinceRestaurant.getSelectedItem();
     }//GEN-LAST:event_jcbProvinceRestaurantActionPerformed
 
     private void jcbLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLocationActionPerformed
         restaurant = (String) jcbLocation.getSelectedItem();
+
         onOffLabel(true);
     }//GEN-LAST:event_jcbLocationActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        loadDoubleCircularList();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAtras;
@@ -1784,6 +1797,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JButton jConfirm;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLDessert;
@@ -1905,7 +1919,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void loadImage() {
         drinksProductsList = new DoubleLinkedCircularList();
-        foodsProductsList = new DoubleLinkedCircularList();
+        variousProductsList = new DoubleLinkedCircularList();
         dessertsProductsList = new DoubleLinkedCircularList();
         variousProductsList = new DoubleLinkedCircularList();
         queueDriver = new LinkedList<Driver>();
@@ -1957,42 +1971,42 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsFood0.setPrice(1000 + "");
         productsFood0.setTypeProduct(0 + "");
         productsFood0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
-        foodsProductsList.insert(productsFood0);
+        variousProductsList.insert(productsFood0);
 
         productsFood1.setId("sin DNI 1");
         productsFood1.setName("Papas Fritas");
         productsFood1.setPrice(900 + "");
         productsFood1.setTypeProduct(1 + "");
         productsFood1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
-        foodsProductsList.insert(productsFood1);
+        variousProductsList.insert(productsFood1);
 
         productsFood2.setId("sin DNI 1");
         productsFood2.setName("Pizza");
         productsFood2.setPrice(1200 + "");
         productsFood2.setTypeProduct(2 + "");
         productsFood2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
-        foodsProductsList.insert(productsFood2);
+        variousProductsList.insert(productsFood2);
 
         productsFood3.setId("sin DNI 1");
         productsFood3.setName("Pollo");
         productsFood3.setPrice(900 + "");
         productsFood3.setTypeProduct(3 + "");
         productsFood3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
-        foodsProductsList.insert(productsFood3);
+        variousProductsList.insert(productsFood3);
 
         productsFood4.setId("sin DNI 1");
         productsFood4.setName("Pure");
         productsFood4.setPrice(900 + "");
         productsFood4.setTypeProduct(4 + "");
         productsFood4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
-        foodsProductsList.insert(productsFood4);
+        variousProductsList.insert(productsFood4);
 
         productsFood5.setId("sin DNI 1");
         productsFood5.setName("Sandwich");
         productsFood5.setPrice(900 + "");
         productsFood5.setTypeProduct(1 + "");
         productsFood5.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida5.jpg")));
-        foodsProductsList.insert(productsFood5);
+        variousProductsList.insert(productsFood5);
 
         ////////////////////////////////////////////////postres /////////////////////////////////////////////
         productsDesserts0.setId("sin DNI");
@@ -2632,7 +2646,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     /**
      * Método que carga los restaurantes en los comboBox de seleccion
      */
-    private void loadRestaurant() {
+    private void fillJCBLocation() {
         jcbLocation.removeAllItems();
         jcbLocation.addItem("Seleccione un Restaurante - Ubicación");
         jcbLocation.setSelectedItem(0);
@@ -2640,7 +2654,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         String selection = (String) jcbProvinceRestaurant.getSelectedItem();
         for (Restaurant restaurantObject : restaurants) {
             if (restaurantObject.getProvince().equals(selection)) {
-                String restaurantLocalitation = restaurantObject.getName() + "  -  " + restaurantObject.getLocation();
+                String restaurantLocalitation = restaurantObject.getName() + "-" + restaurantObject.getLocation();
                 jcbLocation.addItem(restaurantLocalitation);
             }
         }
@@ -2671,5 +2685,32 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLVarious2.setEnabled(active);
         jLVarious3.setEnabled(active);
         jLVarious4.setEnabled(active);
+    }
+
+    private void loadDoubleCircularList() {
+        String[] p = this.restaurant.split("-");
+        String location = p[1];
+        String restaurantName = p[0];
+        GetDataById getDataById = new GetDataById();
+        String idRestaurant = getDataById.getRestaurantIdByNameAndLocation(restaurantName, location, this.selectedProvince);
+        for (int q = 0; q < this.allProducts.size(); q++) {
+            Products pp = this.allProducts.get(q);
+            if (idRestaurant.equals(pp.getIdRestaurant()) && pp.getTypeProduct().equals("0")) {
+                this.drinksProductsList.insert(pp);
+                System.out.println("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+            } else if (idRestaurant.equals(pp.getIdRestaurant()) && pp.getTypeProduct().equals("1")) {
+                this.variousProductsList.insert(pp);
+                System.out.println("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+
+            } else if (idRestaurant.equals(pp.getIdRestaurant()) && pp.getTypeProduct().equals("2")) {
+                this.dessertsProductsList.insert(pp);
+                System.out.println("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+
+            } else if (idRestaurant.equals(pp.getIdRestaurant()) && pp.getTypeProduct().equals("3")) {
+                this.variousProductsList.insert(pp);
+                System.out.println("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+
+            }
+        }
     }
 }

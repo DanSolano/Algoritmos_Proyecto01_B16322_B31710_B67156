@@ -5,7 +5,6 @@
  */
 package GUI.CRUD.Restaurant.Products;
 
-import ADT.LinkedList.DoubleLinkedCircularList;
 import Domain.Products;
 import Domain.Restaurant;
 import Exceptions.ListException;
@@ -16,12 +15,8 @@ import Utilities.StringPath;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
