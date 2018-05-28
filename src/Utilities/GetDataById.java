@@ -6,11 +6,14 @@
 package Utilities;
 
 import Domain.Client;
+import Domain.Driver;
 import Domain.Products;
 import Domain.Restaurant;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
@@ -59,6 +62,23 @@ public class GetDataById {
             }
         }
         return id;
+    }
+
+    public String getDriverName(String clientId) {
+        Queue<Driver> drivers = Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE;
+        Queue tempDriver = new LinkedList();
+        Iterator<Driver> it = drivers.iterator();
+        while (it.hasNext()) {
+            tempDriver.add(it.next());
+        }
+        while (!tempDriver.isEmpty()) {
+            Driver driver = (Driver) tempDriver.poll();
+            if (driver.getId().equals(clientId)) {
+                return driver.getName();
+            }
+        }
+
+        return null;
     }
 
     public String getClientName(String clientId) {
