@@ -6,18 +6,11 @@
 package Data;
 
 import ADT.Stack.LinkedStack;
-import Domain.Order;
 import Domain.Report;
 import Domain.Restaurant;
-import Exceptions.StackException;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.GetDataById;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;

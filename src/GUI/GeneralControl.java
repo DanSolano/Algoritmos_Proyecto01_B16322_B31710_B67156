@@ -205,9 +205,9 @@ public class GeneralControl extends javax.swing.JFrame {
                     order = (Order) orders.pop();
                     tempOrder.add(order);
                     String nameClient = getDataById.getClientName(order.getClientId());
-//                    String nameDriver = getDataById.getDriverName(order.getClientId());
+                    String nameDriver = getDataById.getDriverName(order.getClientId());
                     
-                    model.addRow(new Object[]{nameClient, order.getId(), "Agente", order.getCurrentDate(), order.getTotal(), "Provincia", "Direccion Exacta", "Nombre"});
+                    model.addRow(new Object[]{nameClient, order.getId(), "Agente", order.getCurrentDate(), order.getTotal(), "Provincia", "Direccion Exacta", nameDriver});
                 } catch (StackException ex) {
                     Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
