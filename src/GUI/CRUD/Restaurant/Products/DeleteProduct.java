@@ -5,17 +5,42 @@
  */
 package GUI.CRUD.Restaurant.Products;
 
+import Domain.Products;
+import Domain.Restaurant;
+import Exceptions.ListException;
+import GUI.AdminModule;
+import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
+import Utilities.GetDataById;
+import Utilities.StringPath;
+import com.mxrck.autocompleter.TextAutoCompleter;
+import java.io.File;
+import java.time.chrono.ThaiBuddhistEra;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Luis Cerdas Garita
+ * @author daniel
  */
 public class DeleteProduct extends javax.swing.JFrame {
 
+    private TextAutoCompleter textAutocompleter;
+    private Restaurant restaurantSearch;
+    private ArrayList<Products> allProducts;
+    private Products deleteProduct;
+
     /**
-     * Creates new form DeleteProducts
+     * Creates new form CreateRestaurant
      */
     public DeleteProduct() {
         initComponents();
+        this.deleteProduct = new Products();
+        this.allProducts = Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST;
+        jbDelete.setEnabled(false);
+
     }
 
     /**
@@ -27,24 +52,203 @@ public class DeleteProduct extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
+        jtfIdProduct = new javax.swing.JTextField();
+        jbDelete = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jlInformation = new javax.swing.JLabel();
+        jbSearch = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Eliminar Restaurante");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jLabel2.setText("ID product");
+
+        jtfIdProduct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfIdProductKeyReleased(evt);
+            }
+        });
+
+        jbDelete.setText("Eliminar");
+        jbDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDeleteActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jlInformation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlInformation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jbSearch.setText("Buscar");
+        jbSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSearchActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtfIdProduct, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlInformation, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbDelete)
+                .addGap(82, 82, 82)
+                .addComponent(jbSearch)
+                .addGap(46, 46, 46))
+            .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
+                .addComponent(jtfIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtfIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSearch)
+                    .addComponent(jButton2)
+                    .addComponent(jbDelete))
+                .addGap(18, 18, 18)
+                .addComponent(jlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        back();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jbDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDeleteActionPerformed
+        delete();
+
+    }//GEN-LAST:event_jbDeleteActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        back();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jtfIdProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfIdProductKeyReleased
+
+    }//GEN-LAST:event_jtfIdProductKeyReleased
+
+    private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
+        try {
+            searchProduct();
+        } catch (ListException ex) {
+            Logger.getLogger(DeleteProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbDelete;
+    private javax.swing.JButton jbSearch;
+    private javax.swing.JLabel jlInformation;
+    private javax.swing.JTextField jtfIdProduct;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * isMail evaluate if the String is an email.
+     *
+     * @param email email received the string input the text field for email
+     * @return true if the String is a email and false if the String is not an
+     * email
+     */
+    private void back() {
+        Algoritmos_Proyecto01_B16322_B31710_B67156.ALL_PRODUCTS_LIST = this.allProducts;
+
+        this.dispose();
+        AdminModule adminModule = new AdminModule();
+        adminModule.setVisible(true);
+    }
+
+    private void searchProduct() throws ListException {
+
+        if (!jtfIdProduct.getText().trim().isEmpty()) {
+            String idProduct = jtfIdProduct.getText().trim();
+            for (int q = 0; q < this.allProducts.size(); q++) {
+                Products pp = this.allProducts.get(q);
+                if (pp.getId().equals(idProduct)) {
+                    this.deleteProduct = pp;
+                    jlInformation.setText("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar provincia, ubicacion-restaurante y provincia");
+        }
+
+    }
+
+    private void clearFields() {
+        jtfIdProduct.setText("");
+        jlInformation.setText("Producto Eliminado");
+    }
+
+    private void delete() {
+        for (Iterator<Products> iterator = allProducts.iterator(); iterator.hasNext();) {
+            Products next = iterator.next();
+            if (next.getId().equals(this.deleteProduct.getId())) {
+                allProducts.remove(next);
+                clearFields();
+                break;
+            }
+
+        }
+
+    }
+
 }

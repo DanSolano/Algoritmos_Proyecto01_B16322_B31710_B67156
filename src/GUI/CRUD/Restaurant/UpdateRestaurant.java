@@ -5,31 +5,16 @@
  */
 package GUI.CRUD.Restaurant;
 
-import GUI.CRUD.Driver.*;
-import Domain.Driver;
 import Domain.Restaurant;
-import Domain.User;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.ImageManage;
-import Utilities.StringMD;
 import Utilities.StringPath;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Queue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
