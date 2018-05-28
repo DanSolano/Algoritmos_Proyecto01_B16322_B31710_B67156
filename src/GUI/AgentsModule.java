@@ -136,7 +136,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jlAgentID.setText(agent.getCode());
         ImageIcon logo = new ImageIcon(getClass().getResource("/Resources/logo.jpg"));
         jlLogo.setIcon(resize.resizeImage100(logo));
-        onOffLabel(false);
+        onOffLabel(true);
         loadImage();
 
         try {
