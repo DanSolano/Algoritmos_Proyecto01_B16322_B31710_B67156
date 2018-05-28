@@ -49,7 +49,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
-    private int IdOrder;
+    private int idOrder;
+    private int idClient;
     private ArrayList<User> agents;
     private ArrayList<User> admin;
     private ArrayList<Restaurant> restaurants;
@@ -69,6 +70,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private String Mensage;
     private String PassWord;
     private String To;
+    private String restaurant;
+    private String dateOrder;
     private Thread thread;
     private Order order;
     private ImageManage resize = new ImageManage();
@@ -110,19 +113,27 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     Node newNodeDessert;
     Node newNodeVarious;
     private TextAutoCompleter textAutocompleter;
+    private User agent;
 
     /**
      * Creates new form AgentsModule
      */
-    public AgentsModule() {
+    public AgentsModule(User agent) {
         initComponents();
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        this.clientList = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
         this.stackOrderPrin = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
         this.stackOrder = new LinkedStack();
+        this.agent = agent;
+        restaurant = new String();
+        jlAgentName.setText(agent.getName());
+        jlAgentID.setText(agent.getCode());
+        ImageIcon logo = new ImageIcon(getClass().getResource("/FoodImagesA/logo.jpg"));
+        jlLogo.setIcon(resize.resizeImage100(logo));
         loadImage();
-        this.clientList = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
+
         try {
             newNodeDrink = drinksProductsList.getNode(0);
             newNodeFood = foodsProductsList.getNode(0);
@@ -164,10 +175,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jSeparator2 = new javax.swing.JSeparator();
         jTextFieldMail = new javax.swing.JTextField();
         jTextFieldPhone = new javax.swing.JTextField();
-        jComboBoxProvince = new javax.swing.JComboBox<>();
+        jcbProvince = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jcbProvinceRestaurant = new javax.swing.JComboBox<>();
+        jcbLocation = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -182,13 +193,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLVarios = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jlAgentName = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jlAgentID = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
+        jlLogo = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jlDate = new javax.swing.JLabel();
@@ -258,16 +269,26 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jTextFieldMail.setText("dljeatsrun@gmail.com ");
 
-        jComboBoxProvince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Provincia", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon" }));
+        jcbProvince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Provincia", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon" }));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Restaurante");
         jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Provincia", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon" }));
+        jcbProvinceRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una Provincia", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon" }));
+        jcbProvinceRestaurant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProvinceRestaurantActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciones una Ubicacion" }));
+        jcbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Restaurante - Ubicación" }));
+        jcbLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbLocationActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Bebidas:");
 
@@ -340,11 +361,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jLabel14.setText("Nombre:");
 
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jlAgentName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel16.setText("Codigo:");
 
-        jLabel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jlAgentID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -355,9 +376,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jlLogo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jlLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlLogo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel21.setText("Fecha");
 
@@ -586,10 +607,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextFieldMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jTextFieldPhone, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jComboBoxProvince, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jcbProvince, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jComboBox2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jComboBox3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jcbProvinceRestaurant, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jcbLocation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -604,13 +625,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLVarios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlAgentName, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel17, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlAgentID, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel18, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel19, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jSeparator3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel20, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jlLogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel22, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jlDate, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -668,7 +689,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jLDessert)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 115, Short.MAX_VALUE)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton5)
                                     .addComponent(jButton3)
@@ -745,22 +766,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel9))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGap(81, 81, 81)
@@ -791,7 +801,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBoxProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel9))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -807,16 +826,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jlAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel16)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jlAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(160, 160, 160)))
-                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -862,7 +881,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jBAtras)
                                 .addGap(18, 18, 18)
                                 .addComponent(jConfirm)))
-                        .addContainerGap(251, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -880,11 +899,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel16)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jlAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel14)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jlAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -953,7 +972,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                     .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcbProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelProvincia))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -967,8 +986,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jcbProvinceRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -982,9 +1001,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
+                                .addGap(0, 0, 0)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1046,14 +1065,14 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3)
-                .addGap(28, 28, 28))
+                .addContainerGap())
         );
 
         pack();
@@ -1084,7 +1103,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
         productsShow = productsDrink0;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1112,7 +1132,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
         productsShow = productsDrink1;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1139,7 +1160,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
         productsShow = productsDrink2;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1166,7 +1188,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
         productsShow = productsDrink3;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1193,7 +1216,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks4MouseReleased
         productsShow = productsDrink4;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1269,9 +1293,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jbDisminuirActionPerformed
 
     private void jLFood0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood0MouseReleased
-        // TODO add your handling code here:
         productsShow = productsFood0;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1298,7 +1322,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood1MouseReleased
         productsShow = productsFood1;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1325,7 +1350,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood2MouseReleased
         productsShow = productsFood2;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1352,7 +1378,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood3MouseReleased
         productsShow = productsFood3;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1379,7 +1406,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood4MouseReleased
         productsShow = productsFood4;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1416,7 +1444,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert0MouseReleased
         productsShow = productsDesserts0;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1443,7 +1472,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert1MouseReleased
         productsShow = productsDesserts1;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1470,7 +1500,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts2MouseReleased
         productsShow = productsDesserts2;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1497,7 +1528,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts3MouseReleased
         productsShow = productsDesserts3;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1524,7 +1556,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts4MouseReleased
         productsShow = productsDesserts4;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1571,7 +1604,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious0MouseReleased
         productsShow = productsVarious0;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1598,7 +1632,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious1MouseReleased
         productsShow = productsVarious1;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1625,7 +1660,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious2MouseReleased
         productsShow = productsVarious2;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1652,7 +1688,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious3MouseReleased
         productsShow = productsVarious3;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1679,7 +1716,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious4MouseReleased
         productsShow = productsVarious4;
-        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
+        dateOrder = "" + new Date();
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1703,21 +1741,18 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLVarious4MouseReleased
-   
+
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         queueDriver.add(queueDriver.poll());
         addLabelDrivers();
-       
         autoCompleter();
         try {
-            order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), orderQuantity()+ "",orderTotal() + "", new Date());
-             getInfoClient();
-            stackOrderPrin.push(order);
+            order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), orderQuantity() + "", orderTotal() + "", new Date());
+            getInfoClient();
+
             Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = stackOrderPrin;
             resetSpaces();
             validIdOrder();
-//            SaveAll saveAll = new SaveAll();
-//            saveAll.save();
         } catch (StackException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1729,6 +1764,14 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         login.setVisible(true);
     }//GEN-LAST:event_jBAtrasActionPerformed
 
+    private void jcbProvinceRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProvinceRestaurantActionPerformed
+        loadRestaurant();
+    }//GEN-LAST:event_jcbProvinceRestaurantActionPerformed
+
+    private void jcbLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLocationActionPerformed
+        restaurant = (String) jcbLocation.getSelectedItem();
+    }//GEN-LAST:event_jcbLocationActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAtras;
     private javax.swing.JButton jButton1;
@@ -1739,9 +1782,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBoxProvince;
     private javax.swing.JButton jConfirm;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLDessert;
@@ -1771,13 +1811,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
@@ -1809,8 +1846,14 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextFieldPhone;
     private javax.swing.JButton jbAumentar;
     private javax.swing.JButton jbDisminuir;
+    private javax.swing.JComboBox<String> jcbLocation;
+    private javax.swing.JComboBox<String> jcbProvince;
+    private javax.swing.JComboBox<String> jcbProvinceRestaurant;
+    private javax.swing.JLabel jlAgentID;
+    private javax.swing.JLabel jlAgentName;
     private javax.swing.JLabel jlDate;
     private javax.swing.JLabel jlHour;
+    private javax.swing.JLabel jlLogo;
     // End of variables declaration//GEN-END:variables
  @Override
     public void run() {
@@ -2288,7 +2331,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         client.setLastNameB(jTFLastName2.getText());
         client.setMail(jTextFieldMail.getText());
         client.setPhoneNumber(jTextFieldPhone.getText());
-        client.setProvince((String) jComboBoxProvince.getSelectedItem());
+        client.setProvince((String) jcbProvince.getSelectedItem());
         client.setExactAddress(jTextField4.getText());
         clientList.add(client);
 
@@ -2345,9 +2388,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         message += client.getName() + ", DJL FAST FOOD se complace de compartirle el detalle de la orden"
                 + "\n\nOrden: " + order.getId()
                 + "\nFecha: " + order.getCurrentDate()
+                + "\nAgente: " + agent.getName()
                 + "\n\n\nCompra: " + concatDetailOrder()
                 + "\n\nMonto Total: " + order.getTotal()
-                + "\n\n\nProvincia: " + jComboBoxProvince.getSelectedItem()
+                + "\n\n\nProvincia: " + jcbProvince.getSelectedItem()
+                + "\nRestaurante: " + restaurant
                 + "\nConductor: " + driver0.getName() + driver0.getLastNameA()
                 + "\n\n\n\nLa tarifa no incluye cargos que puede cobrar su banco."
                 + "Si tiene preguntas, consulte directamente a su banco";
@@ -2397,7 +2442,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                     jTFLastName1.setText(clientsList.get(i).getLastNameA());
                     jTFLastName2.setText(clientsList.get(i).getLastNameB());
                     jTextFieldPhone.setText(clientsList.get(i).getPhoneNumber());
-                    jComboBoxProvince.setSelectedItem(clientsList.get(i).getProvince());
+                    jcbProvince.setSelectedItem(clientsList.get(i).getProvince());
                     jTextField4.setText(clientsList.get(i).getExactAddress());
                 }
             }
@@ -2416,7 +2461,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jTFLastName2.setText("");
         jTextFieldPhone.setText("");
         jTextFieldMail.setText("");
-        jComboBoxProvince.setSelectedItem("");
+        jcbProvince.setSelectedIndex(0);
         jTextField4.setText("");
 
         this.tableModel = new DefaultTableModel();
@@ -2425,13 +2470,12 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         this.tableModel.addColumn("Monto");
         this.tableModel.addColumn("Cantidad");
         this.jTable1.setModel(tableModel);
-        for (int i = 0; i < stackOrder.getSize(); i++) {
-            stackOrder.pop();
-        }
-
+        completeOrder();
     }
-    int idClient;
 
+    /**
+     * Valida si existe un cliente en la lista
+     */
     private void validIdClient() {
         this.idClient = 1;
         while (existClientId(idClient)) {
@@ -2439,6 +2483,12 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    /**
+     * Determina si existe un cliente en la lista
+     *
+     * @param id
+     * @return
+     */
     private boolean existClientId(int id) {
         for (Iterator<Client> iterator = clientList.iterator(); iterator.hasNext();) {
             Client client = iterator.next();
@@ -2450,8 +2500,11 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         return false;
     }
 
-    int idOrder;
-
+    /**
+     * Valida el ID de las ordenes
+     *
+     * @throws StackException
+     */
     private void validIdOrder() throws StackException {
         this.idOrder = 1;
         while (existOrderId(idOrder)) {
@@ -2459,6 +2512,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    /**
+     * Determina si existe una orden anteriormente ingresada
+     *
+     * @param id
+     * @return
+     * @throws StackException
+     */
     private boolean existOrderId(int id) throws StackException {
         LinkedStack tempStackOrder = new LinkedStack();
         while (!stackOrderPrin.isEmpty()) {
@@ -2475,6 +2535,12 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         return false;
     }
 
+    /**
+     * Suma el total final del precio del producto
+     *
+     * @return
+     * @throws StackException
+     */
     private int orderTotal() throws StackException {
         int total = 0;
         LinkedStack orderTempStack = new LinkedStack();
@@ -2488,8 +2554,14 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
         return total;
     }
-    
-    private int orderQuantity () throws StackException{
+
+    /**
+     * Suma las cantidades de las ordenes a realizar
+     *
+     * @return
+     * @throws StackException
+     */
+    private int orderQuantity() throws StackException {
         int totalQuantity = 0;
         LinkedStack orderTempStack = new LinkedStack();
         while (!stackOrder.isEmpty()) {
@@ -2502,13 +2574,20 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         }
         return totalQuantity;
     }
-    
+
+    /**
+     * Método que concatena el mensaje del detalle de la orden de tal forma que
+     * se pueda enviar en el correo los detalles
+     *
+     * @return
+     * @throws StackException
+     */
     private String concatDetailOrder() throws StackException {
         String products = "";
         LinkedStack orderTempStack = new LinkedStack();
         while (!stackOrder.isEmpty()) {
             Order orderTemp = (Order) stackOrder.pop();
-            products += "\n"+orderTemp.getProductoId();
+            products += "\n" + orderTemp.getProductoId() + " : " + orderTemp.getTotal();
             orderTempStack.push(orderTemp);
         }
         while (!orderTempStack.isEmpty()) {
@@ -2517,24 +2596,51 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         return products;
     }
 
-    private void sortStackOrder() throws StackException {
-        ArrayList<Order> tempOrder = new ArrayList<Order>();
-        while (!stackOrderPrin.isEmpty()) {
-            Order order;
-            try {
-                order = (Order) stackOrderPrin.pop();
-                tempOrder.add(order);
-                JOptionPane.showMessageDialog(null, order.getClientId());
-            } catch (StackException ex) {
-                Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+//    private void sortStackOrder() throws StackException {
+//        ArrayList<Order> tempOrder = new ArrayList<Order>();
+//        while (!stackOrderPrin.isEmpty()) {
+//            Order order;
+//            try {
+//                order = (Order) stackOrderPrin.pop();
+//                tempOrder.add(order);
+//                JOptionPane.showMessageDialog(null, order.getClientId());
+//            } catch (StackException ex) {
+//                Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        }
+//        for (int i = tempOrder.size() - 1; i >= 0; i--) {
+//            Order order1 = tempOrder.get(i);
+//            stackOrderPrin.push(order1);
+//            JOptionPane.showMessageDialog(null, "Esta es la Temporal: " + order1.getClientId() + " precio: " + order1.getTotal());
+//        }
+//
+//    }
+    /**
+     * Método que llena las ordenes enlistadas en la tabla
+     *
+     * @throws StackException
+     */
+    private void completeOrder() throws StackException {
+        while (!stackOrder.isEmpty()) {
+            stackOrderPrin.push(stackOrder.pop());
+        }
+    }
+
+    /**
+     * Método que carga los restaurantes en los comboBox de seleccion
+     */
+    private void loadRestaurant() {
+        jcbLocation.removeAllItems();
+        jcbLocation.addItem("Seleccione un Restaurante - Ubicación");
+        jcbLocation.setSelectedItem(0);
+
+        String selection = (String) jcbProvinceRestaurant.getSelectedItem();
+        for (Restaurant restaurantObject : restaurants) {
+            if (restaurantObject.getProvince().equals(selection)) {
+                String restaurantLocalitation = restaurantObject.getName() + "  -  " + restaurantObject.getLocation();
+                jcbLocation.addItem(restaurantLocalitation);
             }
-
         }
-        for (int i = tempOrder.size() - 1; i >= 0; i--) {
-            Order order1 = tempOrder.get(i);
-            stackOrderPrin.push(order1);
-            JOptionPane.showMessageDialog(null, "Esta es la Temporal: " + order1.getClientId() + " precio: " + order1.getTotal());
-        }
-
     }
 }
