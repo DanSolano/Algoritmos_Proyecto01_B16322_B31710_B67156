@@ -101,7 +101,7 @@ public class LoadData {
         for (Order order : ordersDetail) {
             String idRestaurant = order.getRestaurantId();
             String total = order.getTotal();
-            Date   date=order.getCurrentDate();
+            String   date=order.getCurrentDate();
             
             reportsDetail.add(new Report(idRestaurant, Double.parseDouble(total), date));
             

@@ -28,6 +28,7 @@ public class Login extends javax.swing.JFrame {
 
     ArrayList<User> agents;
     ArrayList<User> admin;
+    private User agentLogin;
 
     /**
      * Creates new form Login
@@ -38,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
+        this.agentLogin = new User();
         enableEvents(MouseEvent.MOUSE_EVENT_MASK);
 
     }
@@ -184,7 +186,7 @@ public class Login extends javax.swing.JFrame {
             String userOrMail = jtfUserOrMail.getText().trim();
             if (isAgent(sha, userOrMail)) {
                 this.dispose();
-                AgentsModule agentsModule = new AgentsModule();
+                AgentsModule agentsModule = new AgentsModule(this.agentLogin);
                 agentsModule.setVisible(true);
             } else {
                 jlError.setText("<html><font color=\"#FE0101\"><u>" + "Usuario y contraseña no coinciden." + "</u></font></html>");//#FF000
@@ -208,8 +210,8 @@ public class Login extends javax.swing.JFrame {
 
     private boolean isAgent(String sha, String userOrMail) {
         for (User agent : agents) {
-            //this.agentLogin = agent;
             if ((agent.getUserName().equals(userOrMail) || agent.getMail().equals(userOrMail)) && agent.getPassword().equals(sha)) {
+                this.agentLogin = agent;
                 return true;
             }
 
