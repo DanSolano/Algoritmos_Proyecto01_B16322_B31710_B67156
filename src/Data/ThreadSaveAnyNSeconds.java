@@ -12,7 +12,7 @@ package Data;
 public class ThreadSaveAnyNSeconds extends Thread {
 
     SaveAll saveAll = new SaveAll();
-    private int seconds = 2000;
+    private int seconds = 20000;
 
     public void run() {
         while (true) {

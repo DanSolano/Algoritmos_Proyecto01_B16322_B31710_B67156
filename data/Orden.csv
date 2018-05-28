@@ -1,13 +1,1 @@
 Id Order;Id Client;Id Restaurant;Id Product;Quantity;Total items;Date order place
-0;0;Seleccione un Restaurante - Ubicación;Zarza;3;3000;Mon May 28 10:26:25 CST 2018
-0;dfsd;MELVIN  -  Paraiso;Fanta Colita;1;100;Mon May 28 10:14:18 CST 2018
-0;dfsd;MELVIN  -  Paraiso;Cerveza;1;800;Mon May 28 10:14:18 CST 2018
-0;sdas;Seleccione un Restaurante - Ubicación;Cerveza;1;800;Mon May 28 10:13:40 CST 2018
-0;sdas;Seleccione un Restaurante - Ubicación;Zarza;1;1000;Mon May 28 10:13:38 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Arroz con leche;1;900;Mon May 28 10:15:10 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Fanta;1;900;Mon May 28 10:15:10 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Pure;1;900;Mon May 28 10:15:09 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Pollo;1;900;Mon May 28 10:15:08 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Papas Fritas;1;900;Mon May 28 10:15:08 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Pizza;1;1200;Mon May 28 10:15:07 CST 2018
-0;jesus;EL QUE SEA  -  Taras;Hamburquesa;3;3000;Mon May 28 10:15:04 CST 2018

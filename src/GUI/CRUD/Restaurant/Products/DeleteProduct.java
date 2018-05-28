@@ -224,6 +224,8 @@ public class DeleteProduct extends javax.swing.JFrame {
                 if (pp.getId().equals(idProduct)) {
                     this.deleteProduct = pp;
                     jlInformation.setText("Product: " + pp.getName() + ". rest: " + pp.getIdRestaurant() + ". type: " + pp.getTypeProduct());
+                    jbDelete.setEnabled(true);
+                    break;
                 }
             }
 
@@ -244,6 +246,7 @@ public class DeleteProduct extends javax.swing.JFrame {
             if (next.getId().equals(this.deleteProduct.getId())) {
                 allProducts.remove(next);
                 clearFields();
+                jbSearch.setEnabled(false);
                 break;
             }
 
