@@ -48,7 +48,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel Solano, Luis Cerdas, Jesus Torres
  */
 public class AgentsModule extends javax.swing.JFrame implements Runnable {
-    
+
     private int IdOrder;
     private ArrayList<User> agents;
     private ArrayList<User> admin;
@@ -103,7 +103,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private Driver driver3 = new Driver();
     private Driver driver4 = new Driver();
     private DefaultTableModel tableModel;
-    private LinkedStack stackOrder = new LinkedStack();
+    private LinkedStack stackOrderPrin;
+    private LinkedStack stackOrder;
     Node newNodeDrink;
     Node newNodeFood;
     Node newNodeDessert;
@@ -118,9 +119,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         this.agents = Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST;
         this.admin = Algoritmos_Proyecto01_B16322_B31710_B67156.ADMIN_LIST;
         this.restaurants = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        this.stackOrderPrin = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
+        this.stackOrder = new LinkedStack();
         loadImage();
         this.clientList = Algoritmos_Proyecto01_B16322_B31710_B67156.CLIENT_LIST;
-        
         try {
             newNodeDrink = drinksProductsList.getNode(0);
             newNodeFood = foodsProductsList.getNode(0);
@@ -194,7 +196,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
+        jConfirm = new javax.swing.JButton();
         jLabelDrinks1 = new javax.swing.JLabel();
         jLabelDrinks2 = new javax.swing.JLabel();
         jLabelDrinks3 = new javax.swing.JLabel();
@@ -226,6 +228,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jLDriver4 = new javax.swing.JLabel();
         jLDriverSelect = new javax.swing.JLabel();
         jBAtras = new javax.swing.JButton();
+        jTFLastName2 = new javax.swing.JTextField();
+        jTFLastName1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Control de Agente");
@@ -235,7 +241,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLabel2.setText("Nombre Completo:");
+        jLabel2.setText("Nombre:");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -380,10 +386,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
         jLabel25.setText("Conductores:");
 
-        jButton11.setText("Confirmar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jConfirm.setText("Confirmar");
+        jConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jConfirmActionPerformed(evt);
             }
         });
 
@@ -566,6 +572,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jLabel6.setText("Primer Apellido:");
+
+        jLabel7.setText("Segundo Apellido:");
+
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -607,7 +617,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jlHour, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel25, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jConfirm, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabelDrinks3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -639,142 +649,155 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         jDesktopPane1.setLayer(jLDriver4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLDriverSelect, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jBAtras, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jTFLastName2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jTFLastName1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLDessert)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton5)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                        .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                        .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                        .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                        .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jButton6))
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLVarios)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton8))))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLDessert)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(0, 84, Short.MAX_VALUE)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jButton5)
-                                                    .addComponent(jButton3)
-                                                    .addComponent(jButton2)
-                                                    .addComponent(jButton7))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelDrinks1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelDrinks2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelDrinks3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLFood0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jLDessert0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jLVarious0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLFood1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(jLFood2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLDessert1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(jLDesserts2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                                .addGap(18, 18, 18)
-                                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLFood3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(jLFood4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                                        .addComponent(jLDesserts3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(jLDesserts4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                                .addComponent(jLVarious1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(jLVarious2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                        .addComponent(jButton6))
-                                    .addComponent(jSeparator1)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton1))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton4))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addComponent(jLVarios)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                                        .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addComponent(jLVarious3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(26, 26, 26)
-                                                        .addComponent(jLVarious4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton8))))
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel9))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGap(9, 9, 9)
-                                                .addComponent(jLabel3))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                        .addGap(9, 9, 9)
-                                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel2)
-                                                            .addComponent(jLabel4)))
-                                                    .addComponent(jLabelProvincia))
-                                                .addGap(38, 38, 38)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jComboBoxProvince, 0, 324, Short.MAX_VALUE)
-                                                    .addComponent(jTextFieldMail, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                                                    .addComponent(jTextFieldName)
-                                                    .addComponent(jTextFieldPhone)
-                                                    .addComponent(jTextField4)))
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel8)
-                                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel9))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(179, 179, 179)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(81, 81, 81)
+                                                .addComponent(jTFLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addGap(15, 15, 15)
+                                        .addComponent(jTFLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(11, 11, 11))
+                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                            .addComponent(jLabelProvincia)
+                                            .addGap(410, 410, 410))
+                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(419, 419, 419))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(118, 118, 118)
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBoxProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(18, 79, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -838,8 +861,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGap(133, 133, 133)
                                 .addComponent(jBAtras)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton11)))
-                        .addContainerGap())))
+                                .addComponent(jConfirm)))
+                        .addContainerGap(251, Short.MAX_VALUE))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -903,7 +926,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                         .addComponent(jLDriverSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton11)
+                            .addComponent(jConfirm)
                             .addComponent(jBAtras))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -912,10 +935,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTFLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jTFLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
@@ -923,18 +952,18 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelProvincia))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -953,9 +982,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                                             .addComponent(jLabelDrinks0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabelDrinks4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(109, 109, 109)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1055,7 +1084,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks0MouseReleased
         productsShow = productsDrink0;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1083,7 +1112,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks1MouseReleased
         productsShow = productsDrink1;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1110,7 +1139,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
         productsShow = productsDrink2;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1137,7 +1166,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks3MouseReleased
         productsShow = productsDrink3;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1164,7 +1193,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLabelDrinks4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks4MouseReleased
         productsShow = productsDrink4;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1231,7 +1260,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                 } else {
                     deleteOrder(selectionString);
                 }
-                
+
             }
             showTable();
         } catch (StackException ex) {
@@ -1242,7 +1271,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private void jLFood0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood0MouseReleased
         // TODO add your handling code here:
         productsShow = productsFood0;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1269,7 +1298,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood1MouseReleased
         productsShow = productsFood1;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1296,7 +1325,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood2MouseReleased
         productsShow = productsFood2;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1323,7 +1352,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood3MouseReleased
         productsShow = productsFood3;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1350,7 +1379,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLFood4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLFood4MouseReleased
         productsShow = productsFood4;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1387,7 +1416,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert0MouseReleased
         productsShow = productsDesserts0;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1414,7 +1443,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDessert1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDessert1MouseReleased
         productsShow = productsDesserts1;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1441,7 +1470,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts2MouseReleased
         productsShow = productsDesserts2;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1468,7 +1497,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts3MouseReleased
         productsShow = productsDesserts3;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1495,7 +1524,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLDesserts4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDesserts4MouseReleased
         productsShow = productsDesserts4;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1542,7 +1571,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious0MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious0MouseReleased
         productsShow = productsVarious0;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1569,7 +1598,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious1MouseReleased
         productsShow = productsVarious1;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1596,7 +1625,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious2MouseReleased
         productsShow = productsVarious2;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1623,7 +1652,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious3MouseReleased
         productsShow = productsVarious3;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1650,7 +1679,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jLVarious4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVarious4MouseReleased
         productsShow = productsVarious4;
-        order = new Order("ID", "Cliente", "Restaurant", productsShow.getName(), "1", productsShow.getPrice(),new Date());
+        order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), "1", productsShow.getPrice(), new Date());
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
@@ -1674,19 +1703,25 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLVarious4MouseReleased
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        IdOrder++;
+   
+    private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         queueDriver.add(queueDriver.poll());
         addLabelDrivers();
-        getInfoClient();
+       
         autoCompleter();
         try {
+            order = new Order(idOrder + "", jTextFieldName.getText(), "Restaurant", productsShow.getName(), orderQuantity()+ "",orderTotal() + "", new Date());
+             getInfoClient();
+            stackOrderPrin.push(order);
+            Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = stackOrderPrin;
             resetSpaces();
+            validIdOrder();
+//            SaveAll saveAll = new SaveAll();
+//            saveAll.save();
         } catch (StackException ex) {
             Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jConfirmActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
         Login login = new Login();
@@ -1697,7 +1732,6 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAtras;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1708,6 +1742,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBoxProvince;
+    private javax.swing.JButton jConfirm;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLDessert;
     private javax.swing.JLabel jLDessert0;
@@ -1749,6 +1784,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelDrinks0;
@@ -1763,6 +1800,8 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField jTFLastName1;
+    private javax.swing.JTextField jTFLastName2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldMail;
@@ -1792,7 +1831,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     public void calculate() {
         Calendar calendar = new GregorianCalendar();
         Date dateAndTimeNow = new Date();
-        
+
         calendar.setTime(dateAndTimeNow);
         ampm = calendar.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
         if (ampm.equals("PM")) {
@@ -1814,53 +1853,53 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         String month = Integer.toString(c.get(Calendar.MONTH));
         String year = Integer.toString(c.get(Calendar.YEAR));
         jlDate.setText(day + " / " + month + " / " + year + " / ");
-        
+
         thread = new Thread(this);
         thread.start();
     }
-    
+
     private void loadImage() {
         drinksProductsList = new DoubleLinkedCircularList();
         foodsProductsList = new DoubleLinkedCircularList();
         dessertsProductsList = new DoubleLinkedCircularList();
         variousProductsList = new DoubleLinkedCircularList();
         queueDriver = new LinkedList<Driver>();
-        
+
         productsDrink0.setId("sin DNI");
         productsDrink0.setName("Zarza");
         productsDrink0.setPrice(1000 + "");
         productsDrink0.setTypeProduct(0 + "");
         productsDrink0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida0.jpg")));
         drinksProductsList.insert(productsDrink0);
-        
+
         productsDrink1.setId("sin DNI 1");
         productsDrink1.setName("Fanta Colita");
         productsDrink1.setPrice(100 + "");
         productsDrink1.setTypeProduct(1 + "");
         productsDrink1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida1.jpg")));
         drinksProductsList.insert(productsDrink1);
-        
+
         productsDrink2.setId("sin DNI 1");
         productsDrink2.setName("Cerveza");
         productsDrink2.setPrice(800 + "");
         productsDrink2.setTypeProduct(2 + "");
         productsDrink2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida2.jpg")));
         drinksProductsList.insert(productsDrink2);
-        
+
         productsDrink3.setId("sin DNI 1");
         productsDrink3.setName("Sprite");
         productsDrink3.setPrice(900 + "");
         productsDrink3.setTypeProduct(3 + "");
         productsDrink3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida3.jpg")));
         drinksProductsList.insert(productsDrink3);
-        
+
         productsDrink4.setId("sin DNI 1");
         productsDrink4.setName("Fanta");
         productsDrink4.setPrice(900 + "");
         productsDrink4.setTypeProduct(4 + "");
         productsDrink4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/bebida4.jpg")));
         drinksProductsList.insert(productsDrink4);
-        
+
         productsDrink5.setId("sin DNI 1");
         productsDrink5.setName("Coca Cola");
         productsDrink5.setPrice(900 + "");
@@ -1874,35 +1913,35 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsFood0.setTypeProduct(0 + "");
         productsFood0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida0.jpg")));
         foodsProductsList.insert(productsFood0);
-        
+
         productsFood1.setId("sin DNI 1");
         productsFood1.setName("Papas Fritas");
         productsFood1.setPrice(900 + "");
         productsFood1.setTypeProduct(1 + "");
         productsFood1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida1.jpg")));
         foodsProductsList.insert(productsFood1);
-        
+
         productsFood2.setId("sin DNI 1");
         productsFood2.setName("Pizza");
         productsFood2.setPrice(1200 + "");
         productsFood2.setTypeProduct(2 + "");
         productsFood2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida2.jpg")));
         foodsProductsList.insert(productsFood2);
-        
+
         productsFood3.setId("sin DNI 1");
         productsFood3.setName("Pollo");
         productsFood3.setPrice(900 + "");
         productsFood3.setTypeProduct(3 + "");
         productsFood3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida3.jpg")));
         foodsProductsList.insert(productsFood3);
-        
+
         productsFood4.setId("sin DNI 1");
         productsFood4.setName("Pure");
         productsFood4.setPrice(900 + "");
         productsFood4.setTypeProduct(4 + "");
         productsFood4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/comida4.jpg")));
         foodsProductsList.insert(productsFood4);
-        
+
         productsFood5.setId("sin DNI 1");
         productsFood5.setName("Sandwich");
         productsFood5.setPrice(900 + "");
@@ -1917,35 +1956,35 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsDesserts0.setTypeProduct(0 + "");
         productsDesserts0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre0.jpg")));
         dessertsProductsList.insert(productsDesserts0);
-        
+
         productsDesserts1.setId("sin DNI 1");
         productsDesserts1.setName("Chocolate");
         productsDesserts1.setPrice(900 + "");
         productsDesserts1.setTypeProduct(1 + "");
         productsDesserts1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre1.jpg")));
         dessertsProductsList.insert(productsDesserts1);
-        
+
         productsDesserts2.setId("sin DNI 1");
         productsDesserts2.setName("Muffin");
         productsDesserts2.setPrice(1200 + "");
         productsDesserts2.setTypeProduct(2 + "");
         productsDesserts2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre2.jpg")));
         dessertsProductsList.insert(productsDesserts2);
-        
+
         productsDesserts3.setId("sin DNI 1");
         productsDesserts3.setName("Flan");
         productsDesserts3.setPrice(900 + "");
         productsDesserts3.setTypeProduct(3 + "");
         productsDesserts3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre3.jpg")));
         dessertsProductsList.insert(productsDesserts3);
-        
+
         productsDesserts4.setId("sin DNI 1");
         productsDesserts4.setName("Arroz con leche");
         productsDesserts4.setPrice(900 + "");
         productsDesserts4.setTypeProduct(4 + "");
         productsDesserts4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre4.jpg")));
         dessertsProductsList.insert(productsDesserts4);
-        
+
         productsDesserts5.setId("sin DNI 1");
         productsDesserts5.setName("Helado");
         productsDesserts5.setPrice(900 + "");
@@ -1960,35 +1999,35 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsVarious0.setTypeProduct(0 + "");
         productsVarious0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre0.jpg")));
         variousProductsList.insert(productsVarious0);
-        
+
         productsVarious1.setId("sin DNI 1");
         productsVarious1.setName("Chocolate");
         productsVarious1.setPrice(900 + "");
         productsVarious1.setTypeProduct(1 + "");
         productsVarious1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre1.jpg")));
         variousProductsList.insert(productsVarious1);
-        
+
         productsVarious2.setId("sin DNI 1");
         productsVarious2.setName("Muffin");
         productsVarious2.setPrice(1200 + "");
         productsVarious2.setTypeProduct(2 + "");
         productsVarious2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre2.jpg")));
         variousProductsList.insert(productsVarious2);
-        
+
         productsVarious3.setId("sin DNI 1");
         productsVarious3.setName("Flan");
         productsVarious3.setPrice(900 + "");
         productsVarious3.setTypeProduct(3 + "");
         productsVarious3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre3.jpg")));
         variousProductsList.insert(productsVarious3);
-        
+
         productsVarious4.setId("sin DNI 1");
         productsDesserts4.setName("Arroz con leche");
         productsDesserts4.setPrice(900 + "");
         productsDesserts4.setTypeProduct(4 + "");
         productsDesserts4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/postre4.jpg")));
         variousProductsList.insert(productsDesserts4);
-        
+
         productsVarious5.setId("sin DNI 1");
         productsVarious5.setName("Helado");
         productsVarious5.setPrice(900 + "");
@@ -2008,7 +2047,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver0.setDni("111");
         driver0.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/conductor0.jpg")));
         queueDriver.add(driver0);
-        
+
         driver1.setId("ID");
         driver1.setName("Pedro");
         driver1.setLastNameA("Nuñez");
@@ -2020,7 +2059,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver1.setDni("222");
         driver1.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/conductor1.jpg")));
         queueDriver.add(driver1);
-        
+
         driver2.setId("ID");
         driver2.setName("Mafred");
         driver2.setLastNameA("Bolaños");
@@ -2032,7 +2071,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver2.setDni("333");
         driver2.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/conductor2.jpg")));
         queueDriver.add(driver2);
-        
+
         driver3.setId("ID");
         driver3.setName("Juliana");
         driver3.setLastNameA("Perez");
@@ -2044,7 +2083,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver3.setDni("444");
         driver3.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/conductor3.jpg")));
         queueDriver.add(driver3);
-        
+
         driver4.setId("ID");
         driver4.setName("Maria");
         driver4.setLastNameA("Uva");
@@ -2056,7 +2095,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver4.setDni("555");
         driver4.setImageIcon(new ImageIcon(getClass().getResource("/FoodImagesA/conductor4.jpg")));
         queueDriver.add(driver4);
-        
+
     }
 
     /**
@@ -2072,7 +2111,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsDrink3 = (Products) newNode.next.next.next.element;
         productsDrink4 = (Products) newNode.next.next.next.next.element;
         productsDrink5 = (Products) newNode.next.next.next.next.next.element;
-        
+
         jLabelDrinks0.setIcon(resize.resizeImage(productsDrink0.getImageIcon()));
         jLabelDrinks1.setIcon(resize.resizeImage(productsDrink1.getImageIcon()));
         jLabelDrinks2.setIcon(resize.resizeImage(productsDrink2.getImageIcon()));
@@ -2092,7 +2131,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsFood3 = (Products) newNodeFood.next.next.next.element;
         productsFood4 = (Products) newNodeFood.next.next.next.next.element;
         productsFood5 = (Products) newNodeFood.next.next.next.next.next.element;
-        
+
         jLFood0.setIcon(resize.resizeImage(productsFood0.getImageIcon()));
         jLFood1.setIcon(resize.resizeImage(productsFood1.getImageIcon()));
         jLFood2.setIcon(resize.resizeImage(productsFood2.getImageIcon()));
@@ -2112,7 +2151,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsDesserts3 = (Products) newNodeDeserts.next.next.next.element;
         productsDesserts4 = (Products) newNodeDeserts.next.next.next.next.element;
         productsDesserts5 = (Products) newNodeDeserts.next.next.next.next.next.element;
-        
+
         jLDessert0.setIcon(resize.resizeImage(productsDesserts0.getImageIcon()));
         jLDessert1.setIcon(resize.resizeImage(productsDesserts1.getImageIcon()));
         jLDesserts2.setIcon(resize.resizeImage(productsDesserts2.getImageIcon()));
@@ -2132,7 +2171,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         productsVarious3 = (Products) newNodeVarious.next.next.next.element;
         productsVarious4 = (Products) newNodeVarious.next.next.next.next.element;
         productsVarious5 = (Products) newNodeVarious.next.next.next.next.next.element;
-        
+
         jLVarious0.setIcon(resize.resizeImage(productsVarious0.getImageIcon()));
         jLVarious1.setIcon(resize.resizeImage(productsVarious1.getImageIcon()));
         jLVarious2.setIcon(resize.resizeImage(productsVarious2.getImageIcon()));
@@ -2150,13 +2189,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         driver2 = queueDriver.poll();
         driver3 = queueDriver.poll();
         driver4 = queueDriver.poll();
-        
+
         jLDriver0.setIcon(resize.resizeImage(driver0.getImageIcon()));
         jLDriver1.setIcon(resize.resizeImage(driver1.getImageIcon()));
         jLDriver2.setIcon(resize.resizeImage(driver2.getImageIcon()));
         jLDriver3.setIcon(resize.resizeImage(driver3.getImageIcon()));
         jLDriver4.setIcon(resize.resizeImage(driver4.getImageIcon()));
-        
+
         queueDriver.add(driver0);
         queueDriver.add(driver1);
         queueDriver.add(driver2);
@@ -2203,7 +2242,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         LinkedStack stackTemp = new LinkedStack();
         Order orderTemp = new Order();
         while (!stackOrder.isEmpty()) {
-            
+
             orderTemp = (Order) stackOrder.pop();
             if (order.equals(orderTemp.getProductoId())) {
                 exist = orderTemp;
@@ -2240,17 +2279,19 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     /**
      * Método que extrae los datos del cliente y guarda en el LinkedList
      */
-    private void getInfoClient() {
+    private void getInfoClient() throws StackException {
         Client client = new Client();
-       validId();
-        client.setId(idClient+"");
+        validIdClient();
+        client.setId(idClient + "");
         client.setName(jTextFieldName.getText());
+        client.setLastNameA(jTFLastName1.getText());
+        client.setLastNameB(jTFLastName2.getText());
         client.setMail(jTextFieldMail.getText());
         client.setPhoneNumber(jTextFieldPhone.getText());
         client.setProvince((String) jComboBoxProvince.getSelectedItem());
         client.setExactAddress(jTextField4.getText());
         clientList.add(client);
-        
+
         Username = "dljeatsrun@gmail.com";
         Subject = "Hola " + client.getName() + ", DJL FASTFOOD, muestra el detalle de tu pedido";
         Mensage = concatMessage(client);
@@ -2268,26 +2309,25 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        
+
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(Username, PassWord);
             }
         });
-        
+
         try {
-            
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(Username));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(To));
             message.setSubject(Subject);
             message.setText(Mensage);
-            
+
             Transport.send(message);
             JOptionPane.showMessageDialog(this, "Su mensaje ha sido enviado");
-            
+
         } catch (MessagingException e) {
             JOptionPane.showMessageDialog(null, "Correo inexistente");
         }
@@ -2299,18 +2339,18 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
      * @param client
      * @return
      */
-    private String concatMessage(Client client) {
+    private String concatMessage(Client client) throws StackException {
         String message = "";
-        
+
         message += client.getName() + ", DJL FAST FOOD se complace de compartirle el detalle de la orden"
-                + "\nOrden: " + order.getId()
-                + "\nFecha: " + "Date"
-                + "\nMonto Total: " + order.getTotal()
-                + "\nProvincia: " + "Restaurente"
+                + "\n\nOrden: " + order.getId()
+                + "\nFecha: " + order.getCurrentDate()
+                + "\n\n\nCompra: " + concatDetailOrder()
+                + "\n\nMonto Total: " + order.getTotal()
+                + "\n\n\nProvincia: " + jComboBoxProvince.getSelectedItem()
                 + "\nConductor: " + driver0.getName() + driver0.getLastNameA()
-                + "\n\nLa tarifa no incluye cargos que puede cobrar tu banco."
-                + "Si tienes preguntas, consulta directamente a tu banco";
-        
+                + "\n\n\n\nLa tarifa no incluye cargos que puede cobrar su banco."
+                + "Si tiene preguntas, consulte directamente a su banco";
         return message;
     }
 
@@ -2354,13 +2394,15 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
             for (int i = 0; i < clientsList.size(); i++) {
                 if (selectItem.equals(clientsList.get(i).getMail())) {
                     jTextFieldName.setText(clientsList.get(i).getName());
+                    jTFLastName1.setText(clientsList.get(i).getLastNameA());
+                    jTFLastName2.setText(clientsList.get(i).getLastNameB());
                     jTextFieldPhone.setText(clientsList.get(i).getPhoneNumber());
                     jComboBoxProvince.setSelectedItem(clientsList.get(i).getProvince());
                     jTextField4.setText(clientsList.get(i).getExactAddress());
                 }
             }
         }
-        
+
     }
 
     /**
@@ -2370,11 +2412,13 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
      */
     private void resetSpaces() throws StackException {
         jTextFieldName.setText("");
+        jTFLastName1.setText("");
+        jTFLastName2.setText("");
         jTextFieldPhone.setText("");
         jTextFieldMail.setText("");
         jComboBoxProvince.setSelectedItem("");
         jTextField4.setText("");
-        
+
         this.tableModel = new DefaultTableModel();
         this.tableModel.addColumn("Restaurante");
         this.tableModel.addColumn("Producto");
@@ -2384,25 +2428,113 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         for (int i = 0; i < stackOrder.getSize(); i++) {
             stackOrder.pop();
         }
-        
+
     }
     int idClient;
-    private void validId() {
+
+    private void validIdClient() {
         this.idClient = 1;
-        while (existRestId(idClient)) {
+        while (existClientId(idClient)) {
             this.idClient++;
         }
     }
-    
-    private boolean existRestId(int id) {
+
+    private boolean existClientId(int id) {
         for (Iterator<Client> iterator = clientList.iterator(); iterator.hasNext();) {
             Client client = iterator.next();
-            System.out.println(client.getId());
             int restId = Integer.parseInt(client.getId());
             if (restId == id) {
                 return true;
             }
         }
         return false;
+    }
+
+    int idOrder;
+
+    private void validIdOrder() throws StackException {
+        this.idOrder = 1;
+        while (existOrderId(idOrder)) {
+            this.idOrder++;
+        }
+    }
+
+    private boolean existOrderId(int id) throws StackException {
+        LinkedStack tempStackOrder = new LinkedStack();
+        while (!stackOrderPrin.isEmpty()) {
+            Order orderTemp = (Order) stackOrderPrin.pop();
+            int orderId = Integer.parseInt(orderTemp.getId());
+            if (orderId == id) {
+                return true;
+            }
+            tempStackOrder.push(orderTemp);
+        }
+        while (!tempStackOrder.isEmpty()) {
+            stackOrderPrin.push(tempStackOrder.pop());
+        }
+        return false;
+    }
+
+    private int orderTotal() throws StackException {
+        int total = 0;
+        LinkedStack orderTempStack = new LinkedStack();
+        while (!stackOrder.isEmpty()) {
+            Order orderTemp = (Order) stackOrder.pop();
+            total += Integer.parseInt(orderTemp.getTotal());
+            orderTempStack.push(orderTemp);
+        }
+        while (!orderTempStack.isEmpty()) {
+            stackOrder.push(orderTempStack.pop());
+        }
+        return total;
+    }
+    
+    private int orderQuantity () throws StackException{
+        int totalQuantity = 0;
+        LinkedStack orderTempStack = new LinkedStack();
+        while (!stackOrder.isEmpty()) {
+            Order orderTemp = (Order) stackOrder.pop();
+            totalQuantity += Integer.parseInt(orderTemp.getQuantity());
+            orderTempStack.push(orderTemp);
+        }
+        while (!orderTempStack.isEmpty()) {
+            stackOrder.push(orderTempStack.pop());
+        }
+        return totalQuantity;
+    }
+    
+    private String concatDetailOrder() throws StackException {
+        String products = "";
+        LinkedStack orderTempStack = new LinkedStack();
+        while (!stackOrder.isEmpty()) {
+            Order orderTemp = (Order) stackOrder.pop();
+            products += "\n"+orderTemp.getProductoId();
+            orderTempStack.push(orderTemp);
+        }
+        while (!orderTempStack.isEmpty()) {
+            stackOrder.push(orderTempStack.pop());
+        }
+        return products;
+    }
+
+    private void sortStackOrder() throws StackException {
+        ArrayList<Order> tempOrder = new ArrayList<Order>();
+        while (!stackOrderPrin.isEmpty()) {
+            Order order;
+            try {
+                order = (Order) stackOrderPrin.pop();
+                tempOrder.add(order);
+                JOptionPane.showMessageDialog(null, order.getClientId());
+            } catch (StackException ex) {
+                Logger.getLogger(AgentsModule.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        for (int i = tempOrder.size() - 1; i >= 0; i--) {
+            Order order1 = tempOrder.get(i);
+            stackOrderPrin.push(order1);
+            JOptionPane.showMessageDialog(null, "Esta es la Temporal: " + order1.getClientId() + " precio: " + order1.getTotal());
+        }
+
     }
 }
