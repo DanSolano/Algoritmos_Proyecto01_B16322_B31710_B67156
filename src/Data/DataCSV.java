@@ -18,6 +18,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,8 +94,6 @@ public class DataCSV {
         return users;
 
     }
-
- 
 
     public ArrayList<Restaurant> readRestaurants() {
         ArrayList<Object> list = readCSV();
@@ -199,15 +198,10 @@ public class DataCSV {
                         String quantity = dataImport.get(4);
                         String totalItems = dataImport.get(5);
                         String orderDate = dataImport.get(6);
-
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                        try {
-                            Date date = format.parse(orderDate);
-                            objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems, date));
-                        } catch (ParseException ex) {
-                            Logger.getLogger(DataCSV.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+//                        System.out.println("fecha leída: " + orderDate);
+//                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//                            Date date = format.parse(orderDate);
+                        objeclArrList.add(new Order(id, clientId, restaurantId, productId, quantity, totalItems, orderDate));
 
                     }
 
@@ -327,6 +321,8 @@ public class DataCSV {
                     csvOutput.write("Id Product");
                     csvOutput.write("Quantity");
                     csvOutput.write("Total items");
+                    csvOutput.write("Date order place");
+
                     csvOutput.endRecord();
 
                     for (Object object : writeList) {
@@ -337,6 +333,7 @@ public class DataCSV {
                         csvOutput.write(order.getProductoId());
                         csvOutput.write(order.getQuantity());
                         csvOutput.write(order.getTotal());
+                        csvOutput.write(order.getCurrentDate());
                         csvOutput.endRecord();
                     }
 

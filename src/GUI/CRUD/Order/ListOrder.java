@@ -7,18 +7,13 @@ package GUI.CRUD.Order;
 
 import ADT.Stack.LinkedStack;
 import Utilities.GetDataById;
-import Domain.Client;
 import Domain.Order;
-import Domain.Products;
-import Domain.Restaurant;
 import Exceptions.StackException;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +32,7 @@ public class ListOrder extends javax.swing.JFrame {
         initComponents();
         this.orders = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
         fillJtClient(this.orders);
-        
+
     }
 
     /**
@@ -160,33 +155,36 @@ public class ListOrder extends javax.swing.JFrame {
 
         if (!orders.isEmpty()) {
             GetDataById getDataById = new GetDataById();
-            try {
-                for (int i = 0; i <= orders.getSize(); i++) {
-
-                    Order order = (Order) orders.pop();
+            ArrayList<Order> tempOrder = new ArrayList<Order>();
+            while (!orders.isEmpty()) {
+                Order order;
+                try {
+                    order = (Order) orders.pop();
+                    tempOrder.add(order);
                     String nameClient = getDataById.getClientName(order.getClientId());
                     String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
                     String nameProduct = getDataById.getproductName(order.getProductoId());
-                    model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal(),order.getCurrentDate()});
-                    Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                             order.getQuantity(), order.getTotal(),order.getCurrentDate());
-                    auxStack.push(auxOrder);
+                    model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal(), order.getCurrentDate()});
+
+                } catch (StackException ex) {
+                    Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Order order = (Order) orders.pop();
-                String nameClient = getDataById.getClientName(order.getClientId());
-                String nameRestaurant = getDataById.getRestaurantName(order.getRestaurantId());
-                String nameProduct = getDataById.getproductName(order.getProductoId());
-                model.addRow(new Object[]{order.getId(), nameClient, nameRestaurant, nameProduct, order.getQuantity(), order.getTotal(),order.getCurrentDate()});
-                Order auxOrder = new Order(order.getId(), order.getClientId(), order.getRestaurantId(), order.getProductoId(),
-                         order.getQuantity(), order.getTotal(),order.getCurrentDate());
-                auxStack.push(auxOrder);
-                Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = auxStack;
-            } catch (StackException ex) {
-                System.err.println("Error de lectura de las ordenes");
+
             }
+
+            for (int i = tempOrder.size() - 1; i >= 0; i--) {
+                Order order1 = tempOrder.get(i);
+                try {
+                    orders.push(order1);
+                } catch (StackException ex) {
+                    Logger.getLogger(ListOrder.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
 
     }//Fin metodo que llena la tabla
+
 
     private void back() {
         this.dispose();

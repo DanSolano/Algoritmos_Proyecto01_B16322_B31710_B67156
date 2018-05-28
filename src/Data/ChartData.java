@@ -170,43 +170,43 @@ public class ChartData {
         return false;
     }
 
-    private String monthDate() {
-        String mes = "";
-
-        for (Report report : reportOrder) {
-            switch (report.getDate().getMonth() + 1) {
-                case 1:
-                    return mes = "Enero";
-                case 2:
-                    return mes = "Febrero";
-                case 3:
-                    return mes = "Marzo";
-                case 4:
-                    return mes = "Abril";
-                case 5:
-                    return mes = "Mayo";
-                case 6:
-                    return mes = "junio";
-                case 7:
-                    return mes = "julio";
-                case 8:
-                    return mes = "Agosto";
-                case 9:
-                    return mes = "Septiembre";
-                case 10:
-                    return mes = "Octubre";
-                case 11:
-                    return mes = "Noviembre";
-                case 12:
-                    return mes = "Diciembre";
-                default:
-                    break;
-            }
-            return mes;
-        }
-        return null;
-
-    }
+//    private String monthDate() {
+//        String mes = "";
+//
+//        for (Report report : reportOrder) {
+//            switch (report.getDate().getMonth() + 1) {
+//                case 1:
+//                    return mes = "Enero";
+//                case 2:
+//                    return mes = "Febrero";
+//                case 3:
+//                    return mes = "Marzo";
+//                case 4:
+//                    return mes = "Abril";
+//                case 5:
+//                    return mes = "Mayo";
+//                case 6:
+//                    return mes = "junio";
+//                case 7:
+//                    return mes = "julio";
+//                case 8:
+//                    return mes = "Agosto";
+//                case 9:
+//                    return mes = "Septiembre";
+//                case 10:
+//                    return mes = "Octubre";
+//                case 11:
+//                    return mes = "Noviembre";
+//                case 12:
+//                    return mes = "Diciembre";
+//                default:
+//                    break;
+//            }
+//            return mes;
+//        }
+//        return null;
+//
+//    }
 }
 
 //    private Report reportById(Report report, ArrayList<Report> reportAux) {

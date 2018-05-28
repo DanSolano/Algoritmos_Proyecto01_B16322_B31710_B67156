@@ -15,13 +15,13 @@ public class Report {
 
     private String idRestaurant;
     private Double total;
-    private Date date;
+    private String date;
 
 
     public Report() {
     }
 
-    public Report(String idRestaurant, Double total, Date date) {
+    public Report(String idRestaurant, Double total, String date) {
         this.idRestaurant = idRestaurant;
         this.total = total;
         this.date = date;
@@ -43,11 +43,11 @@ public class Report {
         this.total = total;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
