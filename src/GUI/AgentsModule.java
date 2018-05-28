@@ -2349,7 +2349,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         client.setPhoneNumber(jTextFieldPhone.getText());
         client.setProvince((String) jcbProvince.getSelectedItem());
         client.setExactAddress(jTextField4.getText());
-        clientList.add(client);
+
+        if (!existMail(client.getMail())) {
+            clientList.add(client);
+        }
 
         Username = "dljeatsrun@gmail.com";
         Subject = "Hola " + client.getName() + ", DJL FASTFOOD, muestra el detalle de tu pedido";
@@ -2712,5 +2715,16 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
             }
         }
+    }
+
+    private boolean existMail(String mail) {
+        for (Iterator<Client> iterator = clientList.iterator(); iterator.hasNext();) {
+            Client client = iterator.next();
+            String mailList = client.getMail();
+            if (mailList.equals(mail)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
