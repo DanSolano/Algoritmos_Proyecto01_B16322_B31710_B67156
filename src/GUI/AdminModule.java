@@ -656,6 +656,9 @@ public class AdminModule extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
         jPanel1.validate();
+        //nada
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
