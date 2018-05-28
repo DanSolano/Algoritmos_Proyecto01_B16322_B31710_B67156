@@ -11,15 +11,24 @@ import Exceptions.StackException;
 import GUI.CRUD.Order.ListOrder;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.GetDataById;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -35,14 +44,16 @@ public class GeneralControl extends javax.swing.JFrame {
     /**
      * Creates new form GeneralControl
      */
+    Document document = new Document();
+    FileOutputStream ficheroPdf;
     DefaultTableModel model;
     LinkedStack orders;
     private File file;
-    
+
     public GeneralControl() {
         initComponents();
         this.orders = Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST;
-        fillJtorbders(this.orders);
+        makeToFileXls(this.orders);
     }
 
     /**
@@ -191,13 +202,118 @@ public class GeneralControl extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showSaveDialog(this);
+            this.file = new File(chooser.getSelectedFile() + ".pdf");
+
+            PdfWriter.getInstance(
+                    document,
+                    ficheroPdf).setInitialLeading(20);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        try {
+            document.open();
+
+            Paragraph paragraphTitulo = new Paragraph("REPORTE DEL SISTEMA DRIVER MEDICAL SERVICES\n\n\n");
+            paragraphTitulo.setAlignment(1);
+            document.add(paragraphTitulo);
+
+            Paragraph paragraphDescripcion = new Paragraph("Este reporte contiene la informacion que posee registrada el sistema de los hospitales, con su respectivo codigo y ubicacion.\n"
+                    + "Informacion necesaria para su funcionamiento. A solicitud del administrador se adjunta dicha informacion.\n\n");
+            paragraphDescripcion.setAlignment(0);
+            document.add(paragraphDescripcion);
+
+            //se crea la tabla de los Hospitales
+            PdfPTable tabla = new PdfPTable(3);
+            //el numero indica la cantidad de Columnas
+            PdfPCell celda = new PdfPCell(new Paragraph("Doctores registrados: "));
+            celda.setColspan(3);
+            //cantidad de columnas que ocupa esta celda
+            celda.setRowspan(1);
+            //cantidad de filas que ocupa esta celda
+
+            tabla.addCell(celda);
+            //en caso de que la lista de hospitales este vacia
+            PdfPCell celda2 = new PdfPCell(new Paragraph("El sistema aun no posee registro alguno sobre ordenes"));
+            celda2.setColspan(3);
+
+            tabla.addCell("Cliente\n ");
+            tabla.addCell("Número de Orden\n ");
+            tabla.addCell("Agente\n ");
+            tabla.addCell("Agente\n ");
+            tabla.addCell("Fecha\n ");
+            tabla.addCell("Provincica\n ");
+            tabla.addCell("Direccion\n ");
+            tabla.addCell("Conductor\n ");
+
+//             model.addColumn("Cliente");
+//        model.addColumn("Número de Orden");
+//        model.addColumn("Agente");
+//        model.addColumn("Fecha");
+//        model.addColumn("Total");
+//        model.addColumn("Provincica");
+//        model.addColumn("Direccion");
+//        model.addColumn("Conductor");
+            
+            while (!orders.isEmpty()) {
+                Order order;
+                GetDataById getDataById = new GetDataById();
+                ArrayList<Order> tempOrder = new ArrayList<Order>();
+                try {
+                    if (!orders.isEmpty()) {
+                    order = (Order) orders.pop();
+                    tempOrder.add(order);
+                    String nameClient = getDataById.getClientName(order.getClientId());
+                    String nameDriver = getDataById.getDriverName(order.getClientId());
+                    String[] exit = new String[]{nameClient, order.getId(), "Agente", order.getCurrentDate(), order.getTotal(), "Provincia", "Direccion Exacta", nameDriver};
+                    tabla.addCell(exit[0]);
+                    tabla.addCell(exit[1]);
+                    tabla.addCell(exit[2]);
+                    tabla.addCell(exit[3]);
+                    tabla.addCell(exit[4]);
+                    tabla.addCell(exit[5]);
+                    tabla.addCell(exit[6]);
+                    tabla.addCell(exit[7]);
+                    
+                    }else {
+                tabla.addCell(celda2);
+            }
+                    
+
+                } 
+                catch (StackException ex) {
+                    Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            // esto nos crea una tabla de 2 Columnas por dos Filas 
+            document.add(tabla);
+            document.add(new Paragraph(" \n \n \n "));
+            //fin de tabla Hospitales
+
+            Calendar calendar = new GregorianCalendar();
+            Paragraph paragraphDescripcionFinal = new Paragraph("\n\nFinal del reporte\n"
+                    + "______________________________________________________________________________"
+                    + "\nFavor disponer correctamente del mismo."
+                    + "\n" + calendar.getTime());
+            paragraphDescripcionFinal.setAlignment(0);
+            document.add(paragraphDescripcionFinal);
+            document.close();
+            JOptionPane.showMessageDialog(null, "Se creo el archivo .pdf correctamente.");
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         JFileChooser chooser = new JFileChooser();
-        chooser.showSaveDialog(this); 
-        this.file = new File(chooser.getSelectedFile()+".xls");
+        chooser.showSaveDialog(this);
+        this.file = new File(chooser.getSelectedFile() + ".xls");
         try {
 //Nuestro flujo de salida para apuntar a donde vamos a escribir 
             DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
@@ -205,11 +321,11 @@ public class GeneralControl extends javax.swing.JFrame {
 //Representa nuestro archivo en excel y necesita un OutputStream para saber donde va locoar los datos 
             WritableWorkbook w = Workbook.createWorkbook(out);
             WritableSheet s = w.createSheet("Hoja 1", 0);
-            
+
             for (int i = 0; i < jTable1.getColumnCount(); i++) {
                 for (int j = 0; j < jTable1.getRowCount(); j++) {
                     Object objeto = jTable1.getValueAt(j, i);
-                    s.addCell(new Label(i,j,String.valueOf(objeto)));
+                    s.addCell(new Label(i, j, String.valueOf(objeto)));
                 }
             }
 //Como excel tiene muchas hojas esta crea o toma la hoja 
@@ -219,7 +335,7 @@ public class GeneralControl extends javax.swing.JFrame {
 //Cerramos el WritableWorkbook y DataOutputStream 
             w.close();
             out.close();
-
+            JOptionPane.showMessageDialog(this, "Se ha creado el archivo correctamente");
 //si todo sale bien salimos de aqui con un true  
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -238,10 +354,10 @@ public class GeneralControl extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void fillJtorbders(LinkedStack orders) {
+    public void makeToFileXls(LinkedStack orders) {
         LinkedStack auxStack = new LinkedStack();
         model = new DefaultTableModel();
-        
+
         model.addColumn("Cliente");
         model.addColumn("Número de Orden");
         model.addColumn("Agente");
@@ -250,9 +366,9 @@ public class GeneralControl extends javax.swing.JFrame {
         model.addColumn("Provincica");
         model.addColumn("Direccion");
         model.addColumn("Conductor");
-        
+
         this.jTable1.setModel(model);
-        
+
         if (!orders.isEmpty()) {
             GetDataById getDataById = new GetDataById();
             ArrayList<Order> tempOrder = new ArrayList<Order>();
@@ -263,14 +379,14 @@ public class GeneralControl extends javax.swing.JFrame {
                     tempOrder.add(order);
                     String nameClient = getDataById.getClientName(order.getClientId());
                     String nameDriver = getDataById.getDriverName(order.getClientId());
-                    
+
                     model.addRow(new Object[]{nameClient, order.getId(), "Agente", order.getCurrentDate(), order.getTotal(), "Provincia", "Direccion Exacta", nameDriver});
                 } catch (StackException ex) {
                     Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
-            
+
             for (int i = tempOrder.size() - 1; i >= 0; i--) {
                 Order order1 = tempOrder.get(i);
                 try {
@@ -279,7 +395,7 @@ public class GeneralControl extends javax.swing.JFrame {
                     Logger.getLogger(ListOrder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         }
     }//Fin metodo que llena la tabla
 
