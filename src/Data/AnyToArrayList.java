@@ -5,15 +5,19 @@
  */
 package Data;
 
+import ADT.Stack.LinkedStack;
 import Domain.Client;
 import Domain.Driver;
 import Domain.Order;
 import Domain.Products;
 import Domain.Restaurant;
 import Domain.User;
+import Exceptions.StackException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,12 +52,20 @@ public class AnyToArrayList {
         return arrayDriver;
     }
 
-    public ArrayList<Object> orderToArrayListObject(ArrayList<Order> orderList) {
-        ArrayList<Object> arrayUser = new ArrayList<Object>();
-        for (Order object : orderList) {
-            arrayUser.add(object);
+    public ArrayList<Object> orderToArrayListObject(LinkedStack orderList) {
+        try {
+            ArrayList<Object> arrayUser = new ArrayList<Object>();
+            Object object = new Object();
+            while (!orderList.isEmpty()) {
+                object = orderList.pop();
+                arrayUser.add(object);
+
+            }
+            return arrayUser;
+        } catch (StackException ex) {
+            Logger.getLogger(AnyToArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return arrayUser;
+        return null;
     }
 
     public ArrayList<Object> productsToArrayListObject(ArrayList<Products> orderList) {

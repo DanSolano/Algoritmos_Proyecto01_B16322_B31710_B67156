@@ -2341,7 +2341,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
      */
     private String concatMessage(Client client) throws StackException {
         String message = "";
-
+//
         message += client.getName() + ", DJL FAST FOOD se complace de compartirle el detalle de la orden"
                 + "\n\nOrden: " + order.getId()
                 + "\nFecha: " + order.getCurrentDate()

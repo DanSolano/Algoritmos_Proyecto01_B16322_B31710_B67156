@@ -5,8 +5,7 @@
  */
 package GUI;
 
-import Data.DataCSV;
-import Data.AnyToArrayList;
+
 import Domain.User;
 import GUI.CRUD.Admin.CreateAdmin;
 import GUI.CRUD.Admin.DeleteAdmin;
@@ -657,6 +656,9 @@ public class AdminModule extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(panel);
         jPanel1.validate();
+        //nada
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -723,7 +725,9 @@ public class AdminModule extends javax.swing.JFrame {
         createProduct.setVisible(true);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        GeneralControl generalControl = new GeneralControl();
+        generalControl.setVisible(true);
+        this.dispose();
     }
 
     private JFreeChart kindChart() {

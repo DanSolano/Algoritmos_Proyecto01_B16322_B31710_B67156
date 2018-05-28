@@ -6,11 +6,14 @@
 package Utilities;
 
 import Domain.Client;
+import Domain.Driver;
 import Domain.Products;
 import Domain.Restaurant;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
@@ -33,6 +36,49 @@ public class GetDataById {
             }
         }
         return name;
+    }
+
+    public Restaurant getRestaurantById(String idRestaurant) {
+        ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        Restaurant restSearch = new Restaurant();
+        for (Restaurant restaurant : rest) {
+            if (restaurant.getId().equals(idRestaurant)) {
+                restSearch = restaurant;
+                break;
+
+            }
+        }
+        return restSearch;
+    }
+
+    public String getRestaurantIdByNameAndLocation(String nameRestaurant, String address, String Province) {
+        ArrayList<Restaurant> rest = Algoritmos_Proyecto01_B16322_B31710_B67156.RESTAURANT_LIST;
+        String id = "";
+        for (Restaurant restaurant : rest) {
+            if (restaurant.getName().equals(nameRestaurant) && restaurant.getLocation().equals(address) && restaurant.getProvince().equals(Province)) {
+                id = restaurant.getId();
+                break;
+
+            }
+        }
+        return id;
+    }
+
+    public String getDriverName(String clientId) {
+        Queue<Driver> drivers = Algoritmos_Proyecto01_B16322_B31710_B67156.DRIVER_QUEUE;
+        Queue tempDriver = new LinkedList();
+        Iterator<Driver> it = drivers.iterator();
+        while (it.hasNext()) {
+            tempDriver.add(it.next());
+        }
+        while (!tempDriver.isEmpty()) {
+            Driver driver = (Driver) tempDriver.poll();
+            if (driver.getId().equals(clientId)) {
+                return driver.getName();
+            }
+        }
+
+        return null;
     }
 
     public String getClientName(String clientId) {

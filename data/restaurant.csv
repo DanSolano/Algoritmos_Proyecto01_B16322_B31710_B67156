@@ -2,7 +2,6 @@ id;Name;Location;Province
 1;Fitos;San Pedro;San José
 2;Empanaderia;San Pedro;San José
 3;Fitos;Los Yoses;San José
-6;asdf;asdf;Puntarenas
 4;hOLA;Paraiso;Cartago
 7;MELVIN;Se la come;Cartago
 8;MELVIN;Paraiso;Cartago
@@ -12,3 +11,4 @@ id;Name;Location;Province
 11;pizza;siquirres;Limón
 12;pix;Siqui;Limón
 13;pollolandia;labomaba;Cartago
+6;TalvezSeaSeis;asdfasfg;San José

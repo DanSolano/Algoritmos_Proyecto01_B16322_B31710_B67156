@@ -1,3 +1,8 @@
 Id;Id Restaurant;Name;price;typeProduct
 1;1;Birra Nacional;1000;0
 2;1;Birra Importada;2000;0
+3;12;agua;1000;0
+4;12;agua2;910;0
+6;12;Fanta lata;800;0
+5;12;zumo uva;600;0
+7;2;Vino;8000;0
