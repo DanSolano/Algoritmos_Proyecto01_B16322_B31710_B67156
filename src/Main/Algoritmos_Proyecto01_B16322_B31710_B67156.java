@@ -5,15 +5,15 @@
  */
 package Main;
 
+import ADT.LinkedList.DoubleLinkedCircularList;
 import ADT.Stack.LinkedStack;
-import Data.ChartData;
 import Domain.Client;
 import Exceptions.ListException;
 import GUI.Login;
 import java.util.LinkedList;
 import Data.LoadData;
+import Data.ThreadSaveAnyNSeconds;
 import Domain.Driver;
-import Domain.Order;
 import Domain.Products;
 import Domain.Report;
 import Domain.Restaurant;
@@ -42,28 +42,9 @@ public class Algoritmos_Proyecto01_B16322_B31710_B67156 {
     public static ArrayList<User> ADMIN_LIST;
     public static ArrayList<Products> ALL_PRODUCTS_LIST;
     public static ArrayList<Report> REPORT_FROM_ORDER_DETAIL;
-    
-    
+
     public static void main(String[] args) throws ListException, StackException {
         LoadData ld = new LoadData();
-
-        CLIENT_LIST = ld.getClients();
-        DRIVER_QUEUE = ld.getDrivers();
-        ORDER_DETAIL_LIST = ld.getOrdersDetails();
-        ALL_PRODUCTS_LIST = ld.getProducts();
-        RESTAURANT_LIST = ld.getRestaurants();
-        AGENT_LIST = ld.getAgents();
-        ADMIN_LIST = ld.getAdministrators();
-        REPORT_FROM_ORDER_DETAIL=ld.getReports();
-        
-         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-
-        } catch (Exception ex) {
-        }
-        
-        Login login = new Login();
-        login.setVisible(true);
 
     }
 

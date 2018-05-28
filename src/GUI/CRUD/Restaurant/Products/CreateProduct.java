@@ -8,6 +8,7 @@ package GUI.CRUD.Restaurant.Products;
 import ADT.LinkedList.DoubleLinkedCircularList;
 import Domain.Products;
 import Domain.Restaurant;
+import Exceptions.ListException;
 import GUI.AdminModule;
 import Main.Algoritmos_Proyecto01_B16322_B31710_B67156;
 import Utilities.GetDataById;
@@ -342,7 +343,7 @@ public class CreateProduct extends javax.swing.JFrame {
                 String idRestaurant = getDataById.getRestaurantIdByNameAndLocation(restaurantName, location, this.selectedProvince);
                 Restaurant selectedRestaurant = getDataById.getRestaurantById(idRestaurant);
 
-                if (!existProduct(productName, priceProduct, idRestaurant)) {
+                if (!existProduct(productName, productType, idRestaurant)) {
                     try {
 
                         this.idCountProd = 1;
@@ -366,6 +367,7 @@ public class CreateProduct extends javax.swing.JFrame {
                         Products prod = new Products(this.idCountProd + "", idRestaurant, productName, priceProduct, productType + "");
                         if (productType == 0) {
                             DoubleLinkedCircularList drinkAux = selectedRestaurant.getDrinks();
+
                             drinkAux.insert(prod);
                             this.allProducts.add(prod);
                         } else if (productType == 1) {
@@ -406,7 +408,7 @@ public class CreateProduct extends javax.swing.JFrame {
     private void jcbProvinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProvinceActionPerformed
         this.selectedProvince = jcbProvince.getSelectedItem().toString();
         fillJCBLocation();
-        JOptionPane.showMessageDialog(null, this.selectedProvince);
+//        JOptionPane.showMessageDialog(null, this.selectedProvince);
     }//GEN-LAST:event_jcbProvinceActionPerformed
 
     private void jcbLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLocationActionPerformed
@@ -467,10 +469,10 @@ public class CreateProduct extends javax.swing.JFrame {
         return false;
     }
 
-    private boolean existProduct(String name, String idRestaurant, String id) {
+    private boolean existProduct(String prodName, int productType, String idRestaurant) {
         for (Iterator<Products> iterator = allProducts.iterator(); iterator.hasNext();) {
-            Products restaurant = iterator.next();
-            if (restaurant.getName().equals(name) && restaurant.getId().equals(id) && restaurant.getIdRestaurant().equals(idRestaurant)) {
+            Products prod = iterator.next();
+            if (prod.getName().equals(prodName) && prod.getTypeProduct().equals(productType+"") && prod.getIdRestaurant().equals(idRestaurant)) {
                 return true;
             }
         }
@@ -511,41 +513,6 @@ public class CreateProduct extends javax.swing.JFrame {
         }
     }
 
-//    private void filJCBRestaurants(String e) {
-//        this.selectedLocation = e;
-//        System.out.println("\n---------------------------------------------" + "jcbLocation:" + this.selectedLocation);
-//        jCBRestaurant.removeAllItems();
-//        jCBRestaurant.addItem("Seleccione el Restaurante");
-//        jCBRestaurant.setSelectedItem(0);
-//        ArrayList<String> restaurantsNames = new ArrayList<>();
-//
-//        for (Restaurant restaurant : restaurants) {
-//            if (this.selectedProvince == null) {
-//                JOptionPane.showMessageDialog(null, restaurant.getProvince() + selectedProvince);
-//                break;
-//            }
-//            String restaurantName = restaurant.getName();
-//            System.out.println("Restaurants: " + restaurantName);
-////            if (jcbLocation.getSelectedIndex() == 0 || jcbLocation.getSelectedItem().toString() == null) {
-//            if (restaurantsNames.isEmpty()) {
-////                JOptionPane.showMessageDialog(null, restaurant.getProvince() + "---selectedProvince: " + this.selectedProvince);
-//                if ((!restaurantsNames.contains(restaurantName)
-//                        && this.selectedProvince.equals(restaurant.getProvince())
-//                        && this.selectedLocation.equals(restaurant.getLocation()))) {
-//                    restaurantsNames
-//                            .add(restaurantName);
-//                    System.out.println("RESTAURANTS IF ELSE");
-//                }
-//            } else if (!restaurantsNames.contains(restaurantName)
-//                    && this.selectedProvince.equals(restaurant.getProvince())
-//                    && this.selectedLocation.equals(restaurant.getLocation())) {
-//                restaurantsNames.add(restaurantName);
-//                System.out.println("RESTAURANTS ELSE IF");
-//            }
-////            }
-//        }
-//        for (String restaurant : restaurantsNames) {
-//            jCBRestaurant.addItem(restaurant);
-//        }
-//    }
+
+    
 }

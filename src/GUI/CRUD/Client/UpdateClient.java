@@ -82,11 +82,6 @@ public class UpdateClient extends javax.swing.JFrame {
 
         jLabel3.setText("e-mail:");
 
-        jtfMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfMailActionPerformed(evt);
-            }
-        });
         jtfMail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfMailKeyReleased(evt);
@@ -326,10 +321,6 @@ public class UpdateClient extends javax.swing.JFrame {
     private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
         searchUser();
     }//GEN-LAST:event_jbSearchActionPerformed
-
-    private void jtfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfMailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

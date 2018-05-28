@@ -73,8 +73,8 @@ public class DoubleLinkedCircularList implements List {
     }
 
     @Override
-   public void insert(Object element)  {
-        
+    public void insert(Object element) {
+
         Node node = new Node(element);
 
         if (start == null) {
@@ -201,7 +201,8 @@ public class DoubleLinkedCircularList implements List {
         }
         return auxNode.element;
     }
-       @Override
+
+    @Override
     public Node getNode(int position) throws ListException {
         int counter = 0;
 
@@ -222,6 +223,28 @@ public class DoubleLinkedCircularList implements List {
             return end;
         }
         return auxNode;
+    }
+
+    public Object getNodeobject(int position) throws ListException {
+        int counter = 0;
+
+        if (isEmpty()) {
+            throw new ListException("Esta vacia");
+        }
+        Node auxNode = start;
+        while (auxNode != end && counter != position) {
+            auxNode = auxNode.next;
+            counter++;
+        }
+        if (counter == position) {
+            return auxNode.element;
+        }
+        //que pasa si llega al utimo nodo o al nodo apuntado por fin
+        if (auxNode == end && counter + 1 == position)// es el ultimo nodo
+        {
+            return end.element;
+        }
+        return auxNode.element;
     }
 
 }

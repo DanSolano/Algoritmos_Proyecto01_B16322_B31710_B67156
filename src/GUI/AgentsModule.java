@@ -130,8 +130,9 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         restaurant = new String();
         jlAgentName.setText(agent.getName());
         jlAgentID.setText(agent.getCode());
-        ImageIcon logo = new ImageIcon(getClass().getResource("/FoodImagesA/logo.jpg"));
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Resources/logo.jpg"));
         jlLogo.setIcon(resize.resizeImage100(logo));
+        onOffLabel(false);
         loadImage();
 
         try {
@@ -1746,10 +1747,10 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
         queueDriver.add(queueDriver.poll());
         addLabelDrivers();
         autoCompleter();
+        onOffLabel(false);
         try {
             order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), orderQuantity() + "", orderTotal() + "", dateOrder);
             getInfoClient();
-
             Algoritmos_Proyecto01_B16322_B31710_B67156.ORDER_DETAIL_LIST = stackOrderPrin;
             resetSpaces();
             validIdOrder();
@@ -1770,6 +1771,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
 
     private void jcbLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLocationActionPerformed
         restaurant = (String) jcbLocation.getSelectedItem();
+        onOffLabel(true);
     }//GEN-LAST:event_jcbLocationActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2642,5 +2644,32 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
                 jcbLocation.addItem(restaurantLocalitation);
             }
         }
+    }
+
+    private void onOffLabel(boolean active) {
+
+        jLabelDrinks0.setEnabled(active);
+        jLabelDrinks1.setEnabled(active);
+        jLabelDrinks2.setEnabled(active);
+        jLabelDrinks3.setEnabled(active);
+        jLabelDrinks4.setEnabled(active);
+
+        jLFood0.setEnabled(active);
+        jLFood1.setEnabled(active);
+        jLFood2.setEnabled(active);
+        jLFood3.setEnabled(active);
+        jLFood4.setEnabled(active);
+
+        jLDessert0.setEnabled(active);
+        jLDessert1.setEnabled(active);
+        jLDesserts2.setEnabled(active);
+        jLDesserts3.setEnabled(active);
+        jLDesserts4.setEnabled(active);
+
+        jLVarious0.setEnabled(active);
+        jLVarious1.setEnabled(active);
+        jLVarious2.setEnabled(active);
+        jLVarious3.setEnabled(active);
+        jLVarious4.setEnabled(active);
     }
 }

@@ -48,7 +48,7 @@ public class Products {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public String getIdRestaurant() {
         return idRestaurant;
     }
@@ -87,6 +87,11 @@ public class Products {
 
     public void setImageIcon(ImageIcon imageIcon) {
         this.imageIcon = imageIcon;
+    }
+
+    @Override
+    public String toString() {
+        return "Products{" + "id=" + id + ", idRestaurant=" + idRestaurant + ", name=" + name + ", price=" + price + ", typeProduct=" + typeProduct + ", imageIcon=" + imageIcon + '}';
     }
 
 }

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import Data.ChartData;
 import Data.SaveAll;
+import Exceptions.ListException;
 import GUI.CRUD.Client.DeleteClient;
 import GUI.CRUD.Client.UpdateClient;
 import GUI.CRUD.Driver.CreateDriver;
@@ -42,6 +43,8 @@ import com.orsonpdf.PDFGraphics2D;
 import com.orsonpdf.Page;
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.jfree.chart.JFreeChart;
@@ -714,9 +717,13 @@ public class AdminModule extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        UpdateProduct updateProduct = new UpdateProduct();
-        this.dispose();
-        updateProduct.setVisible(true);
+        try {
+            UpdateProduct updateProduct = new UpdateProduct();
+            this.dispose();
+            updateProduct.setVisible(true);
+        } catch (ListException ex) {
+            Logger.getLogger(AdminModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed

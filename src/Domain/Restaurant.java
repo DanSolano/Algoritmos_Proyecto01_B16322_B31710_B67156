@@ -30,6 +30,10 @@ public class Restaurant {
         this.name = name;
         this.location = location;
         this.province = province;
+        this.drinks = new DoubleLinkedCircularList();
+        this.foods = new DoubleLinkedCircularList();
+        this.desserts = new DoubleLinkedCircularList();
+        this.others = new DoubleLinkedCircularList();
     }
 
     public Restaurant(String id, String name, String location, String province, DoubleLinkedCircularList drinks, DoubleLinkedCircularList foods, DoubleLinkedCircularList desserts, DoubleLinkedCircularList others) {
@@ -106,6 +110,5 @@ public class Restaurant {
     public void setOthers(DoubleLinkedCircularList others) {
         this.others = others;
     }
-    
 
 }
