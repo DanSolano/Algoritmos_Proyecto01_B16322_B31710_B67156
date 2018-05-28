@@ -1162,7 +1162,7 @@ public class AgentsModule extends javax.swing.JFrame implements Runnable {
     private void jLabelDrinks2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDrinks2MouseReleased
         productsShow = productsDrink2;
         dateOrder = "" + new Date();
-        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(), dateOrder);
+        order = new Order(idOrder + "", jTextFieldName.getText(), restaurant, productsShow.getName(), "1", productsShow.getPrice(),dateOrder);
         try {
             Order ordertemp = orderExist(order.getProductoId());
             if (ordertemp != null) {
