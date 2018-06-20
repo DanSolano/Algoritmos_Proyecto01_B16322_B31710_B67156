@@ -235,7 +235,7 @@ public class CreateAgent extends javax.swing.JFrame {
                     && !jtfUser.getText().trim().isEmpty()
                     && !jtfMail.getText().trim().isEmpty()) {//validate that the email and password are valid and that there are no unfilled fields
 
-                int code = Integer.parseInt(this.agents.get(this.agents.size()).getCode() + 1);//return  the last code and +1 for the new admin
+                int code = Integer.parseInt(this.agents.get(this.agents.size()-1).getCode() + 1);//return  the last code and +1 for the new admin
                 this.agents.add(new User(jtfName.getText(), jtfUser.getText(), jtfMail.getText(), pass, code + "", "agent"));
                 Algoritmos_Proyecto01_B16322_B31710_B67156.AGENT_LIST = this.agents;
                 jlError.setText("Agente crado.");

@@ -19,7 +19,7 @@ public class ThreadSaveAnyNSeconds extends Thread {
             try {
 
                 Thread.sleep(seconds);
-                System.out.println("ThreadSaveAnyNSeconds woks");
+                System.out.println("ThreadSaveAnyNSeconds works");
                 saveAll.save();
 
             } catch (Exception e) {
